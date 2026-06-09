@@ -1,294 +1,166 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MASTER ITALIA 2026</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>رحلة إيطاليا 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root{
+      --bg-deep:#031018;
+      --bg-2:#061B28;
+      --bg-card:rgba(7,24,36,.86);
+      --bg-card-strong:rgba(8,28,42,.94);
+      --gold:#E6C27A;
+      --gold-soft:rgba(230,194,122,.16);
+      --gold-border:rgba(230,194,122,.28);
+      --white:#F8FAFC;
+      --muted:#C4D4DF;
+      --muted-2:#94A8B8;
+      --coral:#E07A5F;
+      --coral-soft:rgba(224,122,95,.13);
+      --line:rgba(255,255,255,.10);
+      --radius-lg:20px;
+      --radius-md:14px;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
+      font-family:'Tajawal',sans-serif;
+    }
 
-<style>
+    html,body{min-height:100%}
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Tajawal',sans-serif;
-scroll-behavior:smooth;
-}
+    body{
+      background:
+        radial-gradient(circle at 10% 8%, rgba(36,155,165,.18) 0, transparent 28%),
+        radial-gradient(circle at 88% 20%, rgba(230,194,122,.09) 0, transparent 26%),
+        radial-gradient(circle at 30% 92%, rgba(25,120,135,.16) 0, transparent 32%),
+        linear-gradient(180deg,#031018 0%,#04131D 48%,#020A10 100%);
+      background-color:#031018;
+      color:var(--white);
+      overflow-x:hidden;
+      position:relative;
+    }
 
-body{
-background:#f6f3ee;
-color:#222;
-overflow-x:hidden;
-}
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      z-index:-1;
+      opacity:.24;
+      background:
+        repeating-radial-gradient(circle at 25% 24%, rgba(230,194,122,.08) 0 1px, transparent 1px 48px),
+        repeating-radial-gradient(circle at 72% 62%, rgba(104,196,202,.075) 0 1px, transparent 1px 56px);
+      filter:blur(.2px);
+      animation:radarDrift 28s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
 
-.cover{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:40px 24px;
-text-align:center;
-background:
-linear-gradient(rgba(255,255,255,.70),rgba(255,255,255,.85)),
-url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop') center/cover;
-}
+    body::after{
+      content:"";
+      position:fixed;
+      width:65vw;
+      height:65vw;
+      right:-20vw;
+      bottom:-20vw;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(82,190,195,.11),transparent 66%);
+      filter:blur(35px);
+      z-index:-1;
+      animation:glowFloat 18s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
 
-.logo{
-letter-spacing:10px;
-font-size:14px;
-margin-bottom:14px;
-color:#567;
-}
+    @keyframes radarDrift{
+      from{transform:translate3d(0,0,0) scale(1)}
+      to{transform:translate3d(20px,-18px,0) scale(1.035)}
+    }
+    @keyframes glowFloat{
+      from{transform:translate3d(0,0,0)}
+      to{transform:translate3d(-28px,-20px,0)}
+    }
 
-.cover h1{
-font-size:42px;
-margin-bottom:12px;
-font-weight:800;
-}
+    .app-header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(3,16,24,.88);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--gold-border);
+      padding:12px 16px 7px;
+    }
 
-.cover p{
-max-width:700px;
-line-height:2;
-font-size:18px;
-color:#444;
-margin-bottom:40px;
-}
+    .app-brand{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+    }
 
-.start-btn{
-background:#13263b;
-color:#fff;
-padding:16px 38px;
-border-radius:50px;
-text-decoration:none;
-font-size:18px;
-font-weight:700;
-box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
+    .brand-title{
+      font-size:19px;
+      font-weight:900;
+      color:var(--white);
+      letter-spacing:-.2px;
+      line-height:1.15;
+    }
 
-.section{
-padding:70px 22px;
-max-width:1100px;
-margin:auto;
-}
+    .brand-title span{color:var(--gold)}
 
-.section-title{
-font-size:34px;
-margin-bottom:14px;
-font-weight:800;
-}
+    .brand-subtitle{
+      margin-top:3px;
+      font-size:11px;
+      color:var(--muted);
+      font-weight:600;
+    }
 
-.section-sub{
-color:#666;
-line-height:2;
-margin-bottom:30px;
-}
+    .header-chip{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--gold-soft);
+      border:1px solid var(--gold-border);
+      color:var(--gold);
+      flex-shrink:0;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:18px;
-}
+    .header-chip svg{width:20px;height:20px}
 
-.card{
-background:#fff;
-padding:24px;
-border-radius:24px;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
+    .top-nav{
+      display:flex;
+      gap:9px;
+      margin-top:10px;
+      overflow-x:auto;
+      scrollbar-width:none;
+      padding-bottom:8px;
+      scroll-behavior:smooth;
+    }
 
-.card h3{
-margin-bottom:10px;
-font-size:22px;
-}
+    .top-nav::-webkit-scrollbar{display:none}
 
-.card p{
-line-height:1.9;
-color:#555;
-}
+    .tab{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.045);
+      color:var(--muted);
+      min-width:max-content;
+      border-radius:999px;
+      padding:8px 14px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.25s ease;
+    }
 
-.day-card{
-background:#fff;
-padding:22px;
-border-radius:26px;
-margin-bottom:22px;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-
-.day-card h2{
-margin-bottom:12px;
-font-size:26px;
-}
-
-.day-card ul{
-padding-right:18px;
-line-height:2.1;
-color:#555;
-}
-
-.footer{
-padding:40px 20px;
-text-align:center;
-color:#777;
-font-size:14px;
-}
-
-</style>
-</head>
-
-<body>
-
-<section class="cover">
-
-<div class="logo">SAFRA</div>
-
-<h1>رحلة إيطاليا 2026 🇮🇹</h1>
-
-<p>
-يسعدنا في SAFRA أن نقدم لكم هذا الدليل التشغيلي الخاص بالرحلة،
-ليكون مرجعًا هادئًا وسهلًا يساعدكم على التنقل والاستمتاع وإدارة الرحلة بكل راحة ووضوح.
-يمكنكم الالتزام بالخطة أو تعديلها بالطريقة المناسبة لكم حسب رغبتكم.
-</p>
-
-<a href="#overview" class="start-btn">
-ابدأ الرحلة
-</a>
-
-</section>
-
-<section class="section" id="overview">
-
-<h2 class="section-title">
-ملخص الرحلة
-</h2>
-
-<p class="section-sub">
-16 يوم بين أجمل مدن شمال إيطاليا، بين البحيرات والجبال والقرى الهادئة والتجارب العائلية.
-</p>
-
-<div class="grid">
-
-<div class="card">
-<h3>ميلان</h3>
-<p>
-الوصول – الدومو – التسوق – كومو – بيلاجيو
-</p>
-</div>
-
-<div class="card">
-<h3>ريفا ديل جاردا</h3>
-<p>
-البحيرة – ليموني – الأجواء الساحلية – الاسترخاء
-</p>
-</div>
-
-<div class="card">
-<h3>أورتيزي</h3>
-<p>
-جبال الدولوميت – الطبيعة – التلفريك – القرى الهادئة
-</p>
-</div>
-
-<div class="card">
-<h3>برونيك</h3>
-<p>
-برايس – سان كانديدو – الأنهار – أجمل طرق الشمال
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-التجهيزات قبل السفر
-</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>المستندات</h3>
-<p>
-الجوازات – التأشيرات – التذاكر – حجوزات الفنادق – التأمين
-</p>
-</div>
-
-<div class="card">
-<h3>الأجهزة</h3>
-<p>
-الشواحن – الباور بانك – شرائح الإنترنت – السماعات
-</p>
-</div>
-
-<div class="card">
-<h3>الملابس</h3>
-<p>
-جاكيتات – أحذية مريحة – ملابس باردة – نظارات شمسية
-</p>
-</div>
-
-<div class="card">
-<h3>الصحة</h3>
-<p>
-الأدوية – المعقمات – فرش الأسنان – أدوات العناية
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-الأيام
-</h2>
-
-<div class="day-card">
-<h2>اليوم 01 — ميلان</h2>
-<ul>
-<li>الوصول إلى ميلان</li>
-<li>الراحة في السكن</li>
-<li>جولة مسائية في الدومو</li>
-</ul>
-</div>
-
-<div class="day-card">
-<h2>اليوم 02 — كومو وبيلاجيو</h2>
-<ul>
-<li>الانطلاق صباحًا إلى كومو</li>
-<li>التجول بالقارب</li>
-<li>زيارة بيلاجيو</li>
-</ul>
-</div>
-
-<div class="day-card">
-<h2>اليوم 03 — ريفا ديل جاردا</h2>
-<ul>
-<li>الخروج من ميلان</li>
-<li>الوصول إلى ريفا</li>
-<li>جولة البحيرة</li>
-</ul>
-</div>
-
-<div class="day-card">
-<h2>اليوم 04 — ليموني</h2>
-<ul>
-<li>زيارة ليموني</li>
-<li>جلسات البحيرة</li>
-<li>التصوير والاسترخاء</li>
-</ul>
-</div>
-
-</section>
-
-<div class="footer">
-SAFRA © 2026
-</div>
-
-</body>
-</html>
+    .tab svg{width:15px;height:15px}
