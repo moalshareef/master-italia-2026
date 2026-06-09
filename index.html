@@ -50,30 +50,29 @@
     body::before{
       content:"";
       position:fixed;
-      inset:-20%;
+      inset:0;
       z-index:-1;
-      opacity:.24;
+      opacity:.18;
       background:
-        repeating-radial-gradient(circle at 25% 24%, rgba(230,194,122,.08) 0 1px, transparent 1px 48px),
-        repeating-radial-gradient(circle at 72% 62%, rgba(104,196,202,.075) 0 1px, transparent 1px 56px);
-      filter:blur(.2px);
-      animation:radarDrift 28s ease-in-out infinite alternate;
+        radial-gradient(circle at 25% 24%, rgba(230,194,122,.06) 0, transparent 40%),
+        radial-gradient(circle at 72% 62%, rgba(104,196,202,.05) 0, transparent 45%);
       pointer-events:none;
+      will-change:auto;
     }
 
     body::after{
       content:"";
       position:fixed;
-      width:65vw;
-      height:65vw;
-      right:-20vw;
-      bottom:-20vw;
+      width:50vw;
+      height:50vw;
+      right:-15vw;
+      bottom:-15vw;
       border-radius:50%;
-      background:radial-gradient(circle,rgba(82,190,195,.11),transparent 66%);
-      filter:blur(35px);
+      background:radial-gradient(circle,rgba(82,190,195,.08),transparent 66%);
+      filter:blur(20px);
       z-index:-1;
-      animation:glowFloat 18s ease-in-out infinite alternate;
       pointer-events:none;
+      will-change:auto;
     }
 
     @keyframes radarDrift{
@@ -714,6 +713,10 @@
     .complete-btn{
       width:32px;
       height:32px;
+      min-width:32px;
+      min-height:32px;
+      max-width:32px;
+      max-height:32px;
       border-radius:50%;
       border:1px solid rgba(230,194,122,.32);
       background:rgba(255,255,255,.035);
@@ -724,6 +727,9 @@
       cursor:pointer;
       flex-shrink:0;
       transition:.22s ease;
+      padding:0;
+      box-sizing:border-box;
+      overflow:hidden;
     }
 
     .complete-btn svg{
@@ -766,6 +772,22 @@
   </style>
 
 <style id="safra-enhancements">
+    /* منع تشوه العناصر في card-head */
+    .card-head > * {
+      flex-shrink: 0;
+    }
+    .card-head .card-title {
+      flex: 1;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+    .card-head button, .card-head .complete-btn {
+      flex-shrink: 0 !important;
+      flex-grow: 0 !important;
+    }
+    /* إخفاء أي زر share قديم */
+    .share-btn { display: none !important; }
+
   /* ===== SPLASH SCREEN ===== */
   #splash{
     position:fixed;inset:0;z-index:9999;
@@ -829,7 +851,24 @@
     100%{transform:scale(1)}
   }
 
-  /* ===== SCROLL INDICATOR ===== */
+  /* ===== FINANCE LOCK ===== */
+.finance-locked { display:block !important; }
+.finance-unlocked { display:none; }
+#financePin {
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(230,194,122,.3);
+  border-radius:12px;
+  padding:12px 16px;
+  color:#fff;
+  font-size:20px;
+  font-weight:900;
+  font-family:Tajawal,sans-serif;
+  text-align:center;
+  width:100%;
+  letter-spacing:.3em;
+  -webkit-text-security:disc;
+}
+
   .scroll-top-btn{
     position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
     background:linear-gradient(180deg,#EED08A,#E6C27A);
@@ -846,6 +885,108 @@
     opacity:1;
   }
   .scroll-top-btn svg{width:15px;height:15px}
+</style>
+
+<style id="safra-ios-fixes">
+  /* Safe Area iOS */
+  .app-header{
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .main-content{
+    padding-bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+  }
+  /* تحسين اللمس */
+  .tab, .btn, .btn-secondary, button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 44px;
+  }
+  /* منع الـ overscroll */
+  body { overscroll-behavior: none; }
+  /* تحسين الـ scroll */
+  .top-nav, .main-content {
+    -webkit-overflow-scrolling: touch;
+  }
+  /* will-change للكروت */
+  .card { will-change: transform; }
+  /* تقليل blur على iOS */
+  @supports (-webkit-touch-callout: none) {
+    .app-header {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+  /* زر العودة لليوم الحالي */
+  #returnTodayBtn {
+    position: fixed;
+    bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+    left: 16px;
+    background: linear-gradient(180deg,#EED08A,#E6C27A);
+    color: #06141F;
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 900;
+    font-family: Tajawal,sans-serif;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 16px rgba(230,194,122,.35);
+    cursor: pointer;
+    z-index: 150;
+    transition: opacity .3s;
+  }
+  #returnTodayBtn.visible { display: flex; }
+  /* صفحة الطوارئ */
+  .emergency-card {
+    background: rgba(7,24,36,.88);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .emergency-card.urgent {
+    border-color: rgba(224,122,95,.3);
+    background: rgba(224,122,95,.07);
+  }
+  .emergency-card.safe {
+    border-color: rgba(102,167,142,.25);
+    background: rgba(102,167,142,.06);
+  }
+  .emer-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    color: rgba(230,194,122,.7);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .emer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .emer-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .emer-label { font-size: 13px; color: #94A8B8; font-weight: 600; }
+  .emer-val { font-size: 14px; font-weight: 900; color: #F8FAFC; }
+  .emer-call {
+    background: rgba(102,167,142,.15);
+    border: 1px solid rgba(102,167,142,.3);
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 900;
+    color: rgba(102,167,142,.9);
+    cursor: pointer;
+    font-family: Tajawal,sans-serif;
+    text-decoration: none;
+    display: inline-block;
+  }
 </style>
 
 <style id="safra-platform-layer">
@@ -873,7 +1014,12 @@
 .safra-primary{background:#fff;color:#07151c}
 .safra-secondary{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)}
 .overview-grid,.readiness-grid,.finance-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0
+  display:grid;grid-template-columns:1fr;gap:14px;margin:18px 0
+}
+@media(min-width:700px){
+  .overview-grid,.readiness-grid,.finance-grid{
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  }
 }
 .overview-card,.readiness-card,.finance-card{
   border:1px solid rgba(255,255,255,.1);
@@ -881,6 +1027,7 @@
   border-radius:22px;
   padding:18px;
   backdrop-filter:blur(12px);
+  min-width:0;overflow:visible;width:100%;box-sizing:border-box;
 }
 .overview-card h3,.readiness-card h3,.finance-card h3{margin:0 0 8px;color:#fff;font-size:17px}
 .overview-card p,.readiness-card p,.finance-card p{margin:0;color:rgba(255,255,255,.68);line-height:1.65;font-size:14px}
@@ -916,6 +1063,10 @@
   display:flex;align-items:flex-start;gap:10px;
   padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);
   color:rgba(255,255,255,.78);font-size:14px;line-height:1.55;
+  min-width:0;width:100%;
+}
+.prep-item span{
+  flex:1;min-width:0;word-break:break-word;white-space:normal;overflow:visible;
 }
 .prep-item:last-child{border-bottom:0}
 .prep-check{
@@ -991,6 +1142,11 @@ body{
   <div class="splash-bar-wrap"><div class="splash-bar" id="splashBar"></div></div>
 </div>
 
+<!-- زر العودة لليوم الحالي -->
+<button id="returnTodayBtn" onclick="goSmartStart()">
+  📅 اليوم الحالي
+</button>
+
 <!-- زر العودة للأعلى -->
 <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
@@ -1003,7 +1159,7 @@ body{
       <div class="brand-title">رحلة إيطاليا <span>2026</span></div>
       <div class="brand-subtitle">الدليل التشغيلي للعائلة • 8 أشخاص</div>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;"><div class="italy-flag">🇮🇹</div><div class="header-chip"><i data-lucide="compass"></i></div></div>
+    <div style="display:flex;align-items:center;gap:8px;"><div class="italy-flag" style="width:32px;height:32px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#009246 33%,#fff 33% 66%,#ce2b37 66%);flex-shrink:0"></div><div class="header-chip"><i data-lucide="compass"></i></div></div>
   </div>
 
   <nav class="top-nav" id="tabsNav">
@@ -1011,6 +1167,7 @@ body{
     <button class="tab" onclick="switchView('overview', this)" id="tab-overview"><i data-lucide="layout-dashboard"></i> ملخص الرحلة <small>16 DAYS</small></button>
     <button class="tab" onclick="switchView('readiness', this)" id="tab-readiness"><i data-lucide="check-square"></i> التجهيزات <small>READY</small></button>
     <button class="tab" onclick="switchView('finance', this)" id="tab-finance"><i data-lucide="lock-keyhole"></i> المالية <small>PRIVATE</small></button>
+    <button class="tab" onclick="switchView('emergency', this)" id="tab-emergency"><i data-lucide="phone-call"></i> طوارئ <small>SOS</small></button>
 <button class="tab" onclick="switchView('day1', this)" id="tab-day1"><i data-lucide="map"></i> اليوم 01 <small>11 JUN</small></button>
     <button class="tab" onclick="switchView('day2', this)" id="tab-day2"><i data-lucide="map"></i> اليوم 02 <small>12 JUN</small></button>
     <button class="tab" onclick="switchView('day3', this)" id="tab-day3"><i data-lucide="map"></i> اليوم 03 <small>13 JUN</small></button>
@@ -1031,75 +1188,209 @@ body{
 </header>
 
 
-<main id="view-cover" class="view">
+<main id="view-cover" class="view" style="padding:0;overflow:hidden">
 
-  <div class="safra-hero" style="text-align:center;padding:38px 24px 32px">
-    <div style="font-size:48px;margin-bottom:10px">🇮🇹</div>
-    <div class="safra-mark" style="letter-spacing:.3em;margin-bottom:8px">SAFRA × MASTER ITALIA</div>
-    <h1 class="safra-title" style="font-size:32px;margin:0 0 10px">رحلة إيطاليا <span style="color:#E6C27A">2026</span></h1>
-    <p class="safra-sub" style="font-size:14px;max-width:340px;margin:0 auto;line-height:1.8;font-style:italic;color:rgba(255,255,255,.6)">صُمم هذا الدليل لكم<br>رحلتكم، لحظاتكم، ذكرياتكم</p>
-    <div style="margin-top:12px;font-size:11px;font-weight:800;letter-spacing:.25em;color:rgba(230,194,122,.6)">SAFRA • ITALIA 2026</div>
+  <!-- CINEMATIC HERO -->
+  <div style="
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:60px 32px 48px;
+    text-align:center;
+    overflow:hidden;
+  ">
+
+    <!-- Soft Cinematic Glow Background -->
+    <div style="
+      position:absolute;inset:0;z-index:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 20%, rgba(230,194,122,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(36,155,165,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 80% 70%, rgba(230,194,122,.05) 0%, transparent 55%);
+      pointer-events:none;
+    "></div>
+
+    <!-- خط علوي رفيع -->
+    <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(230,194,122,.3),transparent);z-index:1"></div>
+
+    <!-- المحتوى -->
+    <div style="position:relative;z-index:2;max-width:380px;width:100%">
+
+      <!-- ITALIA 2026 -->
+      <div style="
+        font-size:11px;
+        font-weight:800;
+        letter-spacing:.45em;
+        color:rgba(230,194,122,.55);
+        margin-bottom:52px;
+        text-transform:uppercase;
+      ">ITALIA 2026</div>
+
+      <!-- النص الرئيسي -->
+      <div style="
+        font-size:26px;
+        font-weight:900;
+        color:#F8FAFC;
+        line-height:1.55;
+        letter-spacing:-.3px;
+        margin-bottom:36px;
+      ">
+        هناك رحلات تمرّ…<br>
+        <span style="color:rgba(230,194,122,.85)">ورحلات تبقى للأبد.</span>
+      </div>
+
+      <!-- الفاصل -->
+      <div style="width:32px;height:1px;background:rgba(230,194,122,.3);margin:0 auto 36px"></div>
+
+      <!-- النص الوصفي -->
+      <div style="
+        font-size:15.5px;
+        font-weight:500;
+        color:rgba(255,255,255,.52);
+        line-height:2;
+        letter-spacing:.01em;
+        margin-bottom:36px;
+      ">
+        بين شوارع ميلانو الهادئة،<br>
+        وبحيرات الشمال الإيطالي،<br>
+        صُممت هذه التجربة لتكون<br>
+        مزيجاً من الراحة، الجمال،<br>
+        واللحظات التي لا تُنسى.
+      </div>
+
+      <!-- النص الثاني -->
+      <div style="
+        font-size:14px;
+        font-weight:500;
+        color:rgba(255,255,255,.38);
+        line-height:2.1;
+        letter-spacing:.01em;
+        margin-bottom:64px;
+      ">
+        كل تنقّل، كل إقامة، كل يوم…<br>
+        تم ترتيبه بعناية ليمنحكم<br>
+        <span style="color:rgba(255,255,255,.55)">رحلة هادئة، سلسة، وفاخرة</span><br>
+        كما يجب أن تكون.
+      </div>
+
+      <!-- مرحباً -->
+      <div style="
+        font-size:22px;
+        font-weight:900;
+        color:#F8FAFC;
+        letter-spacing:.02em;
+        margin-bottom:64px;
+      ">مرحباً بكم في إيطاليا. <span style="display:inline-flex;align-items:center;vertical-align:middle;margin-right:2px"><svg width="26" height="18" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" style="border-radius:3px"><rect x="0" y="0" width="10" height="20" fill="#009246"/><rect x="10" y="0" width="10" height="20" fill="#ffffff"/><rect x="20" y="0" width="10" height="20" fill="#CE2B37"/></svg></span></div>
+
+      <!-- زر الدخول -->
+      <button onclick="goSmartStart()" style="
+        background:rgba(230,194,122,.12);
+        border:1px solid rgba(230,194,122,.3);
+        color:#E6C27A;
+        border-radius:999px;
+        padding:14px 36px;
+        font-size:14px;
+        font-weight:800;
+        letter-spacing:.08em;
+        cursor:pointer;
+        font-family:Tajawal,sans-serif;
+        margin-bottom:16px;
+        width:100%;
+        transition:all .3s ease;
+      " onmouseenter="this.style.background='rgba(230,194,122,.2)'" onmouseleave="this.style.background='rgba(230,194,122,.12)'">
+        ✈️ دخول الرحلة
+      </button>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:72px">
+        <button onclick="switchView('readiness', document.getElementById('tab-readiness'))" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);border-radius:14px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:Tajawal,sans-serif">✅ التجهيزات</button>
+        <button onclick="switchView('overview', document.getElementById('tab-overview'))" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);border-radius:14px;padding:12px;font-size:12px;font-weight:700;cursor:pointer;font-family:Tajawal,sans-serif">🗓️ ملخص الأيام</button>
+      </div>
+
+      <!-- التوقيع -->
+      <div style="border-top:1px solid rgba(255,255,255,.06);padding-top:28px">
+        <div style="font-size:10px;font-weight:800;letter-spacing:.35em;color:rgba(230,194,122,.35);text-transform:uppercase">SAFRA TRAVEL</div>
+        <div style="font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,.18);margin-top:6px;font-weight:600">ITALIA 2026</div>
+      </div>
+
+    </div>
+
+    <!-- خط سفلي رفيع -->
+    <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:60px;background:linear-gradient(to bottom,rgba(230,194,122,.2),transparent);z-index:1"></div>
+
   </div>
 
-  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(230,194,122,.28);border-radius:22px;padding:22px 20px;margin:16px 0;text-align:center">
-    <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.12em;margin-bottom:14px">⏳ العد التنازلي للإقلاع</div>
-    <div id="countdownDisplay" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap"></div>
-    <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.45);font-weight:600">الإقلاع: الخميس 11 يونيو 2026 • 02:05 PM</div>
-  </div>
+  <!-- عداد وملخص (مخفي تحت) -->
+  <div style="padding:0 16px 32px">
 
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0">
-    <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 10px;text-align:center">
-      <div style="font-size:24px;font-weight:900;color:#E6C27A">16</div>
-      <div style="font-size:11px;color:#94A8B8;font-weight:700;margin-top:2px">يوم</div>
+    <!-- COUNTDOWN -->
+    <div style="background:rgba(7,24,36,.7);border:1px solid rgba(230,194,122,.15);border-radius:22px;padding:20px;margin-bottom:14px;text-align:center">
+      <div style="font-size:10px;font-weight:800;color:rgba(230,194,122,.6);letter-spacing:.15em;margin-bottom:14px">⏳ العد التنازلي للإقلاع</div>
+      <div id="countdownDisplay" style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap"></div>
+      <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);font-weight:600">الخميس 11 يونيو 2026 • 09:45 AM • SV211</div>
     </div>
-    <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 10px;text-align:center">
-      <div style="font-size:24px;font-weight:900;color:#E6C27A">8</div>
-      <div style="font-size:11px;color:#94A8B8;font-weight:700;margin-top:2px">مسافر</div>
-    </div>
-    <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 10px;text-align:center">
-      <div style="font-size:24px;font-weight:900;color:#E6C27A">7+</div>
-      <div style="font-size:11px;color:#94A8B8;font-weight:700;margin-top:2px">مدينة</div>
-    </div>
-  </div>
 
-  <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin:0 0 16px;cursor:pointer" onclick="switchView('readiness', document.getElementById('tab-readiness'))">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">✅ تجهيزات ما قبل السفر</span>
-      <span id="prepPctLabel" style="font-size:12px;font-weight:900;color:#E6C27A">0%</span>
+    <!-- STATS -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
+      <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 8px;text-align:center">
+        <div style="font-size:22px;font-weight:900;color:#E6C27A">16</div>
+        <div style="font-size:10px;color:#94A8B8;font-weight:700;margin-top:2px">يوم</div>
+      </div>
+      <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 8px;text-align:center">
+        <div style="font-size:22px;font-weight:900;color:#E6C27A">8</div>
+        <div style="font-size:10px;color:#94A8B8;font-weight:700;margin-top:2px">مسافر</div>
+      </div>
+      <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 8px;text-align:center">
+        <div style="font-size:22px;font-weight:900;color:#E6C27A">7+</div>
+        <div style="font-size:10px;color:#94A8B8;font-weight:700;margin-top:2px">مدينة</div>
+      </div>
     </div>
-    <div style="height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden">
-      <div id="prepPctBar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#E6C27A,#EED08A);width:0%;transition:width .6s ease"></div>
-    </div>
-    <div id="prepPctSub" style="margin-top:8px;font-size:11.5px;color:#94A8B8;font-weight:600">اضغط لعرض القائمة</div>
-  </div>
 
-  <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin:0 0 16px">
-    <div style="font-size:12px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.1em;margin-bottom:12px">🗺️ مسار الرحلة</div>
-    <div style="display:flex;align-items:center;flex-wrap:wrap;row-gap:8px;gap:4px">
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">جدة</span>
-      <span style="color:#E6C27A;margin:0 4px">✈</span>
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">ميلانو</span>
-      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">كومو</span>
-      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">دولوميتي</span>
-      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">غاردا</span>
-      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">فينيسيا</span>
-      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
-      <span style="font-size:13px;font-weight:800;color:#F8FAFC">توسكانا</span>
-      <span style="color:#E6C27A;margin:0 4px">✈</span>
-      <span style="font-size:13px;font-weight:900;color:#E6C27A">جدة</span>
+    <!-- مصاريف الرحلة في الداشبورد -->
+    <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;margin-bottom:14px;cursor:pointer" onclick="switchView('finance', document.getElementById('tab-finance'))">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12.5px;font-weight:800;color:#F8FAFC">🧾 مصاريف الرحلة</span>
+        <span id="dashExpenses" style="font-size:13px;font-weight:900;color:#E6C27A">—</span>
+      </div>
+      <div style="font-size:11px;color:#94A8B8;margin-top:4px">اضغط لتسجيل مصروف جديد</div>
     </div>
-  </div>
 
-  <button onclick="goSmartStart()" style="width:100%;border-radius:16px;padding:16px;font-size:15px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;margin-bottom:10px;background:#fff;color:#07151c">
-    ✈️ دخول الرحلة
-  </button>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-    <button onclick="switchView('readiness', document.getElementById('tab-readiness'))" style="border-radius:14px;padding:13px;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)">✅ التجهيزات</button>
-    <button onclick="switchView('overview', document.getElementById('tab-overview'))" style="border-radius:14px;padding:13px;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)">🗓️ ملخص الأيام</button>
+    <!-- READINESS BAR -->
+    <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;margin-bottom:14px;cursor:pointer" onclick="switchView('readiness', document.getElementById('tab-readiness'))">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-size:12.5px;font-weight:800;color:#F8FAFC">✅ تجهيزات ما قبل السفر</span>
+        <span id="prepPctLabel" style="font-size:11px;font-weight:900;color:#E6C27A">0%</span>
+      </div>
+      <div style="height:4px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden">
+        <div id="prepPctBar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#E6C27A,#EED08A);width:0%;transition:width .6s ease"></div>
+      </div>
+      <div id="prepPctSub" style="margin-top:7px;font-size:11px;color:#94A8B8;font-weight:600">اضغط لعرض القائمة</div>
+    </div>
+
+    <!-- ROUTE -->
+    <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px">
+      <div style="font-size:10px;font-weight:800;color:rgba(230,194,122,.6);letter-spacing:.12em;margin-bottom:10px">🗺️ مسار الرحلة</div>
+      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;row-gap:6px">
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">جدة</span>
+        <span style="color:#E6C27A;font-size:10px">✈</span>
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">ميلانو</span>
+        <span style="color:rgba(255,255,255,.2);margin:0 2px">›</span>
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">كومو</span>
+        <span style="color:rgba(255,255,255,.2);margin:0 2px">›</span>
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">دولوميتي</span>
+        <span style="color:rgba(255,255,255,.2);margin:0 2px">›</span>
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">غاردا</span>
+        <span style="color:rgba(255,255,255,.2);margin:0 2px">›</span>
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">فينيسيا</span>
+        <span style="color:rgba(255,255,255,.2);margin:0 2px">›</span>
+        <span style="font-size:12px;font-weight:800;color:#F8FAFC">توسكانا</span>
+        <span style="color:#E6C27A;font-size:10px">✈</span>
+        <span style="font-size:12px;font-weight:900;color:#E6C27A">جدة</span>
+      </div>
+    </div>
+
   </div>
 
 </main>
@@ -1233,12 +1524,121 @@ body{
   </div>
 
   <div class="readiness-grid">
-    <div class="readiness-card"><h3>الوثائق الأساسية</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-1"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>الجوازات الأصلية لجميع المسافرين</span></div><div class="prep-item" data-prep-id="prep-2"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>صور الجوازات محفوظة في الجوال</span></div><div class="prep-item" data-prep-id="prep-3"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>التأشيرات أو متطلبات الدخول إن وجدت</span></div><div class="prep-item" data-prep-id="prep-4"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تذاكر الطيران PDF</span></div><div class="prep-item" data-prep-id="prep-5"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>حجوزات السكن PDF</span></div><div class="prep-item" data-prep-id="prep-6"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تذاكر القطار إن وجدت</span></div><div class="prep-item" data-prep-id="prep-7"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تأمين السفر</span></div><div class="prep-item" data-prep-id="prep-8"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>بطاقات بنكية احتياطية</span></div></div></div><div class="readiness-card"><h3>الجوال والطاقة</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-9"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>شاحن جوال لكل شخص</span></div><div class="prep-item" data-prep-id="prep-10"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>Power Bank مشحون</span></div><div class="prep-item" data-prep-id="prep-11"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>محول كهرباء أوروبي</span></div><div class="prep-item" data-prep-id="prep-12"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>كيابل احتياطية</span></div><div class="prep-item" data-prep-id="prep-13"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تحميل خرائط Google Offline</span></div><div class="prep-item" data-prep-id="prep-14"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تفعيل eSIM أو التجوال</span></div><div class="prep-item" data-prep-id="prep-15"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>حفظ أرقام السائق والسكن</span></div></div></div><div class="readiness-card"><h3>الحقائب والملابس</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-16"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>أحذية مشي مريحة</span></div><div class="prep-item" data-prep-id="prep-17"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>نظارات شمسية</span></div><div class="prep-item" data-prep-id="prep-18"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>قبعات</span></div><div class="prep-item" data-prep-id="prep-19"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>جاكيت خفيف</span></div><div class="prep-item" data-prep-id="prep-20"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>ملابس صيفية قطنية</span></div><div class="prep-item" data-prep-id="prep-21"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>ملابس أنيقة للعشاء</span></div><div class="prep-item" data-prep-id="prep-22"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>شنطة يومية صغيرة</span></div><div class="prep-item" data-prep-id="prep-23"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>أقفال وأسماء على الحقائب</span></div></div></div><div class="readiness-card"><h3>الصحة والعناية</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-24"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>الأدوية الشخصية</span></div><div class="prep-item" data-prep-id="prep-25"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مسكنات بسيطة</span></div><div class="prep-item" data-prep-id="prep-26"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>لاصق جروح</span></div><div class="prep-item" data-prep-id="prep-27"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>واقي شمس</span></div><div class="prep-item" data-prep-id="prep-28"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مرطب شفاه</span></div><div class="prep-item" data-prep-id="prep-29"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مناديل مبللة</span></div><div class="prep-item" data-prep-id="prep-30"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>معقم يدين</span></div><div class="prep-item" data-prep-id="prep-31"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>أدوية دوار الحركة لمن يحتاج</span></div></div></div><div class="readiness-card"><h3>المطار والـ Tax Free</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-32"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>وزن الحقائب قبل السفر</span></div><div class="prep-item" data-prep-id="prep-33"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>فصل السوائل أقل من 100ml</span></div><div class="prep-item" data-prep-id="prep-34"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>حقيبة يد للمشتريات الثمينة</span></div><div class="prep-item" data-prep-id="prep-35"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>ملف خاص لفواتير Tax-Free</span></div><div class="prep-item" data-prep-id="prep-36"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تصوير الفواتير المهمة</span></div><div class="prep-item" data-prep-id="prep-37"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>عدم شحن المشتريات قبل ختم التاكس فري</span></div></div></div><div class="readiness-card"><h3>راحة العائلة</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-38"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>الاتفاق على نقطة تجمع يومية</span></div><div class="prep-item" data-prep-id="prep-39"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>شرب الماء باستمرار</span></div><div class="prep-item" data-prep-id="prep-40"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>عدم ضغط الجدول عند التعب</span></div><div class="prep-item" data-prep-id="prep-41"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تخصيص فترات راحة</span></div><div class="prep-item" data-prep-id="prep-42"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مراعاة كبار السن أو المتعبين</span></div><div class="prep-item" data-prep-id="prep-43"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>إلغاء أي نشاط عند الإرهاق بدون تردد</span></div></div></div>
+    <div class="readiness-card" style="width:100%;box-sizing:border-box;overflow:hidden"><h3>الوثائق الأساسية</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-1"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">الجوازات الأصلية لجميع المسافرين</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-2"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">صور الجوازات محفوظة في الجوال</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-3"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">التأشيرات أو متطلبات الدخول إن وجدت</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-4"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تذاكر الطيران PDF</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-5"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">حجوزات السكن PDF</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-6"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تذاكر القطار إن وجدت</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-7"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تأمين السفر</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-8"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">بطاقات بنكية احتياطية</span>
+  </div></div></div>
+  <div class="readiness-card" style="width:100%;box-sizing:border-box;overflow:hidden"><h3>الجوال والطاقة</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-9"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">شاحن جوال لكل شخص</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-10"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">Power Bank مشحون</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-11"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">محول كهرباء أوروبي</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-12"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">كيابل احتياطية</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-13"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تحميل خرائط Google Offline</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-14"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تفعيل eSIM أو التجوال</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-15"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">حفظ أرقام السائق والسكن</span>
+  </div></div></div>
+  <div class="readiness-card" style="width:100%;box-sizing:border-box;overflow:hidden"><h3>الحقائب والملابس</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-16"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">أحذية مشي مريحة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-17"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">نظارات شمسية</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-18"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">قبعات</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-19"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">جاكيت خفيف</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-20"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">ملابس صيفية قطنية</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-21"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">ملابس أنيقة للعشاء</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-22"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">شنطة يومية صغيرة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-23"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">أقفال وأسماء على الحقائب</span>
+  </div></div></div>
+  <div class="readiness-card" style="width:100%;box-sizing:border-box;overflow:hidden"><h3>الصحة والعناية</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-24"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">الأدوية الشخصية</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-25"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">مسكنات بسيطة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-26"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">لاصق جروح</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-27"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">واقي شمس</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-28"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">مرطب شفاه</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-29"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">مناديل مبللة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-30"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">معقم يدين</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-31"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">أدوية دوار الحركة لمن يحتاج</span>
+  </div></div></div>
+  <div class="readiness-card" style="width:100%;box-sizing:border-box;overflow:hidden"><h3>المطار والـ Tax Free</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-32"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">وزن الحقائب قبل السفر</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-33"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">فصل السوائل أقل من 100ml</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-34"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">حقيبة يد للمشتريات الثمينة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-35"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">ملف خاص لفواتير Tax-Free</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-36"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تصوير الفواتير المهمة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-37"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">عدم شحن المشتريات قبل ختم التاكس فري</span>
+  </div></div></div>
+  <div class="readiness-card" style="width:100%;box-sizing:border-box;overflow:hidden"><h3>راحة العائلة</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-38"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">الاتفاق على نقطة تجمع يومية</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-39"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">شرب الماء باستمرار</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-40"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">عدم ضغط الجدول عند التعب</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-41"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">تخصيص فترات راحة</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-42"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">مراعاة كبار السن أو المتعبين</span>
+  </div>
+  <div class="prep-item" data-prep-id="prep-43"><button class="prep-check" onclick="togglePrep(this)">✓</button><span style="flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word;white-space:normal">إلغاء أي نشاط عند الإرهاق بدون تردد</span>
+  </div></div></div>
   </div>
 </main>
 
 
-<main id="view-finance" class="view">
+<main id="view-finance" class="view" style="position:relative">
+
+  <!-- طبقة القفل — تغطي كل شيء -->
+  <div id="financeLock" style="position:fixed;inset:0;z-index:9998;background:var(--bg-deep, #031018);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center">
+    <div style="width:64px;height:64px;border-radius:20px;background:rgba(230,194,122,.12);border:1px solid rgba(230,194,122,.28);display:flex;align-items:center;justify-content:center;margin-bottom:24px">
+      <i data-lucide="lock-keyhole" style="width:28px;height:28px;color:#E6C27A"></i>
+    </div>
+    <div style="font-size:20px;font-weight:900;color:#fff;margin-bottom:8px">الصفحة المالية</div>
+    <div style="font-size:13px;color:#94A8B8;margin-bottom:32px">هذه الصفحة محمية — أدخل الرمز للمتابعة</div>
+    <div style="width:100%;max-width:280px">
+      <input id="financePin" type="password" inputmode="text" placeholder="أدخل الرمز"
+        style="background:rgba(255,255,255,.07);border:1px solid rgba(230,194,122,.3);border-radius:12px;padding:14px 16px;color:#fff;font-size:18px;font-weight:900;font-family:Tajawal,sans-serif;text-align:center;width:100%;letter-spacing:.3em;box-sizing:border-box"
+        onkeydown="if(event.key==='Enter') checkFinancePin()">
+      <button onclick="checkFinancePin()"
+        style="width:100%;margin-top:12px;background:linear-gradient(180deg,#EED08A,#E6C27A);color:#06141F;border:0;border-radius:12px;padding:14px;font-size:15px;font-weight:900;cursor:pointer;font-family:Tajawal,sans-serif">
+        دخول
+      </button>
+      <div id="pinError" style="margin-top:10px;font-size:12px;color:#E07A5F;display:none">رمز غير صحيح — حاول مجدداً</div>
+    </div>
+    <div style="margin-top:40px;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.2em">SAFRA TRAVEL • PRIVATE</div>
+  </div>
+
+  <!-- المحتوى المالي -->
+  <div id="financeContent" style="display:none">
+
   <div class="page-head">
     <div class="icon"><i data-lucide="wallet"></i></div>
     <h2>الصفحة المالية</h2>
@@ -1399,7 +1799,7 @@ body{
         <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">تُدفع عند الوصول لكل فندق نقداً</div>
       </div>
       <div style="text-align:left;flex-shrink:0">
-        <div style="font-size:15px;font-weight:900;color:#E07A5F">~64 €</div>
+        <div style="font-size:15px;font-weight:900;color:#E07A5F">72 €</div>
         <div style="font-size:10px;font-weight:800;color:rgba(224,122,95,.9);margin-top:2px">⏳ نقداً</div>
       </div>
     </div>
@@ -1436,46 +1836,115 @@ body{
     </div>
   </div>
 
-  <!-- ===== مصاريف إضافية أثناء الرحلة ===== -->
-  <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.1em;margin:0 0 10px">➕ مصاريف إضافية أثناء الرحلة</div>
-  <div id="extraExpenses" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px"></div>
-  <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-bottom:16px">
-    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px">
-      <input id="expName" placeholder="اسم المصروف" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
-      <input id="expAmount" placeholder="المبلغ" type="number" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
-      <button onclick="addExpense()" style="background:linear-gradient(180deg,#EED08A,#E6C27A);color:#06141F;border:0;border-radius:10px;padding:10px 14px;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap;font-family:Tajawal,sans-serif">+ أضف</button>
+  <!-- ===== مصاريف الرحلة ===== -->
+  <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.1em;margin:0 0 12px">🧾 تسجيل مصاريف الرحلة</div>
+
+  <!-- فورم الإضافة -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;margin-bottom:14px">
+
+    <!-- المبلغ والعملة -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <input id="expAmount" placeholder="المبلغ" type="number" inputmode="decimal"
+        style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:16px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
+      <select id="expCurrency"
+        style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:14px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
+        <option value="EUR">€ يورو</option>
+        <option value="SAR">ر.س ريال</option>
+      </select>
     </div>
-    <select id="expCurrency" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;color:#fff;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
-      <option value="يورو">€ يورو</option>
-      <option value="ريال">ر.س ريال سعودي</option>
-      <option value="دولار">$ دولار</option>
-    </select>
+
+    <!-- البنود -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px" id="catBtns">
+      <button onclick="selectCat(this,'مطاعم','🍽️')" data-cat="مطاعم" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">🍽️<br>مطاعم</button>
+      <button onclick="selectCat(this,'مواصلات','🚕')" data-cat="مواصلات" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">🚕<br>مواصلات</button>
+      <button onclick="selectCat(this,'سكن','🏨')" data-cat="سكن" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">🏨<br>سكن</button>
+      <button onclick="selectCat(this,'فعاليات','🎭')" data-cat="فعاليات" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">🎭<br>فعاليات</button>
+      <button onclick="selectCat(this,'تسوق','🛍️')" data-cat="تسوق" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">🛍️<br>تسوق</button>
+      <button onclick="selectCat(this,'رسوم','🏛️')" data-cat="رسوم" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">🏛️<br>رسوم</button>
+      <button onclick="selectCat(this,'أخرى','📦')" data-cat="أخرى" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 4px;font-size:11px;font-weight:800;color:#94A8B8;cursor:pointer;font-family:Tajawal,sans-serif;text-align:center">📦<br>أخرى</button>
+      <input id="expNote" placeholder="ملاحظة" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px 6px;color:#94A8B8;font-size:11px;font-family:Tajawal,sans-serif;text-align:center;width:100%">
+    </div>
+
+    <input type="hidden" id="expCat" value="">
+
+    <!-- زر الحفظ -->
+    <button onclick="addExpense()" style="width:100%;background:linear-gradient(180deg,#EED08A,#E6C27A);color:#06141F;border:0;border-radius:12px;padding:13px;font-weight:900;font-size:15px;cursor:pointer;font-family:Tajawal,sans-serif;letter-spacing:.02em">
+      💾 حفظ المصروف
+    </button>
   </div>
-  <div id="expTotal" style="display:none;background:rgba(230,194,122,.08);border:1px solid rgba(230,194,122,.22);border-radius:14px;padding:13px 16px;margin-bottom:16px;justify-content:space-between;align-items:center">
-    <span style="font-size:13px;font-weight:800;color:#94A8B8">إجمالي المصاريف الإضافية</span>
-    <span id="expTotalVal" style="font-size:15px;font-weight:900;color:#E6C27A"></span>
+
+  <!-- إجماليات سريعة -->
+  <div id="expSummary" style="display:none;background:rgba(7,24,36,.7);border:1px solid rgba(230,194,122,.15);border-radius:16px;padding:14px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.7);margin-bottom:10px">📊 إجمالي المصاريف</div>
+    <div id="expSummaryContent"></div>
+  </div>
+
+  <!-- قائمة المصاريف -->
+  <div id="extraExpenses" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"></div>
+
+  </div>
+</main>
   </div>
 
 </main>
 
 <main id="view-day1" class="view">
-  <div class="page-head">
-    <div class="icon"><i data-lucide="map-pin"></i></div>
-    <h2>ميلانو</h2>
-    <p>ليلتين • 11 June → 13 June</p>
-    <div class="date-line">الخميس — 11 June 2026</div>
+  <div class="page-head" style="position:relative;overflow:hidden;background:linear-gradient(145deg, rgba(42,28,12,.95) 0%, rgba(28,18,8,.98) 40%, rgba(8,20,30,.97) 100%)">
+    <!-- خلفية ميلانو السينمائية -->
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+      <!-- سيلويت الدومو -->
+      <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;opacity:.07;filter:blur(.5px)">
+        <!-- برج مركزي -->
+        <polygon points="195,20 200,5 205,20" fill="#E6C27A"/>
+        <rect x="193" y="20" width="14" height="60" fill="#E6C27A"/>
+        <!-- أبراج جانبية -->
+        <polygon points="170,50 174,38 178,50" fill="#E6C27A"/>
+        <rect x="170" y="50" width="8" height="40" fill="#E6C27A"/>
+        <polygon points="222,50 226,38 230,50" fill="#E6C27A"/>
+        <rect x="222" y="50" width="8" height="40" fill="#E6C27A"/>
+        <!-- أبراج صغيرة -->
+        <polygon points="148,65 151,55 154,65" fill="#E6C27A"/>
+        <rect x="148" y="65" width="6" height="25" fill="#E6C27A"/>
+        <polygon points="246,65 249,55 252,65" fill="#E6C27A"/>
+        <rect x="246" y="65" width="6" height="25" fill="#E6C27A"/>
+        <!-- القاعدة الرئيسية -->
+        <rect x="120" y="90" width="160" height="70" fill="#E6C27A"/>
+        <!-- نوافذ -->
+        <rect x="130" y="100" width="10" height="15" fill="rgba(3,16,24,.6)"/>
+        <rect x="150" y="100" width="10" height="15" fill="rgba(3,16,24,.6)"/>
+        <rect x="170" y="100" width="10" height="15" fill="rgba(3,16,24,.6)"/>
+        <rect x="210" y="100" width="10" height="15" fill="rgba(3,16,24,.6)"/>
+        <rect x="230" y="100" width="10" height="15" fill="rgba(3,16,24,.6)"/>
+        <rect x="250" y="100" width="10" height="15" fill="rgba(3,16,24,.6)"/>
+        <!-- مبانٍ خلفية -->
+        <rect x="60" y="110" width="55" height="50" fill="#C4A876" opacity=".4"/>
+        <rect x="285" y="115" width="55" height="45" fill="#C4A876" opacity=".4"/>
+        <rect x="20" y="120" width="40" height="40" fill="#A89060" opacity=".25"/>
+        <rect x="340" y="122" width="40" height="38" fill="#A89060" opacity=".25"/>
+      </svg>
+      <!-- Gradient فوق السيلويت -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(8,20,30,0) 0%, rgba(8,20,30,.3) 60%, rgba(28,18,8,.7) 100%)"></div>
+      <!-- ضوء ذهبي -->
+      <div style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:80%;height:60%;background:radial-gradient(ellipse, rgba(230,194,122,.12) 0%, transparent 70%)"></div>
+    </div>
+    <div style="position:relative;z-index:1">
+      <div class="icon" style="background:rgba(230,194,122,.15);border-color:rgba(230,194,122,.3)"><i data-lucide="map-pin"></i></div>
+      <h2>ميلانو</h2>
+      <p>ليلتين • 11 June → 13 June</p>
+      <div class="date-line">الخميس — 11 June 2026</div>
+    </div>
   </div>
 
   <div class="quick-strip">
     <div class="quick-item"><i data-lucide="cloud-sun"></i><b>24° / 16°</b><span>الطقس</span></div>
     <div class="quick-item"><i data-lucide="train-front"></i><b>Metro M1</b><span>المساء</span></div>
-    <div class="quick-item"><i data-lucide="badge-euro"></i><b>72€</b><span>مطلوب</span></div>
+    <div class="quick-item"><i data-lucide="badge-euro"></i><b>72€</b><span>عند الوصول</span></div>
     <div class="quick-item"><i data-lucide="car"></i><b>Driver</b><span>نشط</span></div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div class="time">02:05 PM</div>
+      <div class="time">14:05</div>
       <div class="card-title"><h3>الوصول والمطار</h3><p>MXP Terminal 1 • Saudia SV211</p></div>
       <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="plane-landing"></i></div>
     </div>
@@ -1485,7 +1954,7 @@ body{
         <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الإنترنت ودورة المياه</h4><p>تفعيل التجوال قبل بوابة الخروج لضمان التواصل.</p></div></li>
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>اللقاء بالسائق</h4><p>السائق بانتظار العائلة، والفان هو الخيار المناسب للحقائب و8 أشخاص.</p></div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Malpensa+Airport+Terminal+1"><i data-lucide="navigation"></i> فتح مطار مالبينسا T1</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Milan+Malpensa+Airport+Terminal+1"><i data-lucide="navigation"></i> فتح مطار مالبينسا T1</a>
     </div>
   </div>
 
@@ -1500,9 +1969,9 @@ body{
         <li class="step"><span class="step-icon"><i data-lucide="shopping-basket"></i></span><div class="step-content"><h4>توقف سوبرماركت سريع</h4><p>شراء ماء وسناكات وقهوة قبل دخول السكن.</p></div></li>
         <li class="step"><span class="step-icon"><i data-lucide="key-round"></i></span><div class="step-content"><h4>تسجيل الدخول</h4><p>الحجز مدفوع بالكامل، وتوزيع 4 غرف للعائلة.</p></div></li>
       </ul>
-      <div class="info-box"><i data-lucide="badge-euro"></i><div class="box-text"><strong>مطلوب الدفع</strong>72€ كاش — ضريبة المدينة فقط.</div></div>
-      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>ممنوع النوم</strong>راحة 45–60 دقيقة فقط، ثم الخروج لتفادي Jet Lag.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=RELSTAY+Vercelli+Suites+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
+      <div class="info-box"><i data-lucide="badge-euro"></i><div class="box-text"><strong>72€ تُدفع لموظف الاستقبال في RELSTAY</strong>ضريبة إقامة المدينة — تُسدَّد نقداً عند تسجيل الدخول مباشرةً. جهّز المبلغ مسبقاً.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>لحظة استعادة الطاقة</strong>راحة خفيفة 45–60 دقيقة تساعد الجسم على التأقلم مع التوقيت الجديد — ثم الخروج بطاقة كاملة.</div></div>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=RELSTAY+Vercelli+Corso+Vercelli+25+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
     </div>
   </div>
 
@@ -1510,350 +1979,460 @@ body{
     <div class="card-head">
       <div class="time">06:00 PM</div>
       <div class="card-title"><h3>جولة الدومو</h3><p>Duomo • Galleria • Rinascente</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="train-front"></i></span><div class="step-content"><h4>المترو M1</h4><p>Conciliazione إلى Duomo — 4 محطات مباشرة بدون تبديل.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>المسار</h4><p>الدومو، الغاليريا، ثم ريناتشينتي بشكل خفيف بدون إجهاد.</p></div></li>
+        <li class="step"><span class="step-icon">🚇</span><div class="step-content">
+          <h4>المترو M1</h4>
+          <p>Conciliazione إلى Duomo — 4 محطات مباشرة بدون تبديل.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🕌</span><div class="step-content">
+          <h4>الدومو</h4>
+          <p>تحفة معمارية استغرق بناؤها ستة قرون. ثاني أكبر كاتدرائية في العالم — الدخول من الداخل تجربة بصرية لا تُعوَّض.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🏛️</span><div class="step-content">
+          <h4>Galleria Vittorio Emanuele II</h4>
+          <p>من أقدم وأفخم مراكز التسوق في أوروبا — معمار استثنائي وأجواء فريدة تستحق التجوال فيها.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🛍️</span><div class="step-content">
+          <h4>Rinascente</h4>
+          <p>الطابق السابع يتيح إطلالة استثنائية على الدومو. توقف لكوب قهوة قبل مواصلة الجولة — من أجمل المناظر في ميلانو.</p>
+        </div></li>
       </ul>
-      <div class="btn-grid">
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Conciliazione+Metro+Milano"><i data-lucide="train-front"></i> المترو</a>
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Duomo+di+Milano"><i data-lucide="navigation"></i> الدومو</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Conciliazione+Metro+Station+Milano"><i data-lucide="train-front"></i> المترو</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Duomo+di+Milano"><i data-lucide="landmark"></i> الدومو</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Rinascente+Milano+Piazza+Duomo"><i data-lucide="shopping-bag"></i> Rinascente</a>
       </div>
-      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Rinascente+Milano+Piazza+Duomo"><i data-lucide="shopping-bag"></i> Rinascente</a>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
-      <div class="time">08:00 PM</div>
-      <div class="card-title"><h3>القهوة والعشاء</h3><p>Marchesi / Starbucks Reserve • Spontini</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+      <div class="time">08:30 PM</div>
+      <div class="card-title"><h3>القهوة والعشاء والعودة</h3><p>Marchesi 1824 • Spontini • Conciliazione</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>القهوة</h4><p>Marchesi 1824 أو Starbucks Reserve حسب قربهم وازدحام المكان.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>العشاء المقترح</h4><p>Spontini Duomo — سريع ومناسب لأول يوم ولا يحتاج حجز.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="moon"></i></span><div class="step-content"><h4>العودة</h4><p>العودة بالمترو للسكن والنوم مبكرًا استعدادًا لكومو.</p></div></li>
+        <li class="step"><span class="step-icon">☕</span><div class="step-content">
+          <h4>Marchesi 1824 — القهوة</h4>
+          <p>من أعرق مقاهي ميلانو منذ 1824. توقف قصير لكوب إسبريسو أو كابتشينو قبل العشاء — تجربة إيطالية أصيلة لا تُفوَّت.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🍕</span><div class="step-content">
+          <h4>Spontini — العشاء</h4>
+          <p>من أعرق بيتزا ميلانو. خيار سريع ومناسب لأول يوم دون الحاجة لحجز مسبق.</p>
+          <div style="background:rgba(224,122,95,.08);border-right:3px solid rgba(224,122,95,.4);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:12px;color:#C4D4DF;line-height:1.6">
+            <strong style="color:#E07A5F">⚠️ تنبيه</strong> — تأكد من طلب بيتزا بدون لحم خنزير. المطعم يقدم خمراً — اطلب ماء أو عصير.
+          </div>
+          <div style="background:rgba(230,194,122,.08);border-right:3px solid rgba(230,194,122,.4);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:12.5px;color:#C4D4DF;line-height:1.6">
+            <strong style="color:#E6C27A">🍕 Primavera — موصى بها</strong><br>
+            طماطم، موزاريلا، جرانا بادانو DOP، طماطم كرزية وجرجير — Large بـ 12€
+          </div>
+        </div></li>
+        <li class="step"><span class="step-icon">🚇</span><div class="step-content">
+          <h4>العودة للسكن</h4>
+          <p>المترو M1 من محطة Duomo إلى Conciliazione مباشرة — 4 محطات بدون تبديل. أو مع السائق كخيار ثانٍ.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🌙</span><div class="step-content">
+          <h4>نوم مبكر</h4>
+          <p>يوم كومو وبيلاجيو يبدأ باكراً — النوم المبكر يضمن يوماً كاملاً باستمتاع حقيقي.</p>
+        </div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Spontini+Duomo+Milano"><i data-lucide="navigation"></i> فتح Spontini</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Marchesi+1824+Milano+Duomo"><i data-lucide="coffee"></i> Marchesi 1824</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Spontini+Milano+Duomo"><i data-lucide="pizza"></i> Spontini</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Conciliazione+Metro+Station+Milano"><i data-lucide="train-front"></i> محطة Conciliazione</a>
+      </div>
     </div>
   </div>
+
 </main>
 
 
 <main id="view-day2" class="view">
-  <div class="page-head">
-    <div class="icon"><i data-lucide="waves"></i></div>
-    <h2>كومو وبيلاجيو</h2>
-    <p>رحلة يوم كامل • الليلة الثانية في ميلانو</p>
-    <div class="date-line">الجمعة — 12 June 2026</div>
+  <div class="page-head" style="position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(8,28,45,.97) 0%,rgba(5,18,30,.98) 40%,rgba(3,12,22,.97) 100%)">
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+      <!-- سيلويت بحيرة كومو -->
+      <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;opacity:.07;filter:blur(.5px)">
+        <!-- تلال خلفية -->
+        <ellipse cx="100" cy="120" rx="120" ry="60" fill="#4A8FA8"/>
+        <ellipse cx="300" cy="115" rx="130" ry="65" fill="#3A7F98"/>
+        <ellipse cx="200" cy="130" rx="160" ry="50" fill="#2A6F88"/>
+        <!-- البحيرة -->
+        <rect x="0" y="120" width="400" height="40" fill="#1A5F78" opacity=".8"/>
+        <!-- انعكاس ضوء على الماء -->
+        <ellipse cx="200" cy="135" rx="80" ry="8" fill="rgba(230,194,122,.3)"/>
+        <!-- قوارب صغيرة -->
+        <ellipse cx="150" cy="128" rx="12" ry="3" fill="#E6C27A" opacity=".6"/>
+        <ellipse cx="250" cy="132" rx="10" ry="2.5" fill="#E6C27A" opacity=".5"/>
+      </svg>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(3,12,22,0) 0%,rgba(3,12,22,.4) 70%,rgba(8,28,45,.8) 100%)"></div>
+      <div style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:80%;height:60%;background:radial-gradient(ellipse,rgba(74,143,168,.1) 0%,transparent 70%)"></div>
+    </div>
+    <div style="position:relative;z-index:1">
+      <div class="icon" style="background:rgba(74,143,168,.2);border-color:rgba(74,143,168,.4)"><i data-lucide="waves"></i></div>
+      <h2>كومو وبيلاجيو</h2>
+      <p>بحيرة كومو • العبّارة • القرية الإيطالية</p>
+      <div class="date-line">الجمعة — 12 June 2026</div>
+    </div>
   </div>
 
   <div class="quick-strip">
     <div class="quick-item"><i data-lucide="cloud-sun"></i><b>26° / 16°</b><span>الطقس</span></div>
-    <div class="quick-item"><i data-lucide="ship"></i><b>Ferry</b><span>العبّارة</span></div>
-    <div class="quick-item"><i data-lucide="badge-euro"></i><b>120–150€</b><span>احتياط</span></div>
-    <div class="quick-item"><i data-lucide="footprints"></i><b>متوسط</b><span>الحركة</span></div>
+    <div class="quick-item"><i data-lucide="ship"></i><b>عبّارة</b><span>120-150€</span></div>
+    <div class="quick-item"><i data-lucide="anchor"></i><b>قارب</b><span>~1,200 ر.س</span></div>
+    <div class="quick-item"><i data-lucide="activity"></i><b>متوسط</b><span>الحركة</span></div>
   </div>
 
+  <!-- كارت 1: الانطلاق -->
   <div class="card">
     <div class="card-head">
       <div class="time">08:30 AM</div>
-      <div class="card-title"><h3>الانطلاق من ميلانو</h3><p>RELSTAY → Como • الطريق السريع A9</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+      <div class="card-title"><h3>الانطلاق إلى كومو</h3><p>RELSTAY → Como • الطريق السريع A9</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>التحرك المبكر</h4><p>الخروج من السكن باتجاه مدينة كومو. المدة المتوقعة 50–60 دقيقة حسب الحركة الصباحية.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="briefcase"></i></span><div class="step-content"><h4>تجهيزات اليوم</h4><p>ماء، نظارات شمسية، جاكيت خفيف للبحيرة، جوالات مشحونة، وكاش بسيط احتياطي.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="sparkles"></i></span><div class="step-content"><h4>هدف التوقيت</h4><p>الوصول قبل الذروة الصباحية لتسهيل تذاكر العبّارة والاستمتاع بكومو بهدوء.</p></div></li>
+        <li class="step"><span class="step-icon">🚐</span><div class="step-content">
+          <h4>التحرك المبكر</h4>
+          <p>الخروج من السكن باتجاه كومو. المدة المتوقعة 50-60 دقيقة حسب حركة الصباح.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🅿️</span><div class="step-content">
+          <h4>الوقوف والتوجه للمرفأ</h4>
+          <p>السائق يتوقف قرب المرفأ — التوجه مباشرة لشراء تذاكر العبّارة قبل الازدحام.</p>
+        </div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=RELSTAY+Vercelli+Suites+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=RELSTAY+Vercelli+Corso+Vercelli+25+Milano"><i data-lucide="navigation"></i> RELSTAY</a>
     </div>
   </div>
 
+  <!-- كارت 2: المرفأ والتذاكر -->
   <div class="card">
     <div class="card-head">
       <div class="time">09:30 AM</div>
-      <div class="card-title"><h3>مرفأ كومو والتذاكر</h3><p>Navigazione Lago di Como • قبل الازدحام</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ticket"></i></div>
+      <div class="card-title"><h3>مرفأ كومو والتذاكر</h3><p>Lungo Lario Trieste • العبّارة أو القارب</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="ticket"></i></span><div class="step-content"><h4>تذاكر العبّارة السريعة</h4><p>اختيار Hydrofoil / Rapido باتجاه Bellagio، لأنها تختصر الوقت وتعطي تجربة أريح للعائلة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="timer"></i></span><div class="step-content"><h4>المدة المتوقعة</h4><p>20–30 دقيقة حسب الطابور. بعد 10 صباحاً يزيد الازدحام بشكل واضح.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="circle-alert"></i></span><div class="step-content"><h4>تجنب العبّارة البطيئة</h4><p>Battello تتوقف في قرى كثيرة وقد تستغرق وقتاً طويلاً. اليوم مبني على العبّارة السريعة.</p></div></li>
+        <li class="step"><span class="step-icon">🎫</span><div class="step-content">
+          <h4>تذاكر العبّارة</h4>
+          <p>العبّارة العامة إلى بيلاجيو — الخيار العملي للمجموعة. السعر 120-150€ للجميع ذهاباً وإياباً.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">⛵</span><div class="step-content">
+          <h4>Como On Boat — خيار فاخر</h4>
+          <p>قارب خاص داخل البحيرة — مناسب للتصوير والهدوء ورؤية الفلل من الماء. ~1,200 ر.س. يحتاج حجز مسبق.</p>
+          <a href="https://como-on-boat.checkfront.com/reserve/?inline=&header=&optio" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(230,194,122,.12);border:1px solid rgba(230,194,122,.3);color:#E6C27A;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:800;text-decoration:none;margin-top:8px;font-family:Tajawal,sans-serif">🔗 حجز القارب</a>
+        </div></li>
       </ul>
-      <div class="info-box"><i data-lucide="badge-euro"></i><div class="box-text"><strong>مبلغ احتياطي</strong>يفضل تجهيز 120–150€ لتذاكر العبّارة في حال تعطل الدفع بالبطاقة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Navigazione+Lago+di+Como+Piazza+Cavour"><i data-lucide="navigation"></i> فتح مرفأ كومو</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lungo+Lario+Trieste+22100+Como+Italy"><i data-lucide="navigation"></i> المرفأ</a>
     </div>
   </div>
 
+  <!-- كارت 3: سنتر كومو -->
   <div class="card">
     <div class="card-head">
       <div class="time">10:00 AM</div>
-      <div class="card-title"><h3>COMO EXPERIENCE</h3><p>سنتر كومو • ساحة الكاتدرائية • قهوة خفيفة</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+      <div class="card-title"><h3>جولة سنتر كومو</h3><p>ساحة الكاتدرائية • VIK&A • تمشية خفيفة</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="church"></i></span><div class="step-content"><h4>Piazza del Duomo</h4><p>ساحة جميلة قرب الكاتدرائية، مناسبة لجلسة هادئة أو قهوة وجيلاتو، وأحياناً تكون فيها أجواء موسيقى شارع خفيفة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>VIK&amp;A Waffles Drinks</h4><p>قهوة مختصة ووافل وسويت داخل سنتر كومو، مناسبة كاستراحة صباحية أو جلسة خفيفة أثناء التمشية قرب الساحة والكنيسة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>مطعم تايلندي قريب</h4><p>خيار آسيوي مناسب لمحبي الأكل التايلندي داخل كومو، ويمكن اعتماده كغداء أو عشاء بديل إذا فضلت العائلة البقاء في كومو.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Meat Crew Como</h4><p>مطعم برجر ولحم بقري، خيار عملي إذا قررت العائلة البقاء في كومو للغداء أو العشاء بدل بيلاجيو.</p></div></li>
+        <li class="step"><span class="step-icon">🕌</span><div class="step-content">
+          <h4>Piazza del Duomo</h4>
+          <p>ساحة جميلة قرب الكاتدرائية — مناسبة للتصوير وجلسة هادئة قبل ركوب العبّارة.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">☕</span><div class="step-content">
+          <h4>VIK&A Waffles Drinks</h4>
+          <p>قهوة ووافل داخل سنتر كومو — استراحة صباحية خفيفة قبل رحلة البحيرة.</p>
+        </div></li>
       </ul>
-      <div class="btn-grid">
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Piazza+del+Duomo+Como"><i data-lucide="map-pin"></i> ساحة الكاتدرائية</a>
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=VIK%26A+Waffles+Drinks+Como"><i data-lucide="coffee"></i> VIK&amp;A</a>
-      </div>
-      <div class="btn-grid">
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Thai+restaurant+near+VIK%26A+Waffles+Drinks+Como"><i data-lucide="utensils"></i> المطعم التايلندي</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Meat+Crew+Como"><i data-lucide="utensils"></i> Meat Crew</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+del+Duomo+Como+Italy"><i data-lucide="map-pin"></i> ساحة الكاتدرائية</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=VIK+A+Waffles+Drinks+Como+Italy"><i data-lucide="coffee"></i> VIK&A</a>
       </div>
     </div>
   </div>
 
+  <!-- كارت 4: بيلاجيو -->
   <div class="card">
     <div class="card-head">
       <div class="time">11:30 AM</div>
-      <div class="card-title"><h3>العبّارة إلى بيلاجيو</h3><p>Como → Bellagio • تجربة البحيرة</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ship"></i></div>
+      <div class="card-title"><h3>بيلاجيو — جوهرة البحيرة</h3><p>Como → Bellagio • الممرات والغداء</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="waves"></i></span><div class="step-content"><h4>الإبحار السريع</h4><p>المدة 45–50 دقيقة تقريباً، مع إطلالات جميلة على الفلل والجبال المحيطة بالبحيرة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>التصوير</h4><p>يمكن الصعود للسطح للتصوير عند توفر المساحة، مع الانتباه للهواء البارد أثناء الحركة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="jacket"></i></span><div class="step-content"><h4>الملابس</h4><p>الجاكيت الخفيف مناسب على سطح العبّارة فقط، خصوصاً لمن يتأثر بنسمات البحيرة.</p></div></li>
+        <li class="step"><span class="step-icon">⛴️</span><div class="step-content">
+          <h4>العبّارة إلى بيلاجيو</h4>
+          <p>رحلة بحرية خلابة بين الجبال والفلل الإيطالية — من أجمل المشاهد في شمال إيطاليا.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🏘️</span><div class="step-content">
+          <h4>الممرات الحجرية</h4>
+          <p>قرية بيلاجيو من أجمل القرى الإيطالية — أزقة ضيقة وأدراج حجرية ومناظر استثنائية على البحيرة.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🍽️</span><div class="step-content">
+          <h4>خيارات الغداء في بيلاجيو</h4>
+          <p>اختر ما يناسب العائلة:</p>
+          <div style="background:rgba(230,194,122,.07);border-right:3px solid rgba(230,194,122,.3);border-radius:8px;padding:10px 12px;margin-top:8px">
+            <div style="font-size:12.5px;color:#C4D4DF;line-height:1.9">
+              🍝 <strong style="color:#E6C27A">Ristorante Bilacus</strong> — مطعم إيطالي راقٍ مع إطلالة على البحيرة<br>
+              🍦 <strong style="color:#E6C27A">Gelateria del Borgo</strong> — جيلاتو إيطالي أصيل<br>
+              ☕ <strong style="color:#E6C27A">Café Classique</strong> — قهوة وحلويات خفيفة
+            </div>
+          </div>
+        </div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Como+Traghetto+Pier"><i data-lucide="navigation"></i> فتح رصيف كومو</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="time">12:30 PM</div>
-      <div class="card-title"><h3>BELLAGIO EXPERIENCE</h3><p>القرية • الغداء • الممرات الحجرية</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="trees"></i></div>
-    </div>
-    <div class="card-body">
-      <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="map-pin"></i></span><div class="step-content"><h4>الواجهة السفلية</h4><p>الممشى المطل على البحيرة مريح وهادئ، ومناسب كبداية قبل الدخول للممرات الحجرية.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="footprints"></i></span><div class="step-content"><h4>الممرات العلوية</h4><p>تحتاج مشياً أكثر وفيها درجات حجرية. المسار العلوي اختياري لمحبي التصوير والتمشية.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Ristorante Bilacus</h4><p>مطعم إيطالي جميل داخل القرية، مناسب للغداء وجلسة أطول إذا توفر مكان مناسب للعائلة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="ice-cream"></i></span><div class="step-content"><h4>Gelateria del Borgo</h4><p>جيلاتو مشهور داخل الممرات الحجرية، مناسب بعد الغداء وأثناء التمشية.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Café Classique</h4><p>خيار جلسة خفيفة قريب من البحيرة للقهوة أو سناك سريع.</p></div></li>
-      </ul>
-      <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Bellagio+Lake+Como+Italy"><i data-lucide="navigation"></i> Bellagio</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Ristorante+Bilacus+Bellagio"><i data-lucide="utensils"></i> Bilacus</a>
-      </div>
-      <div class="btn-grid">
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+del+Borgo+Bellagio"><i data-lucide="ice-cream"></i> Gelato</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Cafe+Classique+Bellagio"><i data-lucide="coffee"></i> Café Classique</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bellagio+Lake+Como+Italy"><i data-lucide="navigation"></i> بيلاجيو</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ristorante+Bilacus+Bellagio+Lake+Como"><i data-lucide="utensils"></i> Bilacus</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gelateria+del+Borgo+Bellagio+Lake+Como"><i data-lucide="ice-cream"></i> Gelato</a>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-head">
-      <div class="time">OPTION</div>
-      <div class="card-title"><h3>خيار بديل: البقاء في كومو</h3><p>Como Relax Day • بدون بيلاجيو</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="sparkles"></i></div>
-    </div>
-    <div class="card-body">
-      <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="waves"></i></span><div class="step-content"><h4>جلسات البحيرة</h4><p>الاكتفاء بكومو خيار ممتاز إذا رغبت العائلة بيوم أهدأ وحركة أقل.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="sailboat"></i></span><div class="step-content"><h4>Como On Boat</h4><p>تجربة اختيارية لقارب خاص داخل البحيرة، مناسبة للتصوير والهدوء ورؤية الفلل من الماء.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="landmark"></i></span><div class="step-content"><h4>سنتر كومو</h4><p>ساحة الكاتدرائية، القهوة والوافل، المطعم التايلندي، البرجر، والتسوق الخفيف — كلها قريبة ومريحة داخل كومو.</p></div></li>
-      </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Como+On+Boat"><i data-lucide="navigation"></i> Como On Boat</a>
-    </div>
-  </div>
-
+  <!-- كارت 5: العودة لكومو -->
   <div class="card">
     <div class="card-head">
       <div class="time">04:30 PM</div>
-      <div class="card-title"><h3>العودة إلى كومو</h3><p>Bellagio → Como • ثم ميلانو</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="rotate-ccw"></i></div>
+      <div class="card-title"><h3>العودة إلى كومو</h3><p>Bellagio → Como • استراحة قبل المساء</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>الوصول المبكر للرصيف</h4><p>التواجد قبل موعد العبّارة بـ 20 دقيقة، لأن رحلات العودة تكون أكثر ازدحاماً.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="message-circle"></i></span><div class="step-content"><h4>تنسيق العودة</h4><p>إرسال وقت الوصول المتوقع للسائق ليكون قريباً من نقطة الإنزال في كومو.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="car"></i></span><div class="step-content"><h4>العودة إلى ميلانو</h4><p>بعد الوصول لكومو، ركوب الفان والعودة للسكن. المتوقع الوصول حوالي 06:30 PM.</p></div></li>
+        <li class="step"><span class="step-icon">⛴️</span><div class="step-content">
+          <h4>العبّارة للعودة</h4>
+          <p>العودة بالعبّارة من بيلاجيو إلى مرفأ كومو — الوقت المثالي للاسترخاء ومشاهدة البحيرة.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🚶</span><div class="step-content">
+          <h4>تمشية على الكورنيش</h4>
+          <p>Lungo Lario Trieste — كورنيش كومو بمحاذاة البحيرة، مناسب لجلسة هادئة قبل العشاء.</p>
+        </div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Bellagio+Traghetto+Pier"><i data-lucide="navigation"></i> فتح مرفأ Bellagio</a>
+      <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lungo+Lario+Trieste+22100+Como+Italy"><i data-lucide="navigation"></i> كورنيش كومو</a>
     </div>
   </div>
 
+  <!-- كارت 6: المساء والعشاء -->
   <div class="card">
     <div class="card-head">
-      <div class="time">08:00 PM</div>
-      <div class="card-title"><h3>نهاية اليوم</h3><p>راحة وتجهيز لليوم التالي</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+      <div class="time">07:00 PM</div>
+      <div class="card-title"><h3>مساء كومو والعشاء</h3><p>خيارات العشاء • ثم العودة لميلانو</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="bed"></i></span><div class="step-content"><h4>راحة في السكن</h4><p>العودة للفندق، تبديل الملابس، وراحة هادئة بعد يوم البحيرة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="luggage"></i></span><div class="step-content"><h4>تجهيز الشنط</h4><p>غداً تسجيل خروج نهائي من ميلانو، لذلك تُجهز الحقائب والملابس الليلة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="mountain"></i></span><div class="step-content"><h4>الاستعداد للشمال</h4><p>اليوم التالي انتقال أطول باتجاه الدولوميت وبرونيكو، والنوم المبكر مهم جداً.</p></div></li>
+        <li class="step"><span class="step-icon">🍽️</span><div class="step-content">
+          <h4>خيارات العشاء</h4>
+          <div style="background:rgba(230,194,122,.07);border-right:3px solid rgba(230,194,122,.3);border-radius:8px;padding:10px 12px;margin-top:8px">
+            <div style="font-size:12.5px;color:#C4D4DF;line-height:1.9">
+              🍔 <strong style="color:#E6C27A">Meat Crew Como</strong> — برجر بقري — خيار عملي وسريع<br>
+              🍜 <strong style="color:#E6C27A">المطعم التايلندي</strong> — Via Cesare Cantù 43 — خيار آسيوي لمحبي الأكل التايلندي
+            </div>
+          </div>
+          <div style="background:rgba(224,122,95,.07);border-right:3px solid rgba(224,122,95,.3);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:12px;color:#C4D4DF">
+            <strong style="color:#E07A5F">⚠️ تنبيه</strong> — تأكد من طلب أطباق بدون لحم خنزير. المطاعم الإيطالية تقدم خمراً — اطلب ماء أو عصير.
+          </div>
+        </div></li>
+        <li class="step"><span class="step-icon">🚐</span><div class="step-content">
+          <h4>العودة لميلانو</h4>
+          <p>المغادرة بعد العشاء مباشرة — المدة ساعة تقريباً عبر A9.</p>
+        </div></li>
       </ul>
-      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه الغد</strong>تسجيل خروج من ميلانو والانطلاق شمالاً، لذلك الأفضل إغلاق الشنط قبل النوم.</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meat+Crew+Como+Italy"><i data-lucide="utensils"></i> Meat Crew</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via+Cesare+Cantu+43+22100+Como+Italy"><i data-lucide="utensils"></i> المطعم التايلندي</a>
+      </div>
     </div>
   </div>
+
 </main>
 
-
-
-
 <main id="view-day3" class="view">
-  <div class="page-head">
-    <div class="icon"><i data-lucide="mountain-snow"></i></div>
-    <h2>برونيكو • الدولوميت</h2>
-    <p>مغادرة ميلانو والدخول إلى شمال إيطاليا • الليلة الأولى في برونيكو</p>
-    <div class="date-line">السبت — 13 June 2026</div>
+  <div class="page-head" style="position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(15,20,30,.97) 0%,rgba(10,15,25,.98) 40%,rgba(8,12,20,.97) 100%)">
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden">
+      <!-- سيلويت جبال الدولوميت -->
+      <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;opacity:.07;filter:blur(.5px)">
+        <!-- جبال خلفية -->
+        <polygon points="0,160 60,60 120,160" fill="#8899AA"/>
+        <polygon points="80,160 160,40 240,160" fill="#99AABB"/>
+        <polygon points="200,160 280,50 360,160" fill="#8899AA"/>
+        <polygon points="300,160 370,70 400,160" fill="#778899"/>
+        <!-- ثلوج على القمم -->
+        <polygon points="60,60 80,80 40,80" fill="#DDEEFF" opacity=".4"/>
+        <polygon points="160,40 180,65 140,65" fill="#DDEEFF" opacity=".5"/>
+        <polygon points="280,50 300,75 260,75" fill="#DDEEFF" opacity=".4"/>
+        <!-- مروج خضراء -->
+        <rect x="0" y="130" width="400" height="30" fill="#3A5A3A" opacity=".4"/>
+      </svg>
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,20,0) 0%,rgba(8,12,20,.4) 70%,rgba(15,20,30,.8) 100%)"></div>
+      <div style="position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:80%;height:60%;background:radial-gradient(ellipse,rgba(150,180,210,.08) 0%,transparent 70%)"></div>
+    </div>
+    <div style="position:relative;z-index:1">
+      <div class="icon" style="background:rgba(150,180,210,.2);border-color:rgba(150,180,210,.4)"><i data-lucide="mountain"></i></div>
+      <h2>الطريق إلى برونيكو</h2>
+      <p>ترينتو • الدولوميت • يوم انتقال وراحة</p>
+      <div class="date-line">السبت — 13 June 2026</div>
+    </div>
   </div>
 
   <div class="quick-strip">
-    <div class="quick-item"><i data-lucide="cloud-sun"></i><b>19° / 9°</b><span>طقس جبلي</span></div>
-    <div class="quick-item"><i data-lucide="car"></i><b>3:45h</b><span>قيادة صافية</span></div>
-    <div class="quick-item"><i data-lucide="shopping-cart"></i><b>Interspar</b><span>ضروري اليوم</span></div>
-    <div class="quick-item"><i data-lucide="shirt"></i><b>طبقات</b><span>جاكيت دافئ</span></div>
+    <div class="quick-item"><i data-lucide="cloud"></i><b>18° / 10°</b><span>الطقس</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>3.5 ساعة</b><span>المسافة</span></div>
+    <div class="quick-item"><i data-lucide="badge-euro"></i><b>1,056€</b><span>عند الوصول</span></div>
+    <div class="quick-item"><i data-lucide="activity"></i><b>منخفض</b><span>الجهد</span></div>
   </div>
 
+  <!-- كارت 1: الانطلاق -->
   <div class="card">
     <div class="card-head">
-      <div class="time">08:30 AM</div>
-      <div class="card-title"><h3>تسجيل الخروج من ميلانو</h3><p>RELSTAY Vercelli Suites • تحميل الأمتعة</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="hotel"></i></div>
+      <div class="time">09:00 AM</div>
+      <div class="card-title"><h3>الانطلاق من ميلانو</h3><p>RELSTAY → A4/A22 → Trento → Brunico</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="key-round"></i></span><div class="step-content"><h4>إنهاء السكن</h4><p>تسليم مفاتيح الغرف وإنهاء الخروج من السكن قبل الانطلاق باتجاه الشمال الإيطالي.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="luggage"></i></span><div class="step-content"><h4>تحميل الشنط</h4><p>تحميل الحقائب الكبيرة داخل السيارة بشكل مرتب، مع إبقاء الجاكيتات والشواحن والجوازات في متناول اليد.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="search-check"></i></span><div class="step-content"><h4>مراجعة أخيرة</h4><p>التأكد من عدم نسيان الشواحن، الباور بانك، الأدوية، أو أي مقتنيات ثمينة داخل الغرف والخزنات.</p></div></li>
+        <li class="step"><span class="step-icon">🌅</span><div class="step-content">
+          <h4>إفطار خفيف قبل الانطلاق</h4>
+          <p>إفطار سريع في السكن أو على الطريق — اليوم طويل نسبياً ويستحق البدء بهدوء.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🚐</span><div class="step-content">
+          <h4>الطريق عبر A4/A22</h4>
+          <p>مع اقتراب منطقة ترينتو تبدأ الجبال والمروج بالظهور تدريجياً — الهواء يصبح أنقى وأبرد من ميلانو.</p>
+        </div></li>
       </ul>
-      <div class="alert-box"><i data-lucide="clock-3"></i><div class="box-text"><strong>مهم</strong>الانطلاق في الوقت المحدد يساعد على الوصول إلى برونيكو قبل برودة المساء وإغلاق المتاجر.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=RELSTAY+Vercelli+Suites+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=RELSTAY+Vercelli+Corso+Vercelli+25+Milano"><i data-lucide="navigation"></i> RELSTAY</a>
     </div>
   </div>
 
+  <!-- كارت 2: ترينتو -->
   <div class="card">
     <div class="card-head">
-      <div class="time">09:15 AM</div>
-      <div class="card-title"><h3>الطريق السريع والتوقف الأول</h3><p>Milan → A4 / A22 • استراحة طريق</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="road"></i></div>
+      <div class="time">11:30 AM</div>
+      <div class="card-title"><h3>توقف ترينتو</h3><p>Trento Centro • Piazza Duomo • الغداء</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="car-front"></i></span><div class="step-content"><h4>بداية الطريق الطويل</h4><p>الخروج من ميلانو باتجاه الشمال عبر الطرق السريعة الحديثة. اليوم انتقالي ومريح داخل السيارة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Autogrill Brianza Nord</h4><p>توقف قصير للقهوة الإيطالية، دورات المياه، وشراء ماء وسناكات خفيفة قبل استكمال الطريق.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="battery-charging"></i></span><div class="step-content"><h4>شحن الأجهزة</h4><p>استغلال وقت الطريق لشحن الجوالات والكاميرات استعداداً للمناطق الجبلية.</p></div></li>
+        <li class="step"><span class="step-icon">🏛️</span><div class="step-content">
+          <h4>Piazza Duomo — تمشية خفيفة</h4>
+          <p>ساحة تاريخية جميلة في قلب ترينتو — 30-45 دقيقة للتصوير والمشي قبل الغداء.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🍽️</span><div class="step-content">
+          <h4>Forsterbräu Trento — الغداء</h4>
+          <p>مطعم واسع ومناسب للعائلة بأجواء شمالية دافئة — أطباق إيطالية وتيرولية متنوعة تناسب أذواق مختلفة.</p>
+          <div style="background:rgba(224,122,95,.07);border-right:3px solid rgba(224,122,95,.3);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:12px;color:#C4D4DF">
+            <strong style="color:#E07A5F">⚠️ تنبيه</strong> — المطعم يقدم خمراً ولحم خنزير. اطلب أطباقاً بدون ويستبدل المشروبات بماء أو عصير.
+          </div>
+        </div></li>
+        <li class="step"><span class="step-icon">☕</span><div class="step-content">
+          <h4>Pasticceria San Vigilio — القهوة</h4>
+          <p>قريب من الساحة — جرّب Apple Strudel الإيطالي مع كابتشينو. من أبرز حلويات المنطقة الشمالية.</p>
+        </div></li>
       </ul>
-      <div class="info-box"><i data-lucide="route"></i><div class="box-text"><strong>المسار العام</strong>A4 ثم A22 باتجاه الشمال، وبعدها طريق SS49 باتجاه وادي بوستيريا وبرونيكو.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Autogrill+Brianza+Nord+A4"><i data-lucide="navigation"></i> فتح استراحة الطريق</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="time">12:00 PM</div>
-      <div class="card-title"><h3>ترينتو • الغداء والتوقف الجبلي</h3><p>Trento Centro • Piazza Duomo</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
-    </div>
-    <div class="card-body">
-      <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="map-pin"></i></span><div class="step-content"><h4>سنتر ترينتو</h4><p>توقف جميل في مدينة ترينتو التاريخية للغداء وتمشية خفيفة قبل دخول أجواء الدولوميت بالكامل.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="trees"></i></span><div class="step-content"><h4>بداية تغير الأجواء</h4><p>من هذه المرحلة تبدأ الجبال والمروج بالظهور، ويصبح الهواء ألطف وأبرد من ميلانو.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Forsterbräu Trento</h4><p>مطعم واسع ومناسب للتوقف العائلي، بأجواء شمالية دافئة وأطباق إيطالية وتيرولية متنوعة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Pasticceria San Vigilio</h4><p>خيار قهوة وحلويات قريب من الساحة، مناسب لتجربة Apple Strudel أو كابتشينو سريع أثناء التمشية.</p></div></li>
-      </ul>
-      <div class="alert-box"><i data-lucide="shirt"></i><div class="box-text"><strong>تغير الطقس</strong>يفضل إخراج الجاكيتات الخفيفة قبل النزول لأن الحرارة تبدأ بالانخفاض تدريجياً.</div></div>
-      <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+Duomo+Trento"><i data-lucide="navigation"></i> سنتر ترينتو</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Forsterbr%C3%A4u+Trento"><i data-lucide="utensils"></i> Forsterbräu</a>
-      </div>
-      <div class="btn-grid">
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Pasticceria+San+Vigilio+Trento"><i data-lucide="coffee"></i> San Vigilio</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Parcheggio+Piazza+Fiera+Trento"><i data-lucide="parking-circle"></i> موقف قريب</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+Duomo+Trento+Italy"><i data-lucide="map-pin"></i> Piazza Duomo</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Finsterwirt+Trento+Italy"><i data-lucide="utensils"></i> Forsterbräu</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Pasticceria+San+Vigilio+Trento+Italy"><i data-lucide="coffee"></i> San Vigilio</a>
       </div>
     </div>
   </div>
 
+  <!-- كارت 3: الطريق لبرونيكو -->
   <div class="card">
     <div class="card-head">
-      <div class="time">02:30 PM</div>
-      <div class="card-title"><h3>الدخول إلى الدولوميت</h3><p>Trento → Brunico / Bruneck</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="mountain"></i></div>
+      <div class="time">02:00 PM</div>
+      <div class="card-title"><h3>استكمال الطريق لبرونيكو</h3><p>Trento → Bolzano → Brunico • A22</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="route"></i></span><div class="step-content"><h4>المسار البانورامي</h4><p>استكمال الطريق شمالاً عبر A22 ثم باتجاه وادي بوستيريا وصولاً إلى برونيكو.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>المشاهد الطبيعية</h4><p>الطريق مليء بالمروج والقرى التيرولية والجبال، لذلك يفضل إبقاء الكاميرات جاهزة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="tunnel"></i></span><div class="step-content"><h4>الطريق</h4><p>الطريق ممهد وحديث، مع أنفاق جبلية ومقاطع طويلة بين الجبال.</p></div></li>
+        <li class="step"><span class="step-icon">🏔️</span><div class="step-content">
+          <h4>أجواء الدولوميت</h4>
+          <p>من هذه المرحلة تتحول المناظر بالكامل — جبال ضخمة، مروج خضراء، وهواء نقي بارد. وقت مثالي للتصوير من نافذة السيارة.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🕒</span><div class="step-content">
+          <h4>ساعة تقريباً من ترينتو</h4>
+          <p>الطريق سريع ومريح عبر A22 — الوصول لبرونيكو حوالي 3:30 PM.</p>
+        </div></li>
       </ul>
-      <div class="info-box"><i data-lucide="gauge"></i><div class="box-text"><strong>ملاحظة قيادة</strong>طريق A22 يحتوي أنظمة رصد سرعة، لذلك الالتزام بالسرعة يعطي رحلة أهدأ وأكثر سلاسة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Brunico+Bruneck+Italy"><i data-lucide="navigation"></i> فتح برونيكو</a>
     </div>
   </div>
 
+  <!-- كارت 4: السكن -->
   <div class="card">
     <div class="card-head">
-      <div class="time">04:30 PM</div>
-      <div class="card-title"><h3>الوصول والسوبرماركت</h3><p>Brunico • Interspar</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="shopping-cart"></i></div>
+      <div class="time">03:30 PM</div>
+      <div class="card-title"><h3>الوصول واستلام السكن</h3><p>Adlhof Apartments • Brunico</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="package"></i></span><div class="step-content"><h4>تأمين الاحتياجات</h4><p>التوقف في السوبرماركت لتأمين احتياجات الأيام الجبلية قبل إغلاق المتاجر مساءً.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="shopping-basket"></i></span><div class="step-content"><h4>مشتريات مقترحة</h4><p>ماء، فواكه، خبز، حليب، قهوة، أجبان، مناديل، وسناكات للجولات الصباحية.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="calendar-alert"></i></span><div class="step-content"><h4>مهم جداً</h4><p>الكثير من متاجر الشمال تغلق يوم الأحد، لذلك لا يفضل تأجيل التسوق إلى الغد.</p></div></li>
+        <li class="step"><span class="step-icon">🏨</span><div class="step-content">
+          <h4>Adlhof Apartments</h4>
+          <p>Roststraße 1, Brunico — شققان مجهزتان بالكامل لـ 8 أشخاص. تسجيل الدخول من 15:00 إلى 18:00.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">💶</span><div class="step-content">
+          <h4>1,056€ تُدفع عند الوصول</h4>
+          <p>تُسدَّد لموظف الاستقبال في Adlhof عند تسجيل الدخول. جهّز المبلغ مسبقاً — رقم التأكيد: 5763.859.350</p>
+        </div></li>
+        <li class="step"><span class="step-icon">😌</span><div class="step-content">
+          <h4>راحة كاملة</h4>
+          <p>لا يوجد برنامج بعد الوصول — استقرار وراحة تامة استعداداً لبحيرة برايس غداً.</p>
+        </div></li>
       </ul>
-      <div class="alert-box"><i data-lucide="clock"></i><div class="box-text"><strong>إغلاق مبكر</strong>يفضل إنهاء التسوق فور الوصول، لأن محلات المدن الجبلية تغلق مبكراً مقارنة بميلانو.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Interspar+Brunico+Bruneck"><i data-lucide="navigation"></i> فتح Interspar Brunico</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Adlhof+Apartments+Roststrasse+1+Brunico"><i data-lucide="navigation"></i> Adlhof Apartments</a>
     </div>
   </div>
 
+  <!-- كارت 5: مساء برونيكو -->
   <div class="card">
     <div class="card-head">
       <div class="time">06:30 PM</div>
-      <div class="card-title"><h3>جولة برونيكو المسائية</h3><p>Via Centrale / Stadtgasse • عشاء دافئ</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="lamp"></i></div>
+      <div class="card-title"><h3>تمشية خفيفة في برونيكو</h3><p>Via Centrale • جيلاتو • عشاء هادئ</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="footprints"></i></span><div class="step-content"><h4>تمشية هادئة</h4><p>جولة قصيرة في الشارع التاريخي وسط البيوت التيرولية الملونة والأجواء الجبلية الباردة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Weisses Lamm</h4><p>مطعم دافئ داخل السنتر، مناسب لعشاء مريح بعد يوم الطريق.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="ice-cream"></i></span><div class="step-content"><h4>Gelateria Amatis</h4><p>خيار لطيف للجيلاتو أو قهوة خفيفة أثناء التمشية إن كان الوقت مناسباً.</p></div></li>
+        <li class="step"><span class="step-icon">🚶</span><div class="step-content">
+          <h4>Via Centrale — شارع المشاة</h4>
+          <p>الشارع الرئيسي في برونيكو — أجواء تيرولية هادئة، محلات ومقاهٍ تعكس روح المنطقة الألبية.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🍦</span><div class="step-content">
+          <h4>Gelateria Amatis</h4>
+          <p>جيلاتو إيطالي أصيل — توقف قصير لطيف بعد يوم طويل من السفر.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🍽️</span><div class="step-content">
+          <h4>Weisses Lamm — عشاء هادئ</h4>
+          <p>مطعم عائلي مريح في سنتر برونيكو — أجواء ألبية دافئة مناسبة لإنهاء يوم السفر.</p>
+          <div style="background:rgba(224,122,95,.07);border-right:3px solid rgba(224,122,95,.3);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:12px;color:#C4D4DF">
+            <strong style="color:#E07A5F">⚠️ تنبيه</strong> — المطعم يقدم خمراً ولحم خنزير. اطلب الأطباق المناسبة وتجنب المشروبات الكحولية.
+          </div>
+        </div></li>
       </ul>
-      <div class="alert-box"><i data-lucide="shirt"></i><div class="box-text"><strong>المساء بارد</strong>بعد غياب الشمس تنخفض الحرارة سريعاً، لذلك الجاكيت الدافئ مهم أثناء التمشية.</div></div>
-      <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Via+Centrale+Brunico"><i data-lucide="navigation"></i> سنتر برونيكو</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Weisses+Lamm+Brunico"><i data-lucide="utensils"></i> Weisses Lamm</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Brunico+Italy"><i data-lucide="map-pin"></i> سنتر برونيكو</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gelateria+Amatis+Brunico+Italy"><i data-lucide="ice-cream"></i> Gelateria Amatis</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Weisses+Lamm+Brunico+Italy"><i data-lucide="utensils"></i> Weisses Lamm</a>
       </div>
-      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+Amatis+Brunico"><i data-lucide="ice-cream"></i> Gelateria Amatis</a>
     </div>
   </div>
 
+  <!-- كارت 6: نوم مبكر -->
   <div class="card">
     <div class="card-head">
       <div class="time">09:00 PM</div>
-      <div class="card-title"><h3>نهاية اليوم</h3><p>استقرار في برونيكو • تجهيز ليوم برايس</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+      <div class="card-title"><h3>العودة للسكن ونوم مبكر</h3><p>Adlhof Apartments • غداً برايس باكراً</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
-      <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="bed"></i></span><div class="step-content"><h4>الاستقرار</h4><p>العودة للسكن وترتيب الغرف بعد يوم الانتقال الطويل.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="battery-charging"></i></span><div class="step-content"><h4>تجهيز التصوير</h4><p>شحن الجوالات والكاميرات وتجهيز بطاقات الذاكرة ليوم الطبيعة التالي.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="mountain-snow"></i></span><div class="step-content"><h4>الغد</h4><p>زيارة Lago di Braies والمناطق الجبلية القريبة، لذلك النوم المبكر مهم.</p></div></li>
-      </ul>
-      <div class="alert-box"><i data-lucide="shirt"></i><div class="box-text"><strong>تجهيز الملابس</strong>يفضل تجهيز أحذية مريحة وجاكيتات دافئة لليوم التالي.</div></div>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>تنبيه مهم</strong>بحيرة برايس تحتاج انطلاقاً مبكراً جداً — مواقف السيارات تمتلئ قبل 8:00 AM. النوم المبكر ضروري.</div></div>
     </div>
   </div>
-</main>
 
+</main>
 
 <main id="view-day4" class="view">
   <div class="page-head">
@@ -1884,8 +2463,8 @@ body{
       </ul>
       <div class="alert-box"><i data-lucide="triangle-alert"></i><div class="box-text"><strong>تنبيه المواقف</strong>في موسم الصيف قد يتم تقييد دخول السيارات بعد امتلاء المواقف، لذلك الالتزام بالانطلاق المبكر مهم جداً.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Lago+di+Braies"><i data-lucide="navigation"></i> بحيرة برايس</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Lago+di+Braies+Parking+P2"><i data-lucide="parking-circle"></i> موقف P2</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lago+di+Braies"><i data-lucide="navigation"></i> بحيرة برايس</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=St+Veit+27+39030+Braies+BZ+Italy"><i data-lucide="parking-circle"></i> موقف P2</a>
       </div>
     </div>
   </div>
@@ -1904,57 +2483,43 @@ body{
         <li class="step"><span class="step-icon"><i data-lucide="wind"></i></span><div class="step-content"><h4>الهواء حول البحيرة</h4><p>الهواء يكون بارداً قرب المياه وفي القارب، والجاكيت الخفيف يجعل التجربة أكثر راحة.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>السلامة في القارب</strong>يفضل البقاء جالساً أثناء حركة القارب والانتباه عند النزول والصعود من الرصيف.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=The+Boathouse+Lago+di+Braies"><i data-lucide="navigation"></i> موقع القوارب الخشبية</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lago+di+Braies"><i data-lucide="navigation"></i> موقع القوارب الخشبية</a>
     </div>
   </div>
 
   <div class="card">
     <div class="card-head">
       <div class="time">12:00 PM</div>
-      <div class="card-title"><h3>الانتقال إلى سان كانديدو</h3><p>Lago di Braies → San Candido / Innichen</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="map-pinned"></i></div>
+      <div class="card-title"><h3>سان كانديدو</h3><p>Ristorante Central • Loacker • تمشية خفيفة</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="car-front"></i></span><div class="step-content"><h4>طريق قصير</h4><p>التحرك شرقاً باتجاه سان كانديدو. الطريق حوالي 25 دقيقة وسط أجواء تيرولية هادئة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="landmark"></i></span><div class="step-content"><h4>السنتر التاريخي</h4><p>البلدة ذات طابع إيطالي نمساوي جميل، مناسبة للغداء والتمشية بين الشارع الرئيسي ومحلات الهدايا والقهوة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="parking-circle"></i></span><div class="step-content"><h4>المواقف</h4><p>الأفضل الوقوف في المواقف العامة القريبة من منطقة المشاة، ثم الدخول للسنتر مشياً.</p></div></li>
+        <li class="step"><span class="step-icon">🏘️</span><div class="step-content">
+          <h4>الوصول لسان كانديدو</h4>
+          <p>قرية تيرولية هادئة على بعد دقائق من برايس — أجواء ألبية أصيلة ومحلات محلية مميزة.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🍽️</span><div class="step-content">
+          <h4>Ristorante Central — الغداء</h4>
+          <p>مطعم عائلي في قلب سان كانديدو — أطباق إيطالية وتيرولية متنوعة مناسبة للعائلة.</p>
+          <div style="background:rgba(224,122,95,.07);border-right:3px solid rgba(224,122,95,.3);border-radius:8px;padding:9px 12px;margin-top:8px;font-size:12px;color:#C4D4DF">
+            <strong style="color:#E07A5F">⚠️ تنبيه</strong> — تأكد من طلب أطباق بدون لحم خنزير واستبدل المشروبات بماء أو عصير.
+          </div>
+        </div></li>
+        <li class="step"><span class="step-icon">🍫</span><div class="step-content">
+          <h4>Loacker Point San Candido</h4>
+          <p>متجر Loacker الأصلي — شوكولاتة وبسكويت تيرولي راقٍ. هدايا مميزة بأسعار مناسبة للعائلة والأصدقاء.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🚶</span><div class="step-content">
+          <h4>تمشية خفيفة في القرية</h4>
+          <p>30-45 دقيقة في الشوارع الهادئة قبل العودة لبرونيكو.</p>
+        </div></li>
       </ul>
-      <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=San+Candido+Bolzano+Italy"><i data-lucide="navigation"></i> San Candido</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Parking+San+Candido+Zentrum"><i data-lucide="parking-circle"></i> موقف السنتر</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=San+Candido+Italy"><i data-lucide="map-pin"></i> سان كانديدو</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ristorante+Central+San+Candido+Italy"><i data-lucide="utensils"></i> Ristorante Central</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Loacker+Point+San+Candido"><i data-lucide="gift"></i> Loacker</a>
       </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="time">12:30 PM</div>
-      <div class="card-title"><h3>الغداء في سان كانديدو</h3><p>Ristorante Central • جلسة عائلية</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
-    </div>
-    <div class="card-body">
-      <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Ristorante Central</h4><p>مطعم عائلي في قلب السنتر، مناسب للباستا والبيتزا والأطباق الدافئة بعد جولة البحيرة.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>المدة المقترحة</h4><p>ساعة إلى ساعة ونصف للغداء والراحة قبل زيارة Loacker أو إكمال التمشية في البلدة.</p></div></li>
-      </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Central+San+Candido"><i data-lucide="navigation"></i> فتح Ristorante Central</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="time">02:30 PM</div>
-      <div class="card-title"><h3>Loacker Moccaria</h3><p>قهوة • ويفر • هدايا شوكولاتة</p></div>
-      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cookie"></i></div>
-    </div>
-    <div class="card-body">
-      <ul class="steps">
-        <li class="step"><span class="step-icon"><i data-lucide="cookie"></i></span><div class="step-content"><h4>تجربة Loacker</h4><p>زيارة بوتيك ومقهى Loacker، تجربة الحلويات الطازجة وشراء علب الشوكولاتة والويفر كهدايا.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>القهوة والحلويات</h4><p>جلسة مريحة للقهوة أو الكابتشينو مع حلويات Loacker داخل المقهى الرسمي.</p></div></li>
-        <li class="step"><span class="step-icon"><i data-lucide="gift"></i></span><div class="step-content"><h4>المشتريات</h4><p>يفضل شراء الهدايا الخفيفة هنا لأن الخيارات أكبر من المتاجر العامة.</p></div></li>
-      </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Loacker+Moccaria+San+Candido"><i data-lucide="navigation"></i> فتح Loacker Moccaria</a>
     </div>
   </div>
 
@@ -1971,7 +2536,7 @@ body{
         <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>إطلالة العصر</h4><p>المنطقة المحيطة بالقلعة تعطي إطلالة جميلة على الوادي والبيوت الجبلية.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="footprints"></i><div class="box-text"><strong>ملاحظة مشي</strong>الوصول للقلعة يتضمن صعوداً خفيفاً، ويمكن الاكتفاء بالسنتر إذا فضلت العائلة الراحة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Brunico+Castle"><i data-lucide="navigation"></i> فتح قلعة برونيكو</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Brunico+Castle+Italy"><i data-lucide="navigation"></i> فتح قلعة برونيكو</a>
     </div>
   </div>
 
@@ -1986,7 +2551,7 @@ body{
         <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Pasticceria Gatterer</h4><p>خيار هادئ في سنتر برونيكو للقهوة والحلويات أو وجبة خفيفة بعد يوم الطبيعة.</p></div></li>
         <li class="step"><span class="step-icon"><i data-lucide="cover"></i></span><div class="step-content"><h4>خيار السكن</h4><p>يمكن الاكتفاء بوجبة خفيفة ومشروبات دافئة داخل السكن من مشتريات اليوم السابق.</p></div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Pasticceria+Gatterer+Brunico"><i data-lucide="navigation"></i> فتح Pasticceria Gatterer</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Pasticceria+Gatterer+Brunico+Italy"><i data-lucide="navigation"></i> فتح Pasticceria Gatterer</a>
     </div>
   </div>
 
@@ -2039,7 +2604,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة التقريبية ساعة واحدة قيادة.</div></div>
 
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ortisei+Bolzano+Italy"><i data-lucide="navigation"></i> فتح أورتيسي</a>
+      <a class="btn" target="_blank" href="https://maps.app.goo.gl/rZTarf21Po7NR66c6"><i data-lucide="navigation"></i> فتح أورتيسي</a>
     </div>
   </div>
 
@@ -2047,7 +2612,7 @@ body{
   <div class="card">
     <div class="card-head">
       <div class="time">09:45 AM</div>
-      <div class="card-title"><h3>صعود تلفريك سيسيدا</h3><p>Funivie Seceda Ortisei • قمة 2,500m</p></div>
+      <div class="card-title"><h3>صعود تلفريك Seceda — يُنصح بالوصول مبكراً، الطوابير تطول في موسم الصيف</h3><p>Funivie Seceda Ortisei • قمة 2,500m</p></div>
       <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cable-car"></i></div>
     </div>
     <div class="card-body">
@@ -2058,7 +2623,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>التلفريك آمن ومغلق، والسيارة والشنط تنتظر في المواقف السفلية.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>ارتداء الجاكيت والنظارة الشمسية فور النزول من التلفريك بالأعلى.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Seceda+Cableway+Ortisei"><i data-lucide="navigation"></i> فتح تلفريك سيسيدا</a>
+      <a class="btn" target="_blank" href="https://maps.app.goo.gl/rZTarf21Po7NR66c6"><i data-lucide="navigation"></i> فتح تلفريك Seceda — يُنصح بالوصول مبكراً، الطوابير تطول في موسم الصيف</a>
     </div>
   </div>
 
@@ -2077,7 +2642,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>السنتر منبسط ومريح للمشي العائلي.</div></div>
 
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Tubladel+Ortisei"><i data-lucide="navigation"></i> فتح مطعم Tubladel</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ristorante+Tubladel+Ortisei+Italy"><i data-lucide="navigation"></i> فتح مطعم Tubladel</a>
     </div>
   </div>
 
@@ -2096,14 +2661,40 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة التقريبية ساعتان قيادة.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التنسيق مع المضيف مهم لأن الفيلا ليست فندقاً بمكتب استقبال 24 ساعة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Riva+del+Garda+Trento+Italy"><i data-lucide="navigation"></i> فتح ريفا ديل غاردا</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Riva+del+Garda+Italy"><i data-lucide="navigation"></i> فتح ريفا ديل غاردا</a>
     </div>
   </div>
 
 
+  <!-- كارت السكن lillil -->
   <div class="card">
     <div class="card-head">
       <div class="time">05:30 PM</div>
+      <div class="card-title"><h3>استلام السكن — lillil</h3><p>Viale Martiri XXVIII Giugno 2 • Riva del Garda</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">🏠</span><div class="step-content">
+          <h4>lillil — Popping Holiday</h4>
+          <p>شقتان مجهزتان لـ 8 أشخاص مع إطلالة على البحيرة. تسجيل الوصول 14:00 - 20:00.</p>
+        </div></li>
+        <li class="step"><span class="step-icon">💶</span><div class="step-content">
+          <h4>1,235€ تُدفع عند الوصول</h4>
+          <p>تُسدَّد لموظف الاستقبال عند تسجيل الدخول. رقم التأكيد: 5337.430.688 — الرمز السري: 9216</p>
+        </div></li>
+        <li class="step"><span class="step-icon">😌</span><div class="step-content">
+          <h4>استقرار وراحة</h4>
+          <p>غداً يوم غاردا الكامل — بحيرة وليموني وسيرميوني.</p>
+        </div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Viale+Martiri+XXVIII+Giugno+2+38066+Riva+del+Garda"><i data-lucide="navigation"></i> lillil — Riva del Garda</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:00 PM</div>
       <div class="card-title"><h3>كورنيش ريفا ديل غاردا</h3><p>Lungolago Riva del Garda</p></div>
       <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="waves"></i></div>
     </div>
@@ -2115,9 +2706,10 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>شراء المياه واحتياجات الفيلا قبل إغلاق المحلات بين 7:30 و8:00 مساءً.</div></div>
 
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Gelateria+Flora+Riva+del+Garda"><i data-lucide="navigation"></i> فتح Gelateria Flora</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gelateria+Flora+Riva+del+Garda+Italy"><i data-lucide="navigation"></i> فتح Gelateria Flora</a>
     </div>
   </div>
+
 
 </main>
 
@@ -2151,7 +2743,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة 15 دقيقة طريق تقريباً + ساعتان ونصف تمشية.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>ممرات البلدة فيها مرتفعات خفيفة؛ المشي بهدوء مناسب لكبار السن.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Limone+sul+Garda+Brescia+Italy"><i data-lucide="navigation"></i> فتح ليموني</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Limone+sul+Garda"><i data-lucide="navigation"></i> فتح ليموني</a>
     </div>
   </div>
 
@@ -2170,7 +2762,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>Ristorante Risorgimento خيار فاخر، وPizzeria Scaligeri خيار عملي بجانب القلعة.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>يمنع دخول السيارة خلف أسوار القلعة بسبب ZTL والكاميرات.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Sirmione+Brescia+Italy"><i data-lucide="navigation"></i> فتح سيرميوني</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sirmione+Garda+Italy"><i data-lucide="navigation"></i> فتح سيرميوني</a>
     </div>
   </div>
 
@@ -2189,7 +2781,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>رسوم القارب التقريبية 100–130€ للقروب كامل.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>القارب آمن ومزود بسترات نجاة، والجلوس أفضل أثناء الحركة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Sirmione+Boats+Consorzio+Motoscafisti"><i data-lucide="navigation"></i> فتح قوارب سيرميوني</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sirmione+Garda+Italy"><i data-lucide="navigation"></i> فتح قوارب سيرميوني</a>
     </div>
   </div>
 
@@ -2208,7 +2800,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الخروج 4:30 مساءً يساعد على تفادي ذروة ازدحام سيرميوني.</div></div>
 
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Riva+del+Garda+Trento+Italy"><i data-lucide="navigation"></i> فتح ريفا ديل غاردا</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Riva+del+Garda+Italy"><i data-lucide="navigation"></i> فتح ريفا ديل غاردا</a>
     </div>
   </div>
 
@@ -2263,7 +2855,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>Ristorante Leon d'Oro خيار مناسب للغداء الوداعي في ريفا.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>تفتيش الأدراج والفيش قبل إغلاق الفيلا نهائياً.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Leon+d%27Oro+Riva+del+Garda"><i data-lucide="navigation"></i> فتح Leon d'Oro</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ristorante+Leon+d+Oro+Riva+del+Garda+Italy"><i data-lucide="navigation"></i> فتح Leon d'Oro</a>
     </div>
   </div>
 
@@ -2282,7 +2874,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة الصافية ساعتان و15 دقيقة، وتصل 3 ساعات ونصف مع التوقف.</div></div>
 
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Autogrill+Sebino+A4+Highway"><i data-lucide="navigation"></i> فتح Autogrill Sebino</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Autogrill+Sebino+A4"><i data-lucide="navigation"></i> فتح Autogrill Sebino</a>
     </div>
   </div>
 
@@ -2301,7 +2893,23 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>إرسال رسالة للمضيف قبل ساعة من الوصول الفعلي.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التنسيق المسبق مهم لأن السكن فيلا خاصة وليس فندقاً تقليدياً.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milan+Metropolitan+City+Italy"><i data-lucide="navigation"></i> فتح ميلانو الكبرى</a>
+
+      <!-- تنبيه Casa Amrita -->
+      <div style="background:rgba(230,194,122,.08);border-right:4px solid #E6C27A;border-radius:12px;padding:14px 16px;margin:12px 0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <i data-lucide="mail" style="width:18px;height:18px;color:#E6C27A;flex-shrink:0"></i>
+          <span style="font-size:14px;font-weight:800;color:#E6C27A">إجراء أمان حرج — تأكيد الوصول للفيلا</span>
+        </div>
+        <p style="font-size:13px;color:#C4D4DF;line-height:1.7;margin-bottom:12px">
+          الوصول الساعة 6:30 مساءً يُعتبر متأخراً نسبياً للفلل الخاصة. يجب تأكيد الموعد مع إدارة الفيلا مسبقاً لتجنب أي تأخير عند البوابة.
+        </p>
+        <a href="mailto:gestionale@placetostay.it?subject=Arrival%20Time%20Confirmation%20-%20Casa%20Amrita&body=Dear%20Casa%20Amrita%20Team%2C%0D%0A%0D%0AWe%20expect%20to%20arrive%20at%20the%20villa%20on%20June%2017th%20at%20approximately%2006%3A30%20PM%20(18%3A30).%0D%0A%0D%0APlease%20confirm%20that%20someone%20will%20be%20available%20to%20receive%20us.%0D%0A%0D%0AThank%20you!" style="display:inline-flex;align-items:center;gap:8px;background:#E6C27A;color:#031018;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:900;text-decoration:none;font-family:Tajawal,sans-serif">
+          <i data-lucide="send" style="width:15px;height:15px"></i>
+          إرسال إيميل تأكيد فوري ✉️
+        </a>
+      </div>
+
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via+Luigi+Sacco+9+Milan+Lombardy+20146"><i data-lucide="navigation"></i> فتح Casa Amrita</a>
     </div>
   </div>
 
@@ -2320,7 +2928,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المحلات في النطاق السكني قد تغلق 9 مساءً؛ الشراء أولاً.</div></div>
 
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=supermarket+Milan+Metropolitan+City+Italy"><i data-lucide="navigation"></i> فتح سوبرماركت قريب</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Supermercato+Milano+Centro"><i data-lucide="navigation"></i> فتح سوبرماركت قريب</a>
     </div>
   </div>
 
@@ -2375,7 +2983,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>التقسيم بعد الفطور</h4><p>نورة + شخصين يتوجهون للمطار، وبقية العائلة يتوجهون للدومو كنقطة انتظار واضحة وسهلة.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه ZTL</strong>منطقة كوردوسيو قريبة من نطاقات القيادة المحظورة؛ الإنزال والتحميل يكون سريعاً حسب توجيه السائق.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Starbucks+Reserve+Roastery+Milano"><i data-lucide="navigation"></i> فتح Starbucks Reserve</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Starbucks+Reserve+Roastery+Milan"><i data-lucide="navigation"></i> فتح Starbucks Reserve</a>
     </div>
   </div>
 
@@ -2392,7 +3000,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>العودة لنقطة التجمع</h4><p>بعد إنهاء التوديع يعود الشخصان إلى الدومو للالتقاء ببقية العائلة عند النقطة المتفق عليها.</p></div></li>
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>هدف التقسيم</strong>عدم سحب كامل العائلة للمطار يحافظ على وقت وراحة بقية القروب داخل ميلانو.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milan+Malpensa+Airport+Terminal+1"><i data-lucide="navigation"></i> فتح مطار مالبينسا T1</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Milan+Malpensa+Airport+Terminal+1"><i data-lucide="navigation"></i> فتح مطار مالبينسا T1</a>
     </div>
   </div>
 
@@ -2410,8 +3018,8 @@ body{
       </ul>
       <div class="alert-box"><i data-lucide="shield-alert"></i><div class="box-text"><strong>تنبيه النشالين</strong>الدومو والغاليريا مزدحمة؛ الجوالات والحقائب تكون أمام الجسم وليست في الجيوب الخلفية.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+del+Duomo+Milano"><i data-lucide="navigation"></i> فتح الدومو</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Rinascente+Milano+Piazza+Duomo"><i data-lucide="shopping-bag"></i> Rinascente</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Duomo+di+Milano"><i data-lucide="navigation"></i> فتح الدومو</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Rinascente+Milano+Piazza+Duomo"><i data-lucide="shopping-bag"></i> Rinascente</a>
       </div>
     </div>
   </div>
@@ -2430,8 +3038,8 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>طابع اليوم</strong>هذا اليوم مخصص للراحة والرفاهية بعد الأيام الجبلية، وليس للضغط أو المشي المكثف.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Brera+District+Milano"><i data-lucide="navigation"></i> فتح Brera</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Ristorante+Nabucco+Milano"><i data-lucide="utensils"></i> Nabucco</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Brera+District+Milan"><i data-lucide="navigation"></i> فتح Brera</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ristorante+Nabucco+Brera+Milan"><i data-lucide="utensils"></i> Nabucco</a>
       </div>
     </div>
   </div>
@@ -2449,7 +3057,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>مشي منخفض الجهد</h4><p>المنطقة منبسطة، لكن أرضيتها مرصوفة بالحصى؛ الأحذية المريحة مهمة.</p></div></li>
       </ul>
       <div class="info-box"><i data-lucide="clock"></i><div class="box-text"><strong>أفضل توقيت</strong>العصر إلى المساء هو الوقت الأجمل في بريرا، حيث الجلسات الخارجية والهدوء والموسيقى الخفيفة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Caff%C3%A8+Fioraio+Bianchi+Caff%C3%A8+Milano"><i data-lucide="navigation"></i> فتح Fioraio Bianchi</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fioraio+Bianchi+Caffe+Milan"><i data-lucide="navigation"></i> فتح Fioraio Bianchi</a>
     </div>
   </div>
 
@@ -2500,7 +3108,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الرصيف Platform</h4><p>رقم الرصيف يظهر غالباً قبل 15–20 دقيقة فقط من الإقلاع؛ بعد ظهوره يتم الدخول عبر بوابات QR Code.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه محطة</strong>Milano Centrale كبيرة ومزدحمة؛ لا تتوزع العائلة داخل المحطة، والانتظار يكون قرب شاشات المغادرة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milano+Centrale"><i data-lucide="navigation"></i> فتح Milano Centrale</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Milano+Centrale+Railway+Station"><i data-lucide="navigation"></i> فتح Milano Centrale</a>
     </div>
   </div>
 
@@ -2516,7 +3124,7 @@ body{
         <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>راحة القطار</h4><p>الرحلة مريحة ومناسبة لتعويض الخروج المبكر، ويفضل استغلالها للنوم أو شحن الجوالات.</p></div></li>
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الوصول الساحر</h4><p>عند الخروج من محطة Venezia Santa Lucia تظهر القناة الكبرى مباشرة أمام العائلة.</p></div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Venezia+Santa+Lucia"><i data-lucide="navigation"></i> فتح Venezia Santa Lucia</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Venezia+Santa+Lucia+Station"><i data-lucide="navigation"></i> فتح Venezia Santa Lucia</a>
     </div>
   </div>
 
@@ -2533,7 +3141,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تمشية خفيفة</h4><p>استكشاف الممرات القريبة والأسواق الصغيرة دون الدخول العميق في الأزقة لتجنب الضياع.</p></div></li>
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>تخفيف الجهد</strong>الذهاب بحراً عبر القناة الكبرى أفضل بكثير للعائلة من المشي الطويل من المحطة إلى سان ماركو.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ponte+di+Rialto"><i data-lucide="navigation"></i> فتح Ponte di Rialto</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Trattoria+Do+Forni+Venice+Italy"><i data-lucide="navigation"></i> فتح Ponte di Rialto</a>
     </div>
   </div>
 
@@ -2551,10 +3159,10 @@ body{
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تكلفة الجندول</strong>السعر النهاري الرسمي غالباً 80€ للقارب لمدة 30 دقيقة؛ لا تجعلوا المكاسرة تضيع الوقت.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+San+Marco+Venice"><i data-lucide="navigation"></i> San Marco</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Trattoria+Do+Forni+Venice"><i data-lucide="utensils"></i> Do Forni</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice"><i data-lucide="navigation"></i> San Marco</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+San+Marco+Venice"><i data-lucide="utensils"></i> Do Forni</a>
       </div>
-      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Suso+Gelatoteca+Venice"><i data-lucide="ice-cream"></i> Suso Gelatoteca</a>
+      <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Trattoria+Do+Forni+Venice+Italy"><i data-lucide="ice-cream"></i> Suso Gelatoteca</a>
     </div>
   </div>
 
@@ -2619,7 +3227,7 @@ body{
         <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>نقطة الإنزال</h4><p>الأفضل الإنزال قرب Naviglio Grande أو Ponte Alda Merini لتبدأ التمشية مباشرة دون مشي طويل.</p></div></li>
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>استكشاف خفيف</h4><p>محلات الأنتيك، اللوحات، المقاهي الصغيرة، والتمشية البطيئة على الرصيف المائي.</p></div></li>
       </ul>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Naviglio+Grande+Milan"><i data-lucide="navigation"></i> فتح Naviglio Grande</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan"><i data-lucide="navigation"></i> فتح Naviglio Grande</a>
     </div>
   </div>
 
@@ -2637,8 +3245,8 @@ body{
       </ul>
       <div class="alert-box"><i data-lucide="users"></i><div class="box-text"><strong>زحمة السبت</strong>نافيلي يصبح أكثر حيوية بعد 8:30 مساءً؛ العشاء المبكر يحافظ على راحة العائلة.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Osteria+del+Gnocco+Fritto+Milan"><i data-lucide="utensils"></i> Gnocco Fritto</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelato+Libre+Milan"><i data-lucide="ice-cream"></i> Gelato Libre</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan+restaurants"><i data-lucide="utensils"></i> Gnocco Fritto</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Naviglio+Grande+Milan"><i data-lucide="ice-cream"></i> Gelato Libre</a>
       </div>
     </div>
   </div>
@@ -2707,7 +3315,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>Tax Free</h4><p>إحضار صور الجوازات بالجوال وتجميع الفواتير لكل شخص بشكل مستقل.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="clock"></i><div class="box-text"><strong>لا تطيلون الأوت لت</strong>إذا زاد التسوق عن ساعة ونصف سيضغط فلورنسا بالكامل، خصوصاً في Option A.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=The+Mall+Luxury+Outlets"><i data-lucide="navigation"></i> فتح The Mall</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=The+Mall+Luxury+Outlets+Florence"><i data-lucide="navigation"></i> فتح The Mall</a>
     </div>
   </div>
 
@@ -2724,8 +3332,8 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>استراحة طويلة</h4><p>الغداء هنا ليس سريعاً؛ هو محطة راحة حقيقية قبل المشي في السنتر.</p></div></li>
       </ul>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Buca+Mario+Florence"><i data-lucide="utensils"></i> Buca Mario</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Piazza+della+Signoria+Florence"><i data-lucide="map-pin"></i> Piazza Signoria</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Buca+Mario+Florence+Italy"><i data-lucide="utensils"></i> Buca Mario</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Buca+Mario+Florence+Italy"><i data-lucide="map-pin"></i> Piazza Signoria</a>
       </div>
     </div>
   </div>
@@ -2743,10 +3351,10 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>Gelateria Santa Trinita</h4><p>جيلاتو ممتاز قرب النهر؛ نكهة الفستق والشوكولاتة السوداء مناسبة جداً.</p></div></li>
       </ul>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+del+Duomo+Florence"><i data-lucide="navigation"></i> Duomo Florence</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Ponte+Vecchio+Florence"><i data-lucide="camera"></i> Ponte Vecchio</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+del+Duomo+Florence"><i data-lucide="navigation"></i> Duomo Florence</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ponte+Vecchio+Florence"><i data-lucide="camera"></i> Ponte Vecchio</a>
       </div>
-      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+Santa+Trinita+Florence"><i data-lucide="ice-cream"></i> Gelateria Santa Trinita</a>
+      <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ponte+Vecchio+Florence"><i data-lucide="ice-cream"></i> Gelateria Santa Trinita</a>
     </div>
   </div>
 
@@ -2763,7 +3371,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>وصول الفيلا</h4><p>الوصول المتوقع حوالي 09:30 PM، والليلة تكون راحة كاملة فقط.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>قرار مرهق</strong>لا تضيفون Pisa على Option A؛ سيصبح اليوم مضغوطاً جداً وغير مناسب للعائلة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazzale+Michelangelo+Florence"><i data-lucide="navigation"></i> Piazzale Michelangelo</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazzale+Michelangelo+Florence"><i data-lucide="navigation"></i> Piazzale Michelangelo</a>
     </div>
   </div>
 
@@ -2835,7 +3443,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>هذا المسار يحافظ على راحة العائلة ويمنع تراكم الإجهاد قبل Serravalle.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تضيفوا بحيرة أو مدينة جديدة في هذا اليوم إذا تم اختيار Option A.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=CityLife+Milano"><i data-lucide="navigation"></i> فتح CityLife</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=CityLife+Shopping+Centre+Milan"><i data-lucide="navigation"></i> فتح CityLife</a>
     </div>
   </div>
 
@@ -2855,7 +3463,7 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>هذا هو المسار الموصى به لأنه يجعل DAY 12 امتداداً فاخراً وهادئاً لفلورنسا.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تدخلوا بالسيارة داخل البلدة التاريخية؛ السائق يستخدم مواقف خارج الأسوار.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=San+Gimignano+Tuscany"><i data-lucide="navigation"></i> فتح San Gimignano</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=San+Gimignano+Italy"><i data-lucide="navigation"></i> فتح San Gimignano</a>
     </div>
   </div>
 
@@ -2876,8 +3484,8 @@ body{
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الوصول للفيلا قبل 06:00 PM هو الهدف لضمان راحة كاملة قبل يوم التسوق.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>إذا أصروا على Pisa، اجعلها Quick Photo Stop فقط ويفضل إلغاء San Gimignano حتى لا يتراكم الجهد.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Dorand%C3%B2+San+Gimignano"><i data-lucide="utensils"></i> Dorandò</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+Dondoli+San+Gimignano"><i data-lucide="ice-cream"></i> Dondoli</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=San+Gimignano+Italy"><i data-lucide="utensils"></i> Dorandò</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Gelateria+Dondoli+San+Gimignano+Italy"><i data-lucide="ice-cream"></i> Dondoli</a>
       </div>
     </div>
   </div>
@@ -2932,7 +3540,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نقطة الإنزال</h4><p>السائق ينزل العائلة عند المدخل الأقرب، ثم ينتظر في المواقف الخارجية.</p></div></li>
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>يوم الثلاثاء ممتاز لأنه أخف من الويكند وتتوفر المقاسات بهدوء أكبر.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Serravalle</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Serravalle</a>
     </div>
   </div>
 
@@ -2951,7 +3559,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نقطة تجمع ثابتة</h4><p>تحديد نقطة تجمع كل 90 دقيقة لتجنب تشتت العائلة داخل المجمع.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تجعلوا كل شخص يختفي لوحده مدة طويلة؛ المجمع كبير وقد يضيع الوقت بسهولة.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Guest+Services+Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Guest Services</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Guest Services</a>
     </div>
   </div>
 
@@ -2971,8 +3579,8 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الغداء هو محطة استعادة طاقة، وليس تفصيل جانبي في يوم التسوق.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Le+Fornaci+da+Lino+Serravalle"><i data-lucide="utensils"></i> Le Fornaci</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Venchi+Serravalle+Designer+Outlet"><i data-lucide="ice-cream"></i> Venchi</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Serravalle+Designer+Outlet"><i data-lucide="utensils"></i> Le Fornaci</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Serravalle+Designer+Outlet"><i data-lucide="ice-cream"></i> Venchi</a>
       </div>
     </div>
   </div>
@@ -2992,7 +3600,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>مكتب التاكس فري</h4><p>قبل الخروج بـ 45 دقيقة يتم فحص وترتيب الفواتير لتسهيل إجراءات المطار.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تضع الفواتير مع أكياس التسوق؛ تضيع بسهولة وتسبب خسارة الاسترداد.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Tax+Free+Office+Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Tax Free Office</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Tax Free Office</a>
     </div>
   </div>
 
@@ -3047,8 +3655,8 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>لا نرجع للدومو اليوم إلا إذا طلبت العائلة، لأن الازدحام صار مستهلكاً للطاقة.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Portrait+Milano+Corso+Venezia+11"><i data-lucide="navigation"></i> Portrait Milano</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=10+Corso+Como+Milano"><i data-lucide="coffee"></i> 10 Corso Como</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Prada+Caffe+Milano"><i data-lucide="navigation"></i> Portrait Milano</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=10+Corso+Como+Milan"><i data-lucide="coffee"></i> 10 Corso Como</a>
       </div>
     </div>
   </div>
@@ -3069,8 +3677,8 @@ body{
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تحولوا بريرا إلى تسوق طويل جديد؛ هي استراحة أنيقة بعد Serravalle.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Brera+District+Milano"><i data-lucide="navigation"></i> Brera</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Caff%C3%A8+Fioraio+Bianchi+Caff%C3%A8+Milano"><i data-lucide="coffee"></i> Fioraio Bianchi</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Brera+District+Milan"><i data-lucide="navigation"></i> Brera</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fioraio+Bianchi+Caffe+Milan"><i data-lucide="coffee"></i> Fioraio Bianchi</a>
       </div>
     </div>
   </div>
@@ -3091,8 +3699,8 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>CityLife مناسب جداً كخروج مرتب وسهل لآخر مرحلة قبل يوم القرار النهائي.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=CityLife+Milano"><i data-lucide="navigation"></i> CityLife</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Attimi+by+Heinz+Beck+CityLife"><i data-lucide="utensils"></i> Attimi</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=CityLife+Shopping+Centre+Milan"><i data-lucide="navigation"></i> CityLife</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Attimi+by+Heinz+Beck+CityLife+Milan"><i data-lucide="utensils"></i> Attimi</a>
       </div>
     </div>
   </div>
@@ -3167,8 +3775,8 @@ body{
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>لوغانو ليست يوم معالم كثيرة، بل يوم هدوء وبحيرة وقهوة وشوكولاتة.</div></div>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التأكد من جاهزية الجوازات والتجوال/الإنترنت لأنكم ستدخلون سويسرا.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Lungolago+Lugano+Switzerland"><i data-lucide="navigation"></i> Lungolago Lugano</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Parco+Ciani+Lugano"><i data-lucide="trees"></i> Parco Ciani</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lungolago+Lugano+Switzerland"><i data-lucide="navigation"></i> Lungolago Lugano</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Parco+Ciani+Lugano+Switzerland"><i data-lucide="trees"></i> Parco Ciani</a>
       </div>
     </div>
   </div>
@@ -3189,8 +3797,8 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>أفضل هدايا اليوم: شوكولاتة سويسرية فاخرة وخفيفة الحمل.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+della+Riforma+Lugano"><i data-lucide="map-pin"></i> Piazza Riforma</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Via+Nassa+Lugano"><i data-lucide="shopping-bag"></i> Via Nassa</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+della+Riforma+Lugano"><i data-lucide="map-pin"></i> Piazza Riforma</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Via+Nassa+Lugano+Switzerland"><i data-lucide="shopping-bag"></i> Via Nassa</a>
       </div>
     </div>
   </div>
@@ -3211,8 +3819,8 @@ body{
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>الدفع بالفيزا كافٍ ولا حاجة لتحويل فرنك سويسري، لكن الأسعار أعلى من إيطاليا.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Grand+Caf%C3%A9+Al+Porto+Lugano"><i data-lucide="utensils"></i> Al Porto</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=L%C3%A4derach+Lugano"><i data-lucide="gift"></i> Läderach</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Grand+Cafe+Al+Porto+Lugano"><i data-lucide="utensils"></i> Al Porto</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Laderach+Lugano+Switzerland"><i data-lucide="gift"></i> Läderach</a>
       </div>
     </div>
   </div>
@@ -3233,8 +3841,8 @@ body{
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>فيرونا مناسبة إذا فضلت العائلة عدم عبور الحدود أو أرادت تكلفة أخف.</div></div>
       <div class="btn-grid">
-        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+Bra+Verona"><i data-lucide="navigation"></i> Piazza Bra</a>
-        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Arena+di+Verona"><i data-lucide="landmark"></i> Arena Verona</a>
+        <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Piazza+Bra+Verona+Italy"><i data-lucide="navigation"></i> Piazza Bra</a>
+        <a class="btn-secondary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Arena+di+Verona+Italy"><i data-lucide="landmark"></i> Arena Verona</a>
       </div>
     </div>
   </div>
@@ -3269,7 +3877,7 @@ body{
   </div>
 
   <div class="quick-strip">
-    <div class="quick-item"><i data-lucide="plane"></i><b>SV212</b><span>02:05 PM</span></div>
+    <div class="quick-item"><i data-lucide="plane"></i><b>SV212</b><span>14:05</span></div>
     <div class="quick-item"><i data-lucide="clock"></i><b>09:30 AM</b><span>وصول المطار</span></div>
     <div class="quick-item"><i data-lucide="receipt"></i><b>Tax Free</b><span>قبل الشحن</span></div>
     <div class="quick-item"><i data-lucide="luggage"></i><b>23 kg</b><span>لكل شنطة</span></div>
@@ -3307,7 +3915,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نقطة الإنزال</h4><p>الإنزال أمام صالة المغادرة الدولية T1 مع عربات الحقائب.</p></div></li>
       </ul>
       <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الوصول قبل الرحلة بـ 4 ساعات ونصف قرار صحيح لعائلة 7 أشخاص مع Tax-Free.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milan+Malpensa+Airport+Terminal+1+Departures"><i data-lucide="navigation"></i> فتح MXP Terminal 1</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Milan+Malpensa+Airport+Terminal+1+Departures"><i data-lucide="navigation"></i> فتح MXP Terminal 1</a>
     </div>
   </div>
 
@@ -3326,7 +3934,7 @@ body{
         <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الاسترداد</h4><p>الأفضل تحويل المبلغ للفيزا؛ أسرع وأنظف من حمل الكاش.</p></div></li>
       </ul>
       <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>شحن المشتريات قبل ختم التاكس فري قد يعني خسارة الاسترداد بالكامل.</div></div>
-      <a class="btn" target="_blank" href="https://maps.google.com/?q=Global+Blue+Malpensa+Terminal+1"><i data-lucide="navigation"></i> فتح Global Blue MXP</a>
+      <a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Global+Blue+Milan+Malpensa+Terminal+1"><i data-lucide="navigation"></i> فتح Global Blue MXP</a>
     </div>
   </div>
 
@@ -3372,17 +3980,22 @@ body{
 
   <div class="card">
     <div class="card-head">
-      <div class="time">02:05 PM</div>
+      <div class="time">14:05</div>
       <div class="card-title"><h3>الإقلاع إلى جدة</h3><p>Milan → Jeddah</p></div>
       <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="plane-takeoff"></i></div>
     </div>
     <div class="card-body">
       <ul class="steps">
-        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الإقلاع</h4><p>المغادرة من ميلانو إلى جدة على رحلة الخطوط السعودية SV212.</p></div></li>
-        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>على متن الطائرة</h4><p>راحة، نوم، وجبات الطائرة، وتجميع ذكريات الرحلة.</p></div></li>
-        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الوصول للوطن</h4><p>استلام الشنط في مطار الملك عبدالعزيز والعودة للمنازل بسلام.</p></div></li>
+        <li class="step"><span class="step-icon">✈️</span><div class="step-content">
+          <h4>SV212 — الإقلاع 14:05</h4>
+          <p>رحلة العودة إلى جدة — 7 مسافرين. PNR: 9MDXX6</p>
+        </div></li>
+        <li class="step"><span class="step-icon">🛬</span><div class="step-content">
+          <h4>الوصول إلى جدة 22:15</h4>
+          <p>مطار الملك عبدالعزيز الدولي — نهاية رحلة لا تُنسى.</p>
+        </div></li>
       </ul>
-      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>رافقتكم السلامة في حلّكم وترحالكم، وانتهت رحلة Master Italia 2026 بنجاح تشغيلي كامل.</div></div>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>بيانات الرحلة</strong>SV212 • 26 يونيو • MXP T1 → JED • إقلاع 14:05 • وصول 22:15 • PNR: 9MDXX6</div></div>
     </div>
   </div>
 
@@ -3557,8 +4170,10 @@ function getSafraTarget(){
 }
 function goSmartStart(){
   const target = getSafraTarget();
-  const tab = document.getElementById('tab-' + target);
-  if(typeof switchView === 'function') switchView(target, tab);
+  // لو قبل الرحلة افتح overview بدل cover
+  const dest = target === 'cover' ? 'overview' : target;
+  const tab = document.getElementById('tab-' + dest);
+  if(typeof switchView === 'function') switchView(dest, tab);
 }
 function togglePrep(btn){
   const item = btn.closest('.prep-item');
@@ -3657,35 +4272,56 @@ function updatePrepProgress(){
   if(sub) sub.textContent = done + ' من ' + items.length + ' عنصر جاهز — اضغط لعرض القائمة';
 }
 
-/* ===== SHARE BUTTON ===== */
+/* ===== SHARE + COPY ===== */
 function shareLink(url, title){
+  const shareUrl = url.startsWith('http') ? url : 'https://moalshareef.github.io/master-italia-2026/';
   if(navigator.share){
-    navigator.share({ title: title || 'رحلة إيطاليا 2026', url: url });
+    navigator.share({
+      title: title || 'رحلة إيطاليا 2026',
+      text: '🇮🇹 ' + (title || '') + '\n' + shareUrl,
+      url: shareUrl
+    }).catch(()=>{});
   } else {
-    navigator.clipboard.writeText(url).then(()=>{
-      alert('تم نسخ الرابط ✓');
+    // fallback — نسخ
+    navigator.clipboard.writeText(shareUrl).then(()=>{
+      showToast('تم نسخ الرابط ✓');
+    }).catch(()=>{
+      showToast('افتح من متصفح لمشاركة الرابط');
     });
   }
 }
 
-function addShareButtons(){
-  document.querySelectorAll('.card').forEach((card, idx) => {
-    const head = card.querySelector('.card-head');
-    if(!head || head.querySelector('.share-btn')) return;
-    const title = card.querySelector('.card-title h3');
-    const view = card.closest('.view');
-    const viewId = view ? view.id.replace('view-','') : '';
-    const baseUrl = 'https://moalshareef.github.io/master-italia-2026/#' + viewId;
-    const cardTitle = title ? title.textContent.trim() : 'تفصيل الرحلة';
-
-    const btn = document.createElement('button');
-    btn.className = 'share-btn';
-    btn.setAttribute('aria-label','مشاركة');
-    btn.innerHTML = '📤';
-    btn.style.cssText = 'background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;flex-shrink:0;margin-right:4px';
-    btn.onclick = (e) => { e.stopPropagation(); shareLink(baseUrl, '🇮🇹 ' + cardTitle + ' — رحلة إيطاليا 2026'); };
-    head.appendChild(btn);
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('تم النسخ ✓');
+  }).catch(() => {
+    // fallback
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast('تم النسخ ✓');
   });
+}
+
+function showToast(msg) {
+  let toast = document.getElementById('safraToast');
+  if(!toast) {
+    toast = document.createElement('div');
+    toast.id = 'safraToast';
+    toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(230,194,122,.95);color:#06141F;padding:10px 20px;border-radius:999px;font-size:13px;font-weight:900;z-index:9999;transition:opacity .3s;font-family:Tajawal,sans-serif;white-space:nowrap';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+}
+
+function addShareButtons(){
+  // لا يوجد أزرار إضافية — الروابط تفتح مباشرة
 }
 
 /* ===== STAR RATING ===== */
@@ -3761,59 +4397,156 @@ window.togglePrep = function(btn){
 };
 
 /* ===== EXTRA EXPENSES ===== */
+const CAT_ICONS = {
+  'مطاعم':'🍽️','مواصلات':'🚕','سكن':'🏨',
+  'فعاليات':'🎭','تسوق':'🛍️','رسوم':'🏛️','أخرى':'📦'
+};
+
+let selectedCat = '';
+
+function selectCat(btn, cat, icon) {
+  selectedCat = cat;
+  document.getElementById('expCat').value = cat;
+  document.querySelectorAll('#catBtns button').forEach(b => {
+    b.style.background = 'rgba(255,255,255,.06)';
+    b.style.border = '1px solid rgba(255,255,255,.1)';
+    b.style.color = '#94A8B8';
+  });
+  btn.style.background = 'rgba(230,194,122,.15)';
+  btn.style.border = '1px solid rgba(230,194,122,.4)';
+  btn.style.color = '#E6C27A';
+}
+
 function loadExpenses(){
   try{ return JSON.parse(localStorage.getItem('italia-expenses') || '[]'); }catch(e){ return []; }
 }
 function saveExpenses(arr){
   try{ localStorage.setItem('italia-expenses', JSON.stringify(arr)); }catch(e){}
 }
+
 function renderExpenses(){
   const list = loadExpenses();
   const container = document.getElementById('extraExpenses');
-  const totalEl = document.getElementById('expTotalVal');
-  const totalWrap = document.getElementById('expTotal');
+  const summary = document.getElementById('expSummary');
+  const summaryContent = document.getElementById('expSummaryContent');
   if(!container) return;
 
   container.innerHTML = '';
-  let totals = {};
+
+  // حساب الإجماليات حسب العملة والبند
+  let totals = { EUR: 0, SAR: 0 };
+  let byCat = {};
+
   list.forEach((exp, idx) => {
     totals[exp.currency] = (totals[exp.currency] || 0) + parseFloat(exp.amount);
+    if(!byCat[exp.cat]) byCat[exp.cat] = { EUR: 0, SAR: 0 };
+    byCat[exp.cat][exp.currency] = (byCat[exp.cat][exp.currency] || 0) + parseFloat(exp.amount);
+
+    const sym = exp.currency === 'EUR' ? '€' : 'ر.س';
+    const icon = CAT_ICONS[exp.cat] || '📦';
+    const dateStr = exp.date ? new Date(exp.date).toLocaleDateString('ar-SA', {month:'short', day:'numeric'}) : '';
+
     const row = document.createElement('div');
-    row.style.cssText = 'background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px';
+    row.style.cssText = 'background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px';
     row.innerHTML = `
-      <div style="flex:1">
-        <div style="font-size:14px;font-weight:800;color:#fff">${exp.name}</div>
-        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">${exp.currency}</div>
+      <div style="font-size:20px;flex-shrink:0">${icon}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13.5px;font-weight:800;color:#fff">${exp.cat}</div>
+        <div style="font-size:11px;color:#94A8B8;margin-top:2px">${exp.note || ''}${dateStr ? ' • ' + dateStr : ''}</div>
       </div>
-      <div style="font-size:15px;font-weight:900;color:#E6C27A">${parseFloat(exp.amount).toLocaleString()} ${exp.currency === 'يورو' ? '€' : exp.currency === 'ريال' ? 'ر.س' : '$'}</div>
-      <button onclick="deleteExpense(${idx})" style="background:rgba(224,122,95,.15);border:1px solid rgba(224,122,95,.25);border-radius:8px;color:#E07A5F;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0">×</button>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">${parseFloat(exp.amount).toLocaleString()} ${sym}</div>
+      </div>
+      <button onclick="deleteExpense(${idx})" style="background:rgba(224,122,95,.12);border:1px solid rgba(224,122,95,.2);border-radius:8px;color:#E07A5F;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;padding:0">×</button>
     `;
     container.appendChild(row);
   });
 
-  if(totalEl && list.length > 0){
-    const parts = Object.entries(totals).map(([cur, val]) => {
-      const sym = cur === 'يورو' ? '€' : cur === 'ريال' ? 'ر.س' : '$';
-      return `${val.toLocaleString()} ${sym}`;
+  // إجماليات
+  if(list.length > 0 && summary && summaryContent) {
+    summary.style.display = 'block';
+    let html = '';
+
+    // إجمالي بالعملة
+    if(totals.EUR > 0) html += `<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;color:#94A8B8">إجمالي يورو</span><span style="font-weight:900;color:#E6C27A">${totals.EUR.toLocaleString()} €</span></div>`;
+    if(totals.SAR > 0) html += `<div style="display:flex;justify-content:space-between;margin-bottom:10px"><span style="font-size:13px;color:#94A8B8">إجمالي ريال</span><span style="font-weight:900;color:#E6C27A">${totals.SAR.toLocaleString()} ر.س</span></div>`;
+
+    // تفصيل بالبند
+    html += `<div style="height:1px;background:rgba(255,255,255,.07);margin-bottom:8px"></div>`;
+    Object.entries(byCat).forEach(([cat, amounts]) => {
+      const icon = CAT_ICONS[cat] || '📦';
+      const parts = [];
+      if(amounts.EUR) parts.push(`${amounts.EUR.toLocaleString()}€`);
+      if(amounts.SAR) parts.push(`${amounts.SAR.toLocaleString()}ر.س`);
+      html += `<div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:12px;color:#94A8B8">${icon} ${cat}</span><span style="font-size:12px;font-weight:800;color:#fff">${parts.join(' + ')}</span></div>`;
     });
-    totalEl.textContent = parts.join(' + ');
-    if(totalWrap) totalWrap.style.display = 'flex';
-  } else if(totalWrap){
-    totalWrap.style.display = 'none';
+
+    summaryContent.innerHTML = html;
+  } else if(summary) {
+    summary.style.display = 'none';
   }
+
+  // تحديث الداشبورد في الغلاف
+  updateDashboardExpenses(totals);
 }
+
+function updateDashboardExpenses(totals) {
+  const el = document.getElementById('dashExpenses');
+  if(!el) return;
+  const parts = [];
+  if(totals && totals.EUR > 0) parts.push(`${totals.EUR.toLocaleString()} €`);
+  if(totals && totals.SAR > 0) parts.push(`${totals.SAR.toLocaleString()} ر.س`);
+  el.textContent = parts.length ? parts.join(' + ') : '—';
+}
+
 function addExpense(){
-  const name = document.getElementById('expName');
   const amount = document.getElementById('expAmount');
   const currency = document.getElementById('expCurrency');
-  if(!name || !amount || !name.value.trim() || !amount.value) return;
+  const cat = document.getElementById('expCat');
+  const note = document.getElementById('expNote');
+
+  if(!amount || !amount.value || parseFloat(amount.value) <= 0) {
+    amount.style.border = '1px solid rgba(224,122,95,.5)';
+    setTimeout(() => amount.style.border = '1px solid rgba(255,255,255,.12)', 1500);
+    return;
+  }
+  if(!cat || !cat.value) {
+    document.querySelectorAll('#catBtns button').forEach(b => {
+      b.style.border = '1px solid rgba(224,122,95,.4)';
+    });
+    setTimeout(() => {
+      document.querySelectorAll('#catBtns button').forEach(b => {
+        if(b.style.color !== 'rgb(230, 194, 122)')
+          b.style.border = '1px solid rgba(255,255,255,.1)';
+      });
+    }, 1500);
+    return;
+  }
+
   const list = loadExpenses();
-  list.push({ name: name.value.trim(), amount: amount.value, currency: currency.value });
+  list.push({
+    amount: parseFloat(amount.value),
+    currency: currency.value,
+    cat: cat.value,
+    note: note ? note.value.trim() : '',
+    date: new Date().toISOString()
+  });
   saveExpenses(list);
-  name.value = '';
+
+  // reset
   amount.value = '';
+  if(note) note.value = '';
+  cat.value = '';
+  selectedCat = '';
+  document.querySelectorAll('#catBtns button').forEach(b => {
+    b.style.background = 'rgba(255,255,255,.06)';
+    b.style.border = '1px solid rgba(255,255,255,.1)';
+    b.style.color = '#94A8B8';
+  });
+
   renderExpenses();
 }
+
 function deleteExpense(idx){
   const list = loadExpenses();
   list.splice(idx, 1);
@@ -3824,6 +4557,50 @@ function deleteExpense(idx){
 document.addEventListener('DOMContentLoaded', renderExpenses);
 window.addEventListener('load', ()=>{ setTimeout(renderExpenses, 300); });
 
+</script>
+
+<script id="safra-final-qa">
+/* ===== RETURN TO TODAY ===== */
+function initReturnTodayBtn(){
+  const btn = document.getElementById('returnTodayBtn');
+  if(!btn) return;
+  const today = typeof getSafraTarget === 'function' ? getSafraTarget() : null;
+  if(today && today.startsWith('day')) btn.classList.add('visible');
+}
+
+/* ===== PERFORMANCE: hide inactive views ===== */
+function hideInactiveViews(){
+  document.querySelectorAll('.view:not(.active)').forEach(v=>{
+    v.style.contentVisibility = 'hidden';
+  });
+  document.querySelectorAll('.view.active').forEach(v=>{
+    v.style.contentVisibility = 'visible';
+  });
+}
+
+/* ===== PATCH switchView for performance ===== */
+const _perfOrig = window.switchView;
+window.switchView = function(viewId, btn){
+  // أظهر الـ view المستهدف أولاً
+  const t = document.getElementById('view-'+viewId);
+  if(t) t.style.contentVisibility = 'visible';
+  _perfOrig(viewId, btn);
+  setTimeout(()=>{
+    hideInactiveViews();
+    // زر اليوم
+    const todayBtn = document.getElementById('returnTodayBtn');
+    if(todayBtn){
+      const today = typeof getSafraTarget==='function' ? getSafraTarget() : null;
+      const show = today && today.startsWith('day') && viewId !== today;
+      todayBtn.classList.toggle('visible', show);
+    }
+    if(window.lucide) lucide.createIcons();
+  }, 80);
+};
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  setTimeout(()=>{ initReturnTodayBtn(); hideInactiveViews(); }, 600);
+});
 </script>
 
 <script id="safra-finance-engine">
@@ -4112,6 +4889,299 @@ window.switchView = function(viewId, btn) {
   __origSwitchFin(viewId, btn);
   if(viewId === 'finance') setTimeout(renderFinanceWidget, 150);
 };
+</script>
+
+
+<!-- ===== صفحة الطوارئ ===== -->
+<main id="view-emergency" class="view">
+  <div class="page-head">
+    <div class="icon" style="background:rgba(224,122,95,.15);border-color:rgba(224,122,95,.3)"><i data-lucide="phone-call" style="color:#E07A5F"></i></div>
+    <h2>معلومات الطوارئ</h2>
+    <p>أرقام مهمة وبيانات الحجوزات</p>
+    <div class="date-line">Master Italia 2026</div>
+  </div>
+
+  <!-- أرقام الطوارئ -->
+  <div class="emergency-card urgent">
+    <div class="emer-title">🚨 أرقام الطوارئ الإيطالية</div>
+    <div class="emer-row">
+      <span class="emer-label">الطوارئ العامة</span>
+      <a href="tel:112" class="emer-call">112 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الشرطة</span>
+      <a href="tel:113" class="emer-call">113 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الإسعاف</span>
+      <a href="tel:118" class="emer-call">118 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الإطفاء</span>
+      <a href="tel:115" class="emer-call">115 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">السفارة السعودية — روما</span>
+      <a href="tel:+390645202020" class="emer-call">+39 06 4520 2020 📞</a>
+    </div>
+  </div>
+
+  <!-- السائق -->
+  <div class="emergency-card safe">
+    <div class="emer-title">🚐 السائق الخاص</div>
+    <div class="emer-row">
+      <span class="emer-label">الاسم</span>
+      <span class="emer-val">عبدالرحمن أبو أميره</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الرقم السعودي</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">+966546539206</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الرقم الأوروبي</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">+380999566626</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">نوع الخدمة</span>
+      <span class="emer-val">فان خاص — طول الرحلة</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">اتصال</span>
+      <div style="display:flex;gap:8px">
+        <a href="tel:+966546539206" class="emer-call">🇸🇦 سعودي</a>
+        <a href="tel:+380999566626" class="emer-call">🇪🇺 أوروبي</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- بيانات السكن -->
+
+  <!-- RELSTAY -->
+  <div class="emergency-card">
+    <div class="emer-title">🏨 RELSTAY Vercelli — ميلانو</div>
+    <div class="emer-row">
+      <span class="emer-label">التواريخ</span>
+      <span class="emer-val">11–13 يونيو</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">العنوان</span>
+      <span class="emer-val" style="font-size:12px">Corso Vercelli 25, Milano</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">رقم التأكيد</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">5067.031.751</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الرمز السري</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">3869</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الهاتف</span>
+      <a href="tel:+393332674665" class="emer-call" style="direction:ltr">+39 333 267 4665 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الدفع المتبقي</span>
+      <span class="emer-val" style="color:#E07A5F">72€ نقداً عند الوصول</span>
+    </div>
+  </div>
+
+  <!-- Adlhof -->
+  <div class="emergency-card">
+    <div class="emer-title">🏔️ Adlhof Apartments — برونيكو</div>
+    <div class="emer-row">
+      <span class="emer-label">التواريخ</span>
+      <span class="emer-val">13–15 يونيو</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">العنوان</span>
+      <span class="emer-val" style="font-size:12px">Roststraße 1, Brunico</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">رقم التأكيد</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">5763.859.350</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الرمز السري</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">9492</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الهاتف</span>
+      <a href="tel:+393475754756" class="emer-call" style="direction:ltr">+39 347 575 4756 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الدفع المتبقي</span>
+      <span class="emer-val" style="color:#E07A5F">1,056€ عند الوصول</span>
+    </div>
+  </div>
+
+  <!-- lillil -->
+  <div class="emergency-card">
+    <div class="emer-title">🌊 lillil Popping Holiday — غاردا</div>
+    <div class="emer-row">
+      <span class="emer-label">التواريخ</span>
+      <span class="emer-val">15–17 يونيو</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">العنوان</span>
+      <span class="emer-val" style="font-size:12px">Viale Martiri XXVIII Giugno 2, Riva del Garda</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">رقم التأكيد</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">5337.430.688</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الرمز السري</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">9216</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الهاتف</span>
+      <a href="tel:+390464662620" class="emer-call" style="direction:ltr">+39 0464 662620 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الدفع المتبقي</span>
+      <span class="emer-val" style="color:#E07A5F">1,235€ عند الوصول</span>
+    </div>
+  </div>
+
+  <!-- Casa Amrita -->
+  <div class="emergency-card safe">
+    <div class="emer-title">🏡 Casa Amrita — ميلانو الكبرى</div>
+    <div class="emer-row">
+      <span class="emer-label">التواريخ</span>
+      <span class="emer-val">17–26 يونيو</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">العنوان</span>
+      <span class="emer-val" style="font-size:12px">Via Luigi Sacco 9, Milano</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">كود التأكيد</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">HMRFHJHPN4</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">المضيف</span>
+      <span class="emer-val">Katia</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الهاتف</span>
+      <a href="tel:+393931980873" class="emer-call" style="direction:ltr">+39 393 198 0873 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">البريد الإلكتروني</span>
+      <a href="mailto:gestionale@placetostay.it" class="emer-call" style="font-size:11px">gestionale@placetostay.it ✉️</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الدفع</span>
+      <span class="emer-val" style="color:rgba(102,167,142,.9)">✅ مدفوع كامل</span>
+    </div>
+  </div>
+
+  <!-- بيانات الطيران -->
+  <div class="emergency-card">
+    <div class="emer-title">✈️ بيانات الطيران</div>
+    <div class="emer-row">
+      <span class="emer-label">PNR المجموعة</span>
+      <span class="emer-val">9MDXX6</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">PNR نورة</span>
+      <span class="emer-val">9MO4WE</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">الخطوط السعودية</span>
+      <a href="tel:920022222" class="emer-call">920022222 📞</a>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">مطار مالبينسا</span>
+      <a href="tel:+390258581" class="emer-call">+39 02 5858 1 📞</a>
+    </div>
+  </div>
+
+  <!-- معلومات مهمة -->
+  <div class="emergency-card">
+    <div class="emer-title">📋 معلومات مهمة</div>
+    <div class="emer-row">
+      <span class="emer-label">تاريخ الإقلاع</span>
+      <span class="emer-val">11 يونيو 2026</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">رحلة الذهاب</span>
+      <span class="emer-val">SV211 • 09:45</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">رحلة العودة</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">SV212 • 26 يونيو • 14:05</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">عودة نورة</span>
+      <span class="emer-val" style="direction:ltr;text-align:left">SV210 • 18 يونيو • 16:05</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">Booking.com دعم</span>
+      <a href="tel:8008141146" class="emer-call">800 814 1146 📞</a>
+    </div>
+  </div>
+
+  <!-- واي فاي -->
+  <div class="emergency-card safe">
+    <div class="emer-title">📶 واي فاي السكن</div>
+    <div class="emer-row">
+      <span class="emer-label">RELSTAY</span>
+      <span class="emer-val">مجاني — كل الأجنحة</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">Adlhof</span>
+      <span class="emer-val">مجاني — كل الأجنحة</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">lillil</span>
+      <span class="emer-val">مجاني — كل الأجنحة</span>
+    </div>
+    <div class="emer-row">
+      <span class="emer-label">Casa Amrita</span>
+      <span class="emer-val">مجاني — الفيلا</span>
+    </div>
+  </div>
+
+</main>
+
+<script id="safra-finance-lock">
+function checkFinancePin(){
+  const pin = document.getElementById('financePin');
+  const err = document.getElementById('pinError');
+  const lock = document.getElementById('financeLock');
+  if(!pin) return;
+  if(pin.value.toLowerCase() === 'a2026'){
+    if(lock){ lock.style.display='none'; lock.style.visibility='hidden'; }
+    const cnt=document.getElementById('financeContent');
+    if(cnt){ cnt.style.display='block'; }
+    setTimeout(()=>{ 
+      if(typeof renderFinanceWidget==='function') renderFinanceWidget(); 
+      if(typeof renderExpenses==='function') renderExpenses(); 
+      if(window.lucide) lucide.createIcons(); 
+    },150);
+  } else {
+    if(err){ err.style.display='block'; setTimeout(()=>{ err.style.display='none'; },2000); }
+    pin.value=''; pin.focus();
+  }
+}
+function initFinanceLock(){
+  // أعد قفل المالية عند كل فتح للصفحة
+  const lock=document.getElementById('financeLock');
+  if(lock){ lock.style.display='flex'; lock.style.visibility='visible'; }
+  const pin=document.getElementById('financePin');
+  if(pin) pin.value='';
+}
+// إعادة القفل عند الانتقال لصفحة أخرى
+const _origSwitchFinLock = window.switchView;
+window.switchView = function(viewId, btn){
+  _origSwitchFinLock(viewId, btn);
+  if(viewId === 'finance'){
+    setTimeout(()=>{ initFinanceLock(); if(window.lucide) lucide.createIcons(); }, 50);
+  }
+};
+document.addEventListener('DOMContentLoaded', ()=>{ setTimeout(initFinanceLock,200); });
+
 </script>
 
 </body>
