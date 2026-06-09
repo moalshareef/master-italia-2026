@@ -765,6 +765,89 @@
 
   </style>
 
+<style id="safra-enhancements">
+  /* ===== SPLASH SCREEN ===== */
+  #splash{
+    position:fixed;inset:0;z-index:9999;
+    background:linear-gradient(160deg,#020C14 0%,#031018 50%,#04131D 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:18px;
+    transition:opacity .6s ease, visibility .6s ease;
+  }
+  #splash.hidden{opacity:0;visibility:hidden;pointer-events:none}
+  .splash-flag{font-size:52px;animation:splashBounce 1.2s ease infinite alternate}
+  @keyframes splashBounce{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+  .splash-title{
+    font-size:28px;font-weight:900;color:#fff;letter-spacing:-.3px;text-align:center
+  }
+  .splash-title span{color:#E6C27A}
+  .splash-sub{font-size:14px;color:rgba(255,255,255,.55);font-weight:600;letter-spacing:.05em}
+  .splash-bar-wrap{
+    width:140px;height:3px;border-radius:999px;
+    background:rgba(255,255,255,.1);overflow:hidden;margin-top:8px
+  }
+  .splash-bar{
+    height:100%;border-radius:999px;
+    background:linear-gradient(90deg,#E6C27A,#EED08A);
+    width:0%;transition:width 1.6s ease
+  }
+
+  /* ===== PROGRESS BAR اليوم ===== */
+  .day-progress{
+    margin:0 0 14px;
+    background:rgba(7,24,36,.7);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:16px;
+    padding:12px 16px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .day-progress-text{flex:1;font-size:12.5px;font-weight:800;color:var(--muted)}
+  .day-progress-text b{color:var(--gold);font-size:14px}
+  .day-progress-bar-wrap{
+    width:90px;height:6px;border-radius:999px;
+    background:rgba(255,255,255,.1);overflow:hidden;flex-shrink:0
+  }
+  .day-progress-bar{
+    height:100%;border-radius:999px;
+    background:linear-gradient(90deg,#E6C27A,#EED08A);
+    transition:width .5s ease
+  }
+
+  /* ===== CARD HOVER & PRESS ===== */
+  .card{
+    transition:transform .22s ease, box-shadow .22s ease !important;
+  }
+  .card:active{
+    transform:scale(.985) !important;
+  }
+  .card.completed{
+    animation:cardDone .4s ease !important;
+  }
+  @keyframes cardDone{
+    0%{transform:scale(1)}
+    40%{transform:scale(1.015)}
+    100%{transform:scale(1)}
+  }
+
+  /* ===== SCROLL INDICATOR ===== */
+  .scroll-top-btn{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+    background:linear-gradient(180deg,#EED08A,#E6C27A);
+    color:#06141F;border:0;border-radius:999px;
+    padding:10px 20px;font-size:13px;font-weight:900;
+    display:flex;align-items:center;gap:6px;
+    box-shadow:0 8px 24px rgba(230,194,122,.32);
+    cursor:pointer;z-index:200;
+    transition:transform .3s ease, opacity .3s ease;
+    opacity:0;
+  }
+  .scroll-top-btn.visible{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+  }
+  .scroll-top-btn svg{width:15px;height:15px}
+</style>
+
 <style id="safra-platform-layer">
 .safra-hero{
   position:relative;
@@ -900,6 +983,20 @@ body{
 
 <body>
 
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-flag">🇮🇹</div>
+  <div class="splash-title">رحلة إيطاليا <span>2026</span></div>
+  <div class="splash-sub">MASTER ITALIA • الدليل التشغيلي</div>
+  <div class="splash-bar-wrap"><div class="splash-bar" id="splashBar"></div></div>
+</div>
+
+<!-- زر العودة للأعلى -->
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  أعلى الصفحة
+</button>
+
 <header class="app-header">
   <div class="app-brand">
     <div>
@@ -910,8 +1007,6 @@ body{
   </div>
 
   <nav class="top-nav" id="tabsNav">
-    <button class="tab" onclick="switchView('finance', this)"><i data-lucide="lock"></i> المالية</button>
-    
     <button class="tab" onclick="switchView('cover', this)" id="tab-cover"><i data-lucide="sparkles"></i> الغلاف<small>SAFRA</small></button>
     <button class="tab" onclick="switchView('overview', this)" id="tab-overview"><i data-lucide="layout-dashboard"></i> ملخص الرحلة <small>16 DAYS</small></button>
     <button class="tab" onclick="switchView('readiness', this)" id="tab-readiness"><i data-lucide="check-square"></i> التجهيزات <small>READY</small></button>
@@ -937,29 +1032,76 @@ body{
 
 
 <main id="view-cover" class="view">
-  <div class="safra-hero">
-    <div class="safra-mark">SAFRA</div>
-    <h1 class="safra-title">MASTER ITALIA 2026</h1>
-    <p class="safra-sub">
-      يسعدنا في SAFRA أن نقدم لكم هذا الدليل المصمم بعناية ليكون رفيقكم الهادئ طوال الرحلة.
-      هذا الملف يساعد العائلة على معرفة مسار كل يوم، أهم الأماكن، الأجواء، المطاعم، التنقلات، والتنبيهات المهمة بطريقة مرنة وسهلة.
-      يمكنكم الالتزام بالخطة كما هي أو تعديلها بما يناسب رغبتكم وطاقتكم أثناء السفر.
-    </p>
-    <div class="safra-actions">
-      <button class="safra-primary" onclick="goSmartStart()"><i data-lucide="play"></i> ✈️ دخول الرحلة</button>
-      <button class="safra-secondary" onclick="switchView('readiness', document.getElementById('tab-readiness'))"><i data-lucide="check-square"></i> تجهيز ما قبل السفر</button>
-      <button class="safra-secondary" onclick="switchView('overview', document.getElementById('tab-overview'))"><i data-lucide="layout-dashboard"></i> ملخص الرحلة</button>
+
+  <div class="safra-hero" style="text-align:center;padding:38px 24px 32px">
+    <div style="font-size:48px;margin-bottom:10px">🇮🇹</div>
+    <div class="safra-mark" style="letter-spacing:.3em;margin-bottom:8px">SAFRA × MASTER ITALIA</div>
+    <h1 class="safra-title" style="font-size:32px;margin:0 0 10px">رحلة إيطاليا <span style="color:#E6C27A">2026</span></h1>
+    <p class="safra-sub" style="font-size:14px;max-width:340px;margin:0 auto;line-height:1.8;font-style:italic;color:rgba(255,255,255,.6)">صُمم هذا الدليل لكم<br>رحلتكم، لحظاتكم، ذكرياتكم</p>
+    <div style="margin-top:12px;font-size:11px;font-weight:800;letter-spacing:.25em;color:rgba(230,194,122,.6)">SAFRA • ITALIA 2026</div>
+  </div>
+
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(230,194,122,.28);border-radius:22px;padding:22px 20px;margin:16px 0;text-align:center">
+    <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.12em;margin-bottom:14px">⏳ العد التنازلي للإقلاع</div>
+    <div id="countdownDisplay" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap"></div>
+    <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,.45);font-weight:600">الإقلاع: الخميس 11 يونيو 2026 • 02:05 PM</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0">
+    <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 10px;text-align:center">
+      <div style="font-size:24px;font-weight:900;color:#E6C27A">16</div>
+      <div style="font-size:11px;color:#94A8B8;font-weight:700;margin-top:2px">يوم</div>
     </div>
-    <div class="day-chip" style="margin-top:18px">
-      <i data-lucide="heart"></i>
-      صُمم هذا الدليل ليمنح العائلة رحلة أكثر هدوءاً وتنظيماً وراحة
+    <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 10px;text-align:center">
+      <div style="font-size:24px;font-weight:900;color:#E6C27A">8</div>
+      <div style="font-size:11px;color:#94A8B8;font-weight:700;margin-top:2px">مسافر</div>
+    </div>
+    <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 10px;text-align:center">
+      <div style="font-size:24px;font-weight:900;color:#E6C27A">7+</div>
+      <div style="font-size:11px;color:#94A8B8;font-weight:700;margin-top:2px">مدينة</div>
     </div>
   </div>
 
-  <div class="section-note">
-    قبل بداية الرحلة يفتح الملف على هذا الغلاف وتجهيزات السفر.
-    وعند دخول أيام الرحلة فعلياً، ينقلك زر “دخول الرحلة” مباشرة إلى اليوم الموافق للتاريخ الحالي.
+  <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin:0 0 16px;cursor:pointer" onclick="switchView('readiness', document.getElementById('tab-readiness'))">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">✅ تجهيزات ما قبل السفر</span>
+      <span id="prepPctLabel" style="font-size:12px;font-weight:900;color:#E6C27A">0%</span>
+    </div>
+    <div style="height:6px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden">
+      <div id="prepPctBar" style="height:100%;border-radius:999px;background:linear-gradient(90deg,#E6C27A,#EED08A);width:0%;transition:width .6s ease"></div>
+    </div>
+    <div id="prepPctSub" style="margin-top:8px;font-size:11.5px;color:#94A8B8;font-weight:600">اضغط لعرض القائمة</div>
   </div>
+
+  <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin:0 0 16px">
+    <div style="font-size:12px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.1em;margin-bottom:12px">🗺️ مسار الرحلة</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;row-gap:8px;gap:4px">
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">جدة</span>
+      <span style="color:#E6C27A;margin:0 4px">✈</span>
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">ميلانو</span>
+      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">كومو</span>
+      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">دولوميتي</span>
+      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">غاردا</span>
+      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">فينيسيا</span>
+      <span style="color:rgba(255,255,255,.3);margin:0 4px">›</span>
+      <span style="font-size:13px;font-weight:800;color:#F8FAFC">توسكانا</span>
+      <span style="color:#E6C27A;margin:0 4px">✈</span>
+      <span style="font-size:13px;font-weight:900;color:#E6C27A">جدة</span>
+    </div>
+  </div>
+
+  <button onclick="goSmartStart()" style="width:100%;border-radius:16px;padding:16px;font-size:15px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;margin-bottom:10px;background:#fff;color:#07151c">
+    ✈️ دخول الرحلة
+  </button>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <button onclick="switchView('readiness', document.getElementById('tab-readiness'))" style="border-radius:14px;padding:13px;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)">✅ التجهيزات</button>
+    <button onclick="switchView('overview', document.getElementById('tab-overview'))" style="border-radius:14px;padding:13px;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)">🗓️ ملخص الأيام</button>
+  </div>
+
 </main>
 
 
@@ -1098,21 +1240,222 @@ body{
 
 <main id="view-finance" class="view">
   <div class="page-head">
-    <div class="icon"><i data-lucide="lock-keyhole"></i></div>
-    <h2>الصفحة المالية الخاصة</h2>
-    <p>Private financial layer — يتم تعبئتها لاحقاً بالأرقام النهائية</p>
-    <div class="date-line">Confidential</div>
+    <div class="icon"><i data-lucide="wallet"></i></div>
+    <h2>الصفحة المالية</h2>
+    <p>مطابقة العمليات البنكية الفعلية • Master Italia 2026</p>
+    <div class="date-line">8 مسافرين • 16 يوم</div>
   </div>
-  <div class="section-note">
-    هذه الصفحة مخصصة لاحقاً للتكاليف الإجمالية، تكلفة الفرد، المدفوع، المتبقي، السكن، السائق، التذاكر، والمستحقات.
-    يمكن جعلها برقم سري في النسخة النهائية عند توفر الأرقام المؤكدة.
+
+  <!-- ملخص سريع -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+    <div style="background:rgba(102,167,142,.12);border:1px solid rgba(102,167,142,.28);border-radius:18px;padding:16px;text-align:center">
+      <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);letter-spacing:.08em;margin-bottom:6px">✅ إجمالي مدفوع</div>
+      <div style="font-size:19px;font-weight:900;color:#fff">48,196 ر.س</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:3px">مؤكد بنكياً</div>
+    </div>
+    <div style="background:rgba(224,122,95,.12);border:1px solid rgba(224,122,95,.28);border-radius:18px;padding:16px;text-align:center">
+      <div style="font-size:10px;font-weight:800;color:rgba(224,122,95,.9);letter-spacing:.08em;margin-bottom:6px">⏳ إجمالي متبقي</div>
+      <div style="font-size:19px;font-weight:900;color:#fff">~7,730 €</div>
+      <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:3px">تقريباً</div>
+    </div>
   </div>
-  <div class="finance-grid">
-    <div class="finance-card"><span class="private-badge"><i data-lucide="lock"></i> خاص</span><h3>إجمالي الرحلة</h3><p>يضاف لاحقاً بعد تثبيت جميع الحجوزات.</p></div>
-    <div class="finance-card"><span class="private-badge"><i data-lucide="user"></i> للفرد</span><h3>تكلفة الشخص الواحد</h3><p>تحسب بناءً على عدد المسافرين وإجمالي التكلفة.</p></div>
-    <div class="finance-card"><span class="private-badge"><i data-lucide="hotel"></i> السكن</span><h3>الفنادق والفلل</h3><p>مدفوع / متبقي / تواريخ الاستحقاق.</p></div>
-    <div class="finance-card"><span class="private-badge"><i data-lucide="car"></i> النقل</span><h3>السائق والتنقلات</h3><p>قيمة العقد، التغطية، والمدفوعات.</p></div>
+
+  <!-- ويدجت سعر الصرف والإجماليات والتذكيرات -->
+  <div id="financeWidget"></div>
+
+  <!-- ===== العمليات البنكية المؤكدة ===== -->
+  <div style="font-size:11px;font-weight:800;color:rgba(102,167,142,.9);letter-spacing:.1em;margin:0 0 10px">💳 العمليات البنكية المؤكدة</div>
+
+  <!-- طيران المجموعة -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">✈️</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">طيران المجموعة — 7 أشخاص</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">جدة ↔ ميلانو • PNR: 9MDXX6</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">18,669 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ مدفوع</div>
+      </div>
+    </div>
   </div>
+
+  <!-- طيران نورة -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">✈️</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">طيران نورة — عودة مبكرة</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">جدة → ميلانو ثم 18 يونيو • PNR: 9MO4WE</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">2,802 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ مدفوع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- مقاعد وإضافات -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">💺</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">المقاعد والإضافات</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">اختيار مقاعد + خدمات إضافية</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">961 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ مدفوع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELSTAY ميلانو -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">🏨</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">RELSTAY Vercelli Suites</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">ميلانو • 11–13 يونيو • 1,060.80€ • رقم: 5067.031.751</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">~4,632 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ مدفوع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- سكن غاردا -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">🌊</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">lillil — ريفا دل غاردا</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">15–17 يونيو • 1,210.74€ شامل رسوم الصرف • رقم: 5337.430.688</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">5,425 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ مدفوع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Casa Amrita -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">🏡</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">Casa Amrita — Private Villa</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">ميلانو • 17–26 يونيو • كود: HMRFHJHPN4</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">11,830 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ مدفوع كامل</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- دفعة السائق -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-bottom:16px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(102,167,142,.15);border:1px solid rgba(102,167,142,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">🚐</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">دفعة أولى — السائق الخاص</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">تحويل لتأكيد الحجز • إجمالي العقد 34,000 ر.س</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E6C27A">5,000 ر.س</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(102,167,142,.9);margin-top:2px">✅ محوَّل</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== المبالغ المتبقية ===== -->
+  <div style="font-size:11px;font-weight:800;color:rgba(224,122,95,.8);letter-spacing:.1em;margin:0 0 10px">⏳ المبالغ المتبقية</div>
+
+  <!-- Adlhof -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(224,122,95,.2);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(224,122,95,.12);border:1px solid rgba(224,122,95,.25);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">🏔️</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">Adlhof Apartments</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">برونيكو — الدولوميتي • 13–15 يونيو • رقم: 5763.859.350</div>
+        <div style="font-size:11px;color:rgba(224,122,95,.8);margin-top:3px">يشمل 423€ تأمين + 633€ رصيد</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E07A5F">1,056 €</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(224,122,95,.9);margin-top:2px">⏳ يُدفع</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ضرائب المدن -->
+  <div style="background:rgba(7,24,36,.88);border:1px solid rgba(224,122,95,.2);border-radius:18px;margin-bottom:8px;overflow:hidden">
+    <div style="padding:13px 16px;display:flex;align-items:flex-start;gap:12px">
+      <div style="width:36px;height:36px;border-radius:11px;background:rgba(224,122,95,.12);border:1px solid rgba(224,122,95,.25);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;margin-top:1px">🏛️</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:900;color:#fff">ضرائب المدن</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">تُدفع عند الوصول لكل فندق نقداً</div>
+      </div>
+      <div style="text-align:left;flex-shrink:0">
+        <div style="font-size:15px;font-weight:900;color:#E07A5F">~64 €</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(224,122,95,.9);margin-top:2px">⏳ نقداً</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- السائق المتبقي -->
+  <div style="background:rgba(230,194,122,.07);border:1px solid rgba(230,194,122,.22);border-radius:18px;padding:16px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <div style="font-size:20px">🚐</div>
+      <div>
+        <div style="font-size:14px;font-weight:900;color:#fff">متبقي السائق الخاص</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">أكبر مبلغ متبقي — يُدفع تدريجياً</div>
+      </div>
+      <div style="margin-right:auto;text-align:left">
+        <div style="font-size:16px;font-weight:900;color:#E07A5F">~6,650 €</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(224,122,95,.9);margin-top:1px">⏳ داخل إيطاليا</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)">
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:#94A8B8">إجمالي العقد</span><span style="font-weight:900;color:#fff">34,000 ر.س</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:#94A8B8">المدفوع</span><span style="font-weight:900;color:rgba(102,167,142,.9)">5,000 ر.س ✅</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:#94A8B8">طريقة السداد</span><span style="font-weight:900;color:#fff">كل 5 أيام</span></div>
+    </div>
+  </div>
+
+  <!-- ===== ملاحظات المطابقة ===== -->
+  <div style="background:rgba(7,24,36,.7);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin-bottom:16px">
+    <div style="font-size:12px;font-weight:900;color:rgba(230,194,122,.8);margin-bottom:10px">📌 ملاحظات المطابقة البنكية</div>
+    <div style="display:flex;flex-direction:column;gap:7px">
+      <div style="font-size:12px;color:#94A8B8;line-height:1.6">• مبلغ غاردا البنكي <span style="color:#fff;font-weight:800">5,425 ر.س</span> يشمل رسوم الصرف + Apple Pay</div>
+      <div style="font-size:12px;color:#94A8B8;line-height:1.6">• RELSTAY تم سداده كاملاً وألغى أي دفعات معلقة سابقة</div>
+      <div style="font-size:12px;color:#94A8B8;line-height:1.6">• الإجمالي لا يشمل: مطاعم، أنشطة، تسوق، مصروف يومي</div>
+      <div style="font-size:12px;color:#94A8B8;line-height:1.6">• السائق هو أكبر مبلغ متبقي حتى الآن</div>
+    </div>
+  </div>
+
+  <!-- ===== مصاريف إضافية أثناء الرحلة ===== -->
+  <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.1em;margin:0 0 10px">➕ مصاريف إضافية أثناء الرحلة</div>
+  <div id="extraExpenses" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px"></div>
+  <div style="background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-bottom:16px">
+    <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px">
+      <input id="expName" placeholder="اسم المصروف" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
+      <input id="expAmount" placeholder="المبلغ" type="number" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
+      <button onclick="addExpense()" style="background:linear-gradient(180deg,#EED08A,#E6C27A);color:#06141F;border:0;border-radius:10px;padding:10px 14px;font-weight:900;font-size:14px;cursor:pointer;white-space:nowrap;font-family:Tajawal,sans-serif">+ أضف</button>
+    </div>
+    <select id="expCurrency" style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;color:#fff;font-size:13px;font-weight:700;font-family:Tajawal,sans-serif;width:100%">
+      <option value="يورو">€ يورو</option>
+      <option value="ريال">ر.س ريال سعودي</option>
+      <option value="دولار">$ دولار</option>
+    </select>
+  </div>
+  <div id="expTotal" style="display:none;background:rgba(230,194,122,.08);border:1px solid rgba(230,194,122,.22);border-radius:14px;padding:13px 16px;margin-bottom:16px;justify-content:space-between;align-items:center">
+    <span style="font-size:13px;font-weight:800;color:#94A8B8">إجمالي المصاريف الإضافية</span>
+    <span id="expTotalVal" style="font-size:15px;font-weight:900;color:#E6C27A"></span>
+  </div>
+
 </main>
 
 <main id="view-day1" class="view">
@@ -3049,6 +3392,34 @@ body{
 <script>
 function initIcons(){ if(window.lucide) lucide.createIcons(); }
 
+/* ===== PROGRESS BAR ===== */
+function updateDayProgress(viewId){
+  const view = document.getElementById('view-' + viewId);
+  if(!view) return;
+  const allCards = view.querySelectorAll('.card');
+  if(!allCards.length) return;
+  const doneCards = view.querySelectorAll('.card.completed');
+  const total = allCards.length;
+  const done = doneCards.length;
+  const pct = total ? Math.round(done/total*100) : 0;
+
+  // إزالة progress قديم
+  const old = view.querySelector('.day-progress');
+  if(old) old.remove();
+
+  // إضافة progress جديد بعد page-head مباشرة
+  const head = view.querySelector('.page-head');
+  if(!head) return;
+  const bar = document.createElement('div');
+  bar.className = 'day-progress';
+  bar.innerHTML = `
+    <div class="day-progress-text">أُنجز <b>${done}</b> من <b>${total}</b></div>
+    <div class="day-progress-bar-wrap"><div class="day-progress-bar" style="width:${pct}%"></div></div>
+  `;
+  head.after(bar);
+}
+
+/* ===== SWITCH VIEW ===== */
 function switchView(viewId, btn){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -3060,6 +3431,7 @@ function switchView(viewId, btn){
   }
   window.scrollTo({top:0,behavior:'smooth'});
   initIcons();
+  updateDayProgress(viewId);
 }
 
 function toggleCheck(el){
@@ -3069,7 +3441,7 @@ function toggleCheck(el){
   initIcons();
 }
 
-
+/* ===== TOGGLE CARD + SAVE ===== */
 function toggleCardDone(btn){
   const card = btn.closest('.card');
   if(!card) return;
@@ -3077,10 +3449,58 @@ function toggleCardDone(btn){
   const icon = btn.querySelector('i');
   icon.setAttribute('data-lucide', card.classList.contains('completed') ? 'check-circle-2' : 'circle');
   initIcons();
+
+  // حفظ في localStorage
+  const view = card.closest('.view');
+  if(view) {
+    const viewId = view.id.replace('view-','');
+    const cards = Array.from(view.querySelectorAll('.card'));
+    const idx = cards.indexOf(card);
+    try{ localStorage.setItem('italia-card-'+viewId+'-'+idx, card.classList.contains('completed')?'1':'0'); }catch(e){}
+    updateDayProgress(viewId);
+  }
+}
+
+/* ===== RESTORE SAVED STATE ===== */
+function restoreCards(){
+  document.querySelectorAll('.view').forEach(view=>{
+    const viewId = view.id.replace('view-','');
+    const cards = view.querySelectorAll('.card');
+    cards.forEach((card,idx)=>{
+      try{
+        if(localStorage.getItem('italia-card-'+viewId+'-'+idx)==='1'){
+          card.classList.add('completed');
+          const icon = card.querySelector('.complete-btn i');
+          if(icon) icon.setAttribute('data-lucide','check-circle-2');
+        }
+      }catch(e){}
+    });
+  });
+}
+
+/* ===== SCROLL TOP BTN ===== */
+function initScrollBtn(){
+  const btn = document.getElementById('scrollTopBtn');
+  if(!btn) return;
+  window.addEventListener('scroll',()=>{
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+}
+
+/* ===== SPLASH ===== */
+function initSplash(){
+  const splash = document.getElementById('splash');
+  const bar = document.getElementById('splashBar');
+  if(!splash) return;
+  setTimeout(()=>{ if(bar) bar.style.width='100%'; }, 80);
+  setTimeout(()=>{ splash.classList.add('hidden'); }, 1800);
 }
 
 window.onload=()=>{
   initIcons();
+  initSplash();
+  initScrollBtn();
+  restoreCards();
   const today=new Date();
   const key=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,'0')+"-"+String(today.getDate()).padStart(2,'0');
   const schedule={
@@ -3192,6 +3612,506 @@ window.addEventListener('load', function(){
     }
   }, 50);
 });
+</script>
+
+<script id="safra-extras">
+
+/* ===== COUNTDOWN ===== */
+function updateCountdown(){
+  const target = new Date('2026-06-11T14:05:00+02:00');
+  const now = new Date();
+  const diff = target - now;
+  const el = document.getElementById('countdownDisplay');
+  if(!el) return;
+
+  if(diff <= 0){
+    el.innerHTML = '<span style="color:#E6C27A;font-size:18px;font-weight:900">✈️ الرحلة انطلقت!</span>';
+    return;
+  }
+
+  const days    = Math.floor(diff / 86400000);
+  const hours   = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  const box = (n, label) => `
+    <div style="background:rgba(230,194,122,.1);border:1px solid rgba(230,194,122,.22);border-radius:14px;padding:12px 14px;min-width:60px;text-align:center">
+      <div style="font-size:26px;font-weight:900;color:#E6C27A;line-height:1">${String(n).padStart(2,'0')}</div>
+      <div style="font-size:10px;color:rgba(255,255,255,.5);font-weight:700;margin-top:4px">${label}</div>
+    </div>`;
+
+  el.innerHTML = box(days,'يوم') + box(hours,'ساعة') + box(minutes,'دقيقة') + box(seconds,'ثانية');
+}
+
+/* ===== PREP PROGRESS ===== */
+function updatePrepProgress(){
+  const items = document.querySelectorAll('.prep-item');
+  if(!items.length) return;
+  const done = document.querySelectorAll('.prep-item.done').length;
+  const pct = Math.round(done / items.length * 100);
+  const bar = document.getElementById('prepPctBar');
+  const label = document.getElementById('prepPctLabel');
+  const sub = document.getElementById('prepPctSub');
+  if(bar) bar.style.width = pct + '%';
+  if(label) label.textContent = pct + '%';
+  if(sub) sub.textContent = done + ' من ' + items.length + ' عنصر جاهز — اضغط لعرض القائمة';
+}
+
+/* ===== SHARE BUTTON ===== */
+function shareLink(url, title){
+  if(navigator.share){
+    navigator.share({ title: title || 'رحلة إيطاليا 2026', url: url });
+  } else {
+    navigator.clipboard.writeText(url).then(()=>{
+      alert('تم نسخ الرابط ✓');
+    });
+  }
+}
+
+function addShareButtons(){
+  document.querySelectorAll('.card').forEach((card, idx) => {
+    const head = card.querySelector('.card-head');
+    if(!head || head.querySelector('.share-btn')) return;
+    const title = card.querySelector('.card-title h3');
+    const view = card.closest('.view');
+    const viewId = view ? view.id.replace('view-','') : '';
+    const baseUrl = 'https://moalshareef.github.io/master-italia-2026/#' + viewId;
+    const cardTitle = title ? title.textContent.trim() : 'تفصيل الرحلة';
+
+    const btn = document.createElement('button');
+    btn.className = 'share-btn';
+    btn.setAttribute('aria-label','مشاركة');
+    btn.innerHTML = '📤';
+    btn.style.cssText = 'background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;flex-shrink:0;margin-right:4px';
+    btn.onclick = (e) => { e.stopPropagation(); shareLink(baseUrl, '🇮🇹 ' + cardTitle + ' — رحلة إيطاليا 2026'); };
+    head.appendChild(btn);
+  });
+}
+
+/* ===== STAR RATING ===== */
+function addStarRatings(){
+  document.querySelectorAll('.card').forEach((card, globalIdx) => {
+    if(card.querySelector('.star-rating')) return;
+    const body = card.querySelector('.card-body');
+    if(!body) return;
+    const view = card.closest('.view');
+    const viewId = view ? view.id.replace('view-','') : 'x';
+    const cards = view ? Array.from(view.querySelectorAll('.card')) : [];
+    const cardIdx = cards.indexOf(card);
+    const storageKey = 'italia-stars-' + viewId + '-' + cardIdx;
+
+    let saved = 0;
+    try{ saved = parseInt(localStorage.getItem(storageKey)) || 0; }catch(e){}
+
+    const wrap = document.createElement('div');
+    wrap.className = 'star-rating';
+    wrap.style.cssText = 'display:flex;align-items:center;gap:4px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07)';
+
+    const label = document.createElement('span');
+    label.style.cssText = 'font-size:11.5px;font-weight:800;color:#94A8B8;margin-left:auto';
+    label.textContent = saved ? 'تقييمك: ' + '★'.repeat(saved) : 'قيّم هذا المكان';
+
+    const stars = document.createElement('div');
+    stars.style.cssText = 'display:flex;gap:3px';
+
+    for(let i=1; i<=5; i++){
+      const s = document.createElement('button');
+      s.textContent = i <= saved ? '★' : '☆';
+      s.style.cssText = `background:none;border:0;font-size:20px;cursor:pointer;color:${i<=saved?'#E6C27A':'rgba(255,255,255,.25)'};padding:0;line-height:1;transition:transform .15s`;
+      s.setAttribute('data-star', i);
+      s.onmouseenter = ()=>{ stars.querySelectorAll('button').forEach((b,bi)=>{ b.style.color = bi<i ? '#E6C27A' : 'rgba(255,255,255,.25)'; b.style.transform = bi<i ? 'scale(1.15)' : 'scale(1)'; }); };
+      s.onmouseleave = ()=>{ const cur = parseInt(stars.dataset.current)||0; stars.querySelectorAll('button').forEach((b,bi)=>{ b.style.color = bi<cur ? '#E6C27A' : 'rgba(255,255,255,.25)'; b.style.transform = 'scale(1)'; }); };
+      s.onclick = ()=>{
+        stars.dataset.current = i;
+        stars.querySelectorAll('button').forEach((b,bi)=>{ b.textContent = bi<i ? '★' : '☆'; b.style.color = bi<i ? '#E6C27A' : 'rgba(255,255,255,.25)'; });
+        label.textContent = 'تقييمك: ' + '★'.repeat(i);
+        try{ localStorage.setItem(storageKey, i); }catch(e){}
+      };
+      stars.appendChild(s);
+    }
+    stars.dataset.current = saved;
+
+    wrap.appendChild(stars);
+    wrap.appendChild(label);
+    body.appendChild(wrap);
+  });
+}
+
+/* ===== INIT EXTRAS ===== */
+function initExtras(){
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  updatePrepProgress();
+  addShareButtons();
+  addStarRatings();
+}
+
+/* hook على switchView لإعادة إضافة الأزرار بعد كل انتقال */
+const _origSwitch = window.switchView;
+window.switchView = function(viewId, btn){
+  _origSwitch(viewId, btn);
+  setTimeout(()=>{ addShareButtons(); addStarRatings(); updatePrepProgress(); }, 100);
+};
+
+/* hook على togglePrep لتحديث البار */
+const _origTogglePrep = window.togglePrep;
+window.togglePrep = function(btn){
+  _origTogglePrep(btn);
+  updatePrepProgress();
+};
+
+/* ===== EXTRA EXPENSES ===== */
+function loadExpenses(){
+  try{ return JSON.parse(localStorage.getItem('italia-expenses') || '[]'); }catch(e){ return []; }
+}
+function saveExpenses(arr){
+  try{ localStorage.setItem('italia-expenses', JSON.stringify(arr)); }catch(e){}
+}
+function renderExpenses(){
+  const list = loadExpenses();
+  const container = document.getElementById('extraExpenses');
+  const totalEl = document.getElementById('expTotalVal');
+  const totalWrap = document.getElementById('expTotal');
+  if(!container) return;
+
+  container.innerHTML = '';
+  let totals = {};
+  list.forEach((exp, idx) => {
+    totals[exp.currency] = (totals[exp.currency] || 0) + parseFloat(exp.amount);
+    const row = document.createElement('div');
+    row.style.cssText = 'background:rgba(7,24,36,.82);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px';
+    row.innerHTML = `
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:800;color:#fff">${exp.name}</div>
+        <div style="font-size:11.5px;color:#94A8B8;margin-top:2px">${exp.currency}</div>
+      </div>
+      <div style="font-size:15px;font-weight:900;color:#E6C27A">${parseFloat(exp.amount).toLocaleString()} ${exp.currency === 'يورو' ? '€' : exp.currency === 'ريال' ? 'ر.س' : '$'}</div>
+      <button onclick="deleteExpense(${idx})" style="background:rgba(224,122,95,.15);border:1px solid rgba(224,122,95,.25);border-radius:8px;color:#E07A5F;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0">×</button>
+    `;
+    container.appendChild(row);
+  });
+
+  if(totalEl && list.length > 0){
+    const parts = Object.entries(totals).map(([cur, val]) => {
+      const sym = cur === 'يورو' ? '€' : cur === 'ريال' ? 'ر.س' : '$';
+      return `${val.toLocaleString()} ${sym}`;
+    });
+    totalEl.textContent = parts.join(' + ');
+    if(totalWrap) totalWrap.style.display = 'flex';
+  } else if(totalWrap){
+    totalWrap.style.display = 'none';
+  }
+}
+function addExpense(){
+  const name = document.getElementById('expName');
+  const amount = document.getElementById('expAmount');
+  const currency = document.getElementById('expCurrency');
+  if(!name || !amount || !name.value.trim() || !amount.value) return;
+  const list = loadExpenses();
+  list.push({ name: name.value.trim(), amount: amount.value, currency: currency.value });
+  saveExpenses(list);
+  name.value = '';
+  amount.value = '';
+  renderExpenses();
+}
+function deleteExpense(idx){
+  const list = loadExpenses();
+  list.splice(idx, 1);
+  saveExpenses(list);
+  renderExpenses();
+}
+
+document.addEventListener('DOMContentLoaded', renderExpenses);
+window.addEventListener('load', ()=>{ setTimeout(renderExpenses, 300); });
+
+</script>
+
+<script id="safra-finance-engine">
+/* ========================================================
+   FINANCE ENGINE — سعر الصرف + تذكيرات + إجماليات
+   ======================================================== */
+
+/* --- بيانات الدفعات المجدولة --- */
+const PAYMENT_SCHEDULE = [
+  {
+    id: 'adlhof',
+    name: 'Adlhof Apartments — دولوميتي',
+    icon: '🏔️',
+    amountEur: 1056,
+    dueDate: '2026-06-13',
+    note: 'يُدفع عند الوصول • برونيكو',
+    paid: false
+  },
+  {
+    id: 'relstay-bal',
+    name: 'RELSTAY — رصيد عند الوصول',
+    icon: '🏨',
+    amountEur: 633,
+    dueDate: '2026-06-11',
+    note: 'مدفوع بالكامل ✅',
+    paid: true
+  },
+  {
+    id: 'driver-1',
+    name: 'السائق — الدفعة الأولى',
+    icon: '🚐',
+    amountEur: 1330,
+    dueDate: '2026-06-11',
+    note: 'كل 5 أيام • ~6,650€ مقسّمة على 5 دفعات',
+    paid: false
+  },
+  {
+    id: 'driver-2',
+    name: 'السائق — الدفعة الثانية',
+    icon: '🚐',
+    amountEur: 1330,
+    dueDate: '2026-06-16',
+    note: 'كل 5 أيام',
+    paid: false
+  },
+  {
+    id: 'driver-3',
+    name: 'السائق — الدفعة الثالثة',
+    icon: '🚐',
+    amountEur: 1330,
+    dueDate: '2026-06-21',
+    note: 'كل 5 أيام',
+    paid: false
+  },
+  {
+    id: 'driver-4',
+    name: 'السائق — الدفعة الرابعة',
+    icon: '🚐',
+    amountEur: 1330,
+    dueDate: '2026-06-26',
+    note: 'آخر دفعة قبل المغادرة',
+    paid: false
+  },
+  {
+    id: 'city-tax',
+    name: 'ضرائب المدن',
+    icon: '🏛️',
+    amountEur: 64,
+    dueDate: '2026-06-11',
+    note: 'نقداً عند الوصول لكل فندق',
+    paid: false
+  }
+];
+
+/* --- سعر الصرف --- */
+let eurRate = 4.37; // سعر افتراضي
+
+async function fetchEurRate() {
+  try {
+    const r = await fetch('https://api.exchangerate-api.com/v4/latest/EUR');
+    const d = await r.json();
+    if(d.rates && d.rates.SAR) {
+      eurRate = d.rates.SAR;
+      renderFinanceWidget();
+    }
+  } catch(e) {
+    // نبقى على السعر الافتراضي
+  }
+}
+
+function eurToSar(eur) {
+  return (eur * eurRate).toFixed(0);
+}
+
+/* --- تحميل/حفظ حالة الدفعات --- */
+function loadPaymentStatus() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('italia-payments') || '{}');
+    // RELSTAY مدفوع بالكامل
+    if(!saved['relstay-bal']) saved['relstay-bal'] = '1';
+    return saved;
+  } catch(e) { return {'relstay-bal':'1'}; }
+}
+function savePaymentStatus(obj) {
+  try { localStorage.setItem('italia-payments', JSON.stringify(obj)); } catch(e) {}
+}
+
+/* --- تنسيق التاريخ --- */
+function formatDate(d) {
+  const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}`;
+}
+
+function getDaysUntil(dateStr) {
+  const now = new Date();
+  now.setHours(0,0,0,0);
+  const target = new Date(dateStr);
+  return Math.ceil((target - now) / 86400000);
+}
+
+/* --- رسم ويدجت المالية --- */
+function renderFinanceWidget() {
+  const container = document.getElementById('financeWidget');
+  if(!container) return;
+
+  const status = loadPaymentStatus();
+  const now = new Date();
+  now.setHours(0,0,0,0);
+
+  // حساب الإجماليات
+  const totalPaidSar = 48196;
+  let totalRemainingEur = 0;
+  let totalRemainingPaidEur = 0;
+
+  PAYMENT_SCHEDULE.forEach(p => {
+    const isPaid = status[p.id] === '1';
+    if(isPaid) totalRemainingPaidEur += p.amountEur;
+    else totalRemainingEur += p.amountEur;
+  });
+
+  const totalRemainingPaidSar = Math.round(totalRemainingPaidEur * eurRate);
+  const grandTotalSar = totalPaidSar + totalRemainingPaidSar;
+  const grandTotalRemainingEur = totalRemainingEur;
+  const costPerPerson = Math.round((totalPaidSar + Math.round(totalRemainingEur * eurRate)) / 8);
+
+  // سعر الصرف widget
+  let html = `
+    <!-- سعر الصرف اليومي -->
+    <div style="background:rgba(230,194,122,.08);border:1px solid rgba(230,194,122,.22);border-radius:18px;padding:14px 16px;margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:10px;font-weight:800;color:rgba(230,194,122,.7);letter-spacing:.1em;margin-bottom:4px">💱 سعر اليورو اليوم</div>
+          <div style="font-size:26px;font-weight:900;color:#E6C27A;line-height:1">1 € = <span id="eurRateDisplay">${eurRate.toFixed(2)}</span> ر.س</div>
+          <div style="font-size:11px;color:#94A8B8;margin-top:3px" id="rateUpdateTime">يتحدث تلقائياً</div>
+        </div>
+        <div style="text-align:left">
+          <div style="font-size:10px;color:#94A8B8;margin-bottom:4px">تكلفة الفرد الإجمالية</div>
+          <div style="font-size:20px;font-weight:900;color:#fff">${Number(costPerPerson).toLocaleString()} ر.س</div>
+          <div style="font-size:10px;color:#94A8B8;margin-top:2px">تقريباً / شخص</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- إجمالي الرحلة -->
+    <div style="background:rgba(7,24,36,.88);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:14px 16px;margin-bottom:14px">
+      <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.7);letter-spacing:.08em;margin-bottom:10px">📊 إجمالي تكلفة الرحلة</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:13px;color:#94A8B8">مدفوع حتى الآن</span>
+          <span style="font-weight:900;color:rgba(102,167,142,.9)">${Number(totalPaidSar).toLocaleString()} ر.س</span>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:13px;color:#94A8B8">متبقي (${grandTotalRemainingEur.toLocaleString()}€)</span>
+          <span style="font-weight:900;color:#E07A5F">~${Number(Math.round(grandTotalRemainingEur * eurRate)).toLocaleString()} ر.س</span>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,.1)"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;font-weight:900;color:#fff">الإجمالي الكامل</span>
+          <span style="font-size:18px;font-weight:900;color:#E6C27A">~${Number(Math.round(totalPaidSar + grandTotalRemainingEur * eurRate)).toLocaleString()} ر.س</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;color:#94A8B8">تكلفة الفرد (÷8)</span>
+          <span style="font-size:15px;font-weight:900;color:#E6C27A">${Number(costPerPerson).toLocaleString()} ر.س</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- تذكيرات الدفع -->
+    <div style="font-size:11px;font-weight:800;color:rgba(230,194,122,.8);letter-spacing:.1em;margin:0 0 10px">🔔 تذكيرات الدفع المجدولة</div>
+  `;
+
+  // ترتيب الدفعات حسب التاريخ
+  const sorted = [...PAYMENT_SCHEDULE].sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+
+  sorted.forEach(p => {
+    const isPaid = status[p.id] === '1';
+    const daysUntil = getDaysUntil(p.dueDate);
+    const dueD = new Date(p.dueDate);
+    const isToday = daysUntil === 0;
+    const isOverdue = daysUntil < 0;
+    const isUrgent = daysUntil >= 0 && daysUntil <= 3;
+    const sarAmount = eurToSar(p.amountEur);
+
+    let borderColor = 'rgba(255,255,255,.1)';
+    let bgColor = 'rgba(7,24,36,.88)';
+    let badge = '';
+
+    if(isPaid) {
+      borderColor = 'rgba(102,167,142,.25)';
+      bgColor = 'rgba(102,167,142,.07)';
+      badge = '<span style="background:rgba(102,167,142,.2);color:rgba(102,167,142,.9);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900">✅ تم الدفع</span>';
+    } else if(isOverdue) {
+      borderColor = 'rgba(224,80,80,.35)';
+      bgColor = 'rgba(224,80,80,.07)';
+      badge = '<span style="background:rgba(224,80,80,.2);color:#E05050;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900">⚠️ متأخر</span>';
+    } else if(isToday) {
+      borderColor = 'rgba(230,194,122,.4)';
+      bgColor = 'rgba(230,194,122,.08)';
+      badge = '<span style="background:rgba(230,194,122,.2);color:#E6C27A;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900">🔔 اليوم!</span>';
+    } else if(isUrgent) {
+      borderColor = 'rgba(224,122,95,.3)';
+      badge = `<span style="background:rgba(224,122,95,.15);color:#E07A5F;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900">⏰ ${daysUntil} أيام</span>`;
+    } else {
+      badge = `<span style="background:rgba(255,255,255,.07);color:#94A8B8;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700">${formatDate(dueD)}</span>`;
+    }
+
+    html += `
+      <div style="background:${bgColor};border:1px solid ${borderColor};border-radius:16px;margin-bottom:8px;overflow:hidden;transition:all .2s">
+        <div style="padding:13px 14px">
+          <div style="display:flex;align-items:flex-start;gap:10px">
+            <div style="font-size:20px;flex-shrink:0;margin-top:1px">${p.icon}</div>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px">
+                <span style="font-size:13.5px;font-weight:900;color:${isPaid ? '#94A8B8' : '#fff'};${isPaid ? 'text-decoration:line-through' : ''}">${p.name}</span>
+                ${badge}
+              </div>
+              <div style="font-size:11px;color:#94A8B8;margin-bottom:6px">${p.note}</div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span style="font-size:15px;font-weight:900;color:${isPaid ? '#94A8B8' : '#E6C27A'}">${p.amountEur.toLocaleString()} €</span>
+                <span style="font-size:12px;color:#94A8B8">≈ ${Number(sarAmount).toLocaleString()} ر.س</span>
+              </div>
+            </div>
+            <button onclick="togglePayment('${p.id}')" style="background:${isPaid ? 'rgba(102,167,142,.2)' : 'rgba(230,194,122,.15)'};border:1px solid ${isPaid ? 'rgba(102,167,142,.3)' : 'rgba(230,194,122,.3)'};border-radius:10px;padding:7px 10px;font-size:12px;font-weight:900;cursor:pointer;color:${isPaid ? 'rgba(102,167,142,.9)' : '#E6C27A'};flex-shrink:0;white-space:nowrap;font-family:Tajawal,sans-serif">
+              ${isPaid ? '↩ عكس' : '✓ دفع'}
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // تحديث عرض السعر
+  const rateEl = document.getElementById('eurRateDisplay');
+  if(rateEl) rateEl.textContent = eurRate.toFixed(2);
+  const timeEl = document.getElementById('rateUpdateTime');
+  if(timeEl) {
+    const now2 = new Date();
+    timeEl.textContent = `آخر تحديث: ${now2.getHours()}:${String(now2.getMinutes()).padStart(2,'0')}`;
+  }
+}
+
+function togglePayment(id) {
+  const status = loadPaymentStatus();
+  status[id] = status[id] === '1' ? '0' : '1';
+  savePaymentStatus(status);
+  renderFinanceWidget();
+}
+
+/* --- تهيئة --- */
+function initFinanceEngine() {
+  renderFinanceWidget();
+  fetchEurRate();
+  // تحديث السعر كل 5 دقائق
+  setInterval(fetchEurRate, 300000);
+}
+
+document.addEventListener('DOMContentLoaded', initFinanceEngine);
+window.addEventListener('load', () => setTimeout(initFinanceEngine, 400));
+
+// hook على switchView لتشغيل الـ widget عند الانتقال للمالية
+const __origSwitchFin = window.switchView;
+window.switchView = function(viewId, btn) {
+  __origSwitchFin(viewId, btn);
+  if(viewId === 'finance') setTimeout(renderFinanceWidget, 150);
+};
 </script>
 
 </body>
