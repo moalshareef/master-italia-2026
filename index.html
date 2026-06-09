@@ -164,3 +164,3035 @@
     }
 
     .tab svg{width:15px;height:15px}
+
+    .tab small{
+      font-size:10px;
+      font-weight:700;
+      color:var(--muted-2);
+      margin-right:2px;
+    }
+
+    .tab.active{
+      background:var(--gold);
+      color:#06141F;
+      border-color:var(--gold);
+      box-shadow:0 8px 24px rgba(230,194,122,.22), inset 0 1px 0 rgba(255,255,255,.18);
+    }
+
+    .tab.active small{color:rgba(6,20,31,.72)}
+
+    .view{
+      display:none;
+      padding:16px 18px 42px;
+      animation:viewIn .34s ease forwards;
+    }
+
+    .view.active{display:block}
+
+    @keyframes viewIn{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .page-head{
+      text-align:center;
+      margin:4px 0 18px;
+    }
+
+    .page-head .icon{
+      width:34px;
+      height:34px;
+      margin:0 auto 8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold);
+    }
+
+    .page-head .icon svg{width:26px;height:26px}
+
+    .page-head h2{
+      font-size:23px;
+      font-weight:900;
+      line-height:1.25;
+      color:var(--white);
+    }
+
+    .page-head p{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:13.5px;
+      line-height:1.7;
+    }
+
+    .date-line{
+      color:var(--gold);
+      font-weight:800;
+      font-size:13px;
+      margin-top:5px;
+    }
+
+    .quick-strip{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-bottom:16px;
+    }
+
+    .quick-item{
+      background:rgba(7,24,36,.78);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 8px;
+      text-align:center;
+      min-height:66px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+    }
+
+    .quick-item svg{width:17px;height:17px;color:var(--gold)}
+    .quick-item b{font-size:12.5px;color:var(--white);line-height:1.2}
+    .quick-item span{font-size:10.5px;color:var(--muted);line-height:1.2}
+
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--line);
+      border-radius:22px;
+      margin-bottom:16px;
+      overflow:hidden;
+      backdrop-filter:blur(12px);
+      box-shadow:
+        0 12px 34px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .card-head{
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:linear-gradient(180deg,rgba(255,255,255,.035),transparent);
+    }
+
+    .time{
+      direction:ltr;
+      background:var(--gold-soft);
+      border:1px solid var(--gold-border);
+      color:var(--gold);
+      padding:6px 10px;
+      border-radius:10px;
+      font-size:13px;
+      font-weight:900;
+      min-width:max-content;
+    }
+
+    .card-title{
+      flex:1;
+    }
+
+    .card-title h3{
+      font-size:17px;
+      color:var(--white);
+      font-weight:900;
+      line-height:1.35;
+    }
+
+    .card-title p{
+      color:var(--muted);
+      font-size:11.5px;
+      margin-top:2px;
+      font-weight:600;
+    }
+
+    .card-icon{
+      color:var(--gold);
+      opacity:.9;
+    }
+    .card-icon svg{width:19px;height:19px}
+
+    .card-body{padding:18px}
+
+    .steps{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+    }
+
+    .step{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+    }
+
+    .step-icon{
+      width:27px;
+      height:27px;
+      border-radius:50%;
+      border:1px solid var(--gold-border);
+      background:rgba(255,255,255,.045);
+      color:var(--gold);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      margin-top:1px;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .step-icon svg{width:15px;height:15px}
+
+    .step-content h4{
+      font-size:15px;
+      color:var(--white);
+      font-weight:900;
+      margin-bottom:3px;
+      line-height:1.4;
+    }
+
+    .step-content p{
+      color:var(--muted);
+      font-size:14.2px;
+      line-height:1.82;
+      font-weight:500;
+    }
+
+    .info-box,
+    .alert-box{
+      border-radius:var(--radius-md);
+      padding:13px 14px;
+      margin-top:15px;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .info-box{
+      background:rgba(230,194,122,.085);
+      border:1px solid rgba(230,194,122,.22);
+    }
+
+    .alert-box{
+      background:var(--coral-soft);
+      border:1px solid rgba(224,122,95,.26);
+    }
+
+    .info-box svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;margin-top:2px}
+    .alert-box svg{width:18px;height:18px;color:var(--coral);flex-shrink:0;margin-top:2px}
+
+    .box-text strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:3px;
+      color:var(--gold);
+      font-weight:900;
+    }
+
+    .alert-box .box-text strong{color:var(--coral)}
+
+    .box-text{
+      color:var(--white);
+      font-size:14px;
+      line-height:1.75;
+      font-weight:600;
+    }
+
+    .btn,
+    .btn-secondary{
+      width:100%;
+      margin-top:14px;
+      border-radius:14px;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:900;
+      transition:.22s ease;
+      border:1px solid var(--gold-border);
+    }
+
+    .btn{
+      color:var(--gold);
+      background:var(--gold-soft);
+      box-shadow:0 8px 22px rgba(0,0,0,.22);
+    }
+
+    .btn-secondary{
+      color:var(--white);
+      background:rgba(255,255,255,.045);
+      border-color:var(--line);
+    }
+
+    .btn svg,.btn-secondary svg{width:16px;height:16px}
+
+    .btn:active,
+    .btn-secondary:active{
+      transform:scale(.985);
+      background:var(--gold);
+      color:#06141F;
+      box-shadow:0 0 20px rgba(230,194,122,.22);
+    }
+
+    .btn-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .check-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .check-item{
+      background:rgba(7,24,36,.82);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:var(--white);
+      font-weight:800;
+      font-size:13.5px;
+      cursor:pointer;
+      min-height:52px;
+    }
+
+    .check-item svg{width:17px;height:17px;color:var(--muted)}
+    .check-item.done{
+      border-color:var(--gold);
+      color:var(--muted);
+      text-decoration:line-through;
+    }
+    .check-item.done svg{color:var(--gold)}
+
+    .finance-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .mini{
+      background:rgba(255,255,255,.045);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+    }
+
+    .mini span{
+      color:var(--muted);
+      font-size:11.5px;
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .mini b{
+      color:var(--white);
+      font-size:14px;
+    }
+
+    @media(max-width:380px){
+      .quick-strip{grid-template-columns:repeat(2,1fr)}
+      .btn-grid{grid-template-columns:1fr}
+      .check-grid{grid-template-columns:1fr}
+      .finance-row{grid-template-columns:1fr}
+    }
+  
+    /* FINAL POLISH — cinematic dark, compact header, luxury depth */
+    html{
+      background:#031018 !important;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at 12% 6%, rgba(38,160,165,.16) 0%, transparent 28%),
+        radial-gradient(circle at 86% 18%, rgba(230,194,122,.08) 0%, transparent 28%),
+        radial-gradient(circle at 30% 92%, rgba(24,120,135,.14) 0%, transparent 32%),
+        linear-gradient(180deg,#031018 0%,#04131D 42%,#020A10 100%) !important;
+      background-color:#031018 !important;
+    }
+
+    .view{
+      background:transparent !important;
+      padding-top:12px !important;
+    }
+
+    .app-header{
+      padding:10px 16px 6px !important;
+      background:rgba(3,16,24,.90) !important;
+      box-shadow:0 8px 28px rgba(0,0,0,.24);
+    }
+
+    .brand-title{
+      font-size:18px !important;
+      line-height:1.12 !important;
+    }
+
+    .brand-subtitle{
+      font-size:10.5px !important;
+      margin-top:2px !important;
+    }
+
+    .header-chip{
+      width:34px !important;
+      height:34px !important;
+      border-radius:13px !important;
+    }
+
+    .top-nav{
+      margin-top:8px !important;
+      gap:8px !important;
+      padding-bottom:6px !important;
+    }
+
+    .tab{
+      padding:7px 12px !important;
+      font-size:12.5px !important;
+      border-color:rgba(255,255,255,.12) !important;
+      background:rgba(255,255,255,.04) !important;
+    }
+
+    .tab.active{
+      background:linear-gradient(180deg,#EED08A,#E6C27A) !important;
+      color:#06141F !important;
+      box-shadow:
+        0 8px 24px rgba(230,194,122,.24),
+        inset 0 1px 0 rgba(255,255,255,.30) !important;
+    }
+
+    .page-head{
+      margin:0 0 13px !important;
+    }
+
+    .page-head .icon{
+      width:28px !important;
+      height:28px !important;
+      margin-bottom:4px !important;
+    }
+
+    .page-head .icon svg{
+      width:22px !important;
+      height:22px !important;
+    }
+
+    .page-head h2{
+      font-size:22px !important;
+      color:rgba(248,250,252,.98) !important;
+    }
+
+    .page-head p{
+      margin-top:3px !important;
+      font-size:13px !important;
+      color:#C4D4DF !important;
+    }
+
+    .date-line{
+      margin-top:4px !important;
+      color:#E6C27A !important;
+      font-weight:900 !important;
+    }
+
+    .quick-strip{
+      gap:8px !important;
+      margin-bottom:14px !important;
+    }
+
+    .quick-item{
+      background:rgba(7,24,36,.88) !important;
+      border-color:rgba(255,255,255,.11) !important;
+      box-shadow:
+        0 10px 24px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .card{
+      background:
+        linear-gradient(180deg,rgba(12,35,51,.96),rgba(7,24,36,.92)) !important;
+      border-color:rgba(255,255,255,.10) !important;
+      box-shadow:
+        0 18px 38px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.045) !important;
+      border-radius:24px !important;
+    }
+
+    .card-head{
+      padding:14px 17px !important;
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)) !important;
+      border-bottom-color:rgba(255,255,255,.09) !important;
+    }
+
+    .card-body{
+      padding:16px 17px !important;
+    }
+
+    .step-content p{
+      color:#C4D4DF !important;
+      line-height:1.82 !important;
+      font-size:14px !important;
+    }
+
+    .step-content h4{
+      color:#FFFFFF !important;
+    }
+
+    .finance-row{
+      gap:9px !important;
+    }
+
+    .mini{
+      background:rgba(255,255,255,.045) !important;
+      border-color:rgba(255,255,255,.105) !important;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+    }
+
+    .info-box{
+      background:rgba(230,194,122,.10) !important;
+      border-color:rgba(230,194,122,.24) !important;
+    }
+
+    .alert-box{
+      background:rgba(224,122,95,.115) !important;
+      border-color:rgba(224,122,95,.28) !important;
+    }
+
+    .btn,.btn-secondary{
+      min-height:48px !important;
+      box-shadow:0 10px 24px rgba(0,0,0,.24) !important;
+    }
+
+    .check-item{
+      background:rgba(7,24,36,.86) !important;
+      border-color:rgba(255,255,255,.12) !important;
+      transition:transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .check-item:active{
+      transform:scale(.985);
+    }
+
+    .check-item.done{
+      background:rgba(230,194,122,.12) !important;
+      border-color:#E6C27A !important;
+      color:#E6C27A !important;
+      text-decoration:none !important;
+      box-shadow:0 0 18px rgba(230,194,122,.12);
+    }
+
+    @media(max-width:430px){
+      .brand-title{font-size:17px !important;}
+      .brand-subtitle{font-size:10px !important;}
+      .tab{padding:7px 11px !important;}
+      .view{padding-left:16px !important;padding-right:16px !important;}
+    }
+
+  
+    .italy-flag{
+      width:34px;
+      height:34px;
+      border-radius:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(230,194,122,.24);
+      font-size:19px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .complete-btn{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      border:1px solid rgba(230,194,122,.32);
+      background:rgba(255,255,255,.035);
+      color:var(--gold);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      flex-shrink:0;
+      transition:.22s ease;
+    }
+
+    .complete-btn svg{
+      width:17px;
+      height:17px;
+    }
+
+    .complete-btn:active{
+      transform:scale(.92);
+    }
+
+    .card.completed{
+      border-color:rgba(230,194,122,.40) !important;
+      box-shadow:
+        0 18px 38px rgba(0,0,0,.34),
+        0 0 24px rgba(230,194,122,.10),
+        inset 0 1px 0 rgba(255,255,255,.045) !important;
+    }
+
+    .card.completed .complete-btn{
+      background:linear-gradient(180deg,#EED08A,#E6C27A);
+      color:#06141F;
+      border-color:#E6C27A;
+      box-shadow:0 0 18px rgba(230,194,122,.22);
+    }
+
+    .card.completed .card-title h3::after{
+      content:"تم";
+      display:inline-flex;
+      margin-right:8px;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(230,194,122,.14);
+      color:var(--gold);
+      font-size:11px;
+      font-weight:900;
+      vertical-align:middle;
+    }
+
+  </style>
+
+<style id="safra-platform-layer">
+.safra-hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(102,167,142,.22), transparent 32%),
+    radial-gradient(circle at 85% 20%, rgba(180,44,54,.16), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  border-radius:28px;
+  padding:34px 24px;
+  margin:18px 0;
+  box-shadow:0 24px 60px rgba(0,0,0,.28);
+}
+.safra-mark{letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);font-size:12px;font-weight:800}
+.safra-title{font-size:34px;line-height:1.1;margin:12px 0 8px;color:#fff}
+.safra-sub{font-size:16px;color:rgba(255,255,255,.76);line-height:1.8;max-width:720px}
+.safra-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.safra-primary,.safra-secondary{
+  border:0;border-radius:18px;padding:14px 18px;font-weight:800;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none
+}
+.safra-primary{background:#fff;color:#07151c}
+.safra-secondary{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.14)}
+.overview-grid,.readiness-grid,.finance-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:18px 0
+}
+.overview-card,.readiness-card,.finance-card{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.055);
+  border-radius:22px;
+  padding:18px;
+  backdrop-filter:blur(12px);
+}
+.overview-card h3,.readiness-card h3,.finance-card h3{margin:0 0 8px;color:#fff;font-size:17px}
+.overview-card p,.readiness-card p,.finance-card p{margin:0;color:rgba(255,255,255,.68);line-height:1.65;font-size:14px}
+.day-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11);
+  border-radius:999px;padding:7px 10px;margin-top:12px;font-size:12px;color:rgba(255,255,255,.72)
+}
+.section-note{
+  border:1px solid rgba(102,167,142,.25);
+  background:rgba(102,167,142,.08);
+  border-radius:22px;
+  padding:18px;
+  color:rgba(255,255,255,.78);
+  line-height:1.9;
+  margin:16px 0;
+}
+.checklist{display:grid;gap:8px;margin-top:12px}
+.check-item{display:flex;gap:10px;align-items:flex-start;color:rgba(255,255,255,.76);font-size:14px;line-height:1.6}
+.check-item i{width:16px;min-width:16px;margin-top:3px;color:rgba(255,255,255,.78)}
+.private-badge{display:inline-flex;gap:7px;align-items:center;border-radius:999px;padding:8px 12px;background:rgba(180,44,54,.13);border:1px solid rgba(180,44,54,.28);color:#fff;font-size:12px}
+@media (max-width: 640px){
+  .safra-title{font-size:27px}
+  .safra-hero{padding:26px 18px;border-radius:24px}
+  .safra-actions{flex-direction:column}
+  .safra-primary,.safra-secondary{justify-content:center;width:100%}
+}
+</style>
+
+
+<style id="safra-checklist-fix">
+.prep-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);
+  color:rgba(255,255,255,.78);font-size:14px;line-height:1.55;
+}
+.prep-item:last-child{border-bottom:0}
+.prep-check{
+  width:24px;height:24px;min-width:24px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.07);color:transparent;
+  display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;margin-top:1px;
+}
+.prep-item.done .prep-check{background:rgba(102,167,142,.25);color:#fff;border-color:rgba(102,167,142,.55)}
+.prep-item.done span{text-decoration:line-through;color:rgba(255,255,255,.45)}
+.prep-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+.prep-actions button{
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);
+  color:#fff;border-radius:14px;padding:10px 12px;font-weight:800;cursor:pointer;
+}
+</style>
+
+
+<style id="safra-polish-pass">
+body{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.view{
+  animation:safraFade .35s ease;
+}
+@keyframes safraFade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.page-head{
+  padding-top:12px;
+}
+.page-head h2{
+  letter-spacing:-0.02em;
+}
+.operation-card,.overview-card,.readiness-card,.finance-card{
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.operation-card:hover,.overview-card:hover{
+  transform:translateY(-2px);
+}
+.tab{
+  backdrop-filter:blur(14px);
+}
+.day-chip{
+  font-weight:700;
+}
+.section-note{
+  line-height:2;
+}
+@media (max-width:640px){
+  .page-head h2{
+    font-size:26px !important;
+    line-height:1.25;
+  }
+  .tab{
+    min-height:54px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="app-header">
+  <div class="app-brand">
+    <div>
+      <div class="brand-title">رحلة إيطاليا <span>2026</span></div>
+      <div class="brand-subtitle">الدليل التشغيلي للعائلة • 8 أشخاص</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;"><div class="italy-flag">🇮🇹</div><div class="header-chip"><i data-lucide="compass"></i></div></div>
+  </div>
+
+  <nav class="top-nav" id="tabsNav">
+    <button class="tab" onclick="switchView('finance', this)"><i data-lucide="lock"></i> المالية</button>
+    
+    <button class="tab" onclick="switchView('cover', this)" id="tab-cover"><i data-lucide="sparkles"></i> الغلاف<small>SAFRA</small></button>
+    <button class="tab" onclick="switchView('overview', this)" id="tab-overview"><i data-lucide="layout-dashboard"></i> ملخص الرحلة <small>16 DAYS</small></button>
+    <button class="tab" onclick="switchView('readiness', this)" id="tab-readiness"><i data-lucide="check-square"></i> التجهيزات <small>READY</small></button>
+    <button class="tab" onclick="switchView('finance', this)" id="tab-finance"><i data-lucide="lock-keyhole"></i> المالية <small>PRIVATE</small></button>
+<button class="tab" onclick="switchView('day1', this)" id="tab-day1"><i data-lucide="map"></i> اليوم 01 <small>11 JUN</small></button>
+    <button class="tab" onclick="switchView('day2', this)" id="tab-day2"><i data-lucide="map"></i> اليوم 02 <small>12 JUN</small></button>
+    <button class="tab" onclick="switchView('day3', this)" id="tab-day3"><i data-lucide="map"></i> اليوم 03 <small>13 JUN</small></button>
+    <button class="tab" onclick="switchView('day4', this)" id="tab-day4"><i data-lucide="mountain-snow"></i> اليوم 04 <small>14 JUN</small></button>
+    <button class="tab" onclick="switchView('day5', this)" id="tab-day5"><i data-lucide="cable-car"></i> اليوم 05 <small>15 JUN</small></button>
+    <button class="tab" onclick="switchView('day6', this)" id="tab-day6"><i data-lucide="waves"></i> اليوم 06 <small>16 JUN</small></button>
+    <button class="tab" onclick="switchView('day7', this)" id="tab-day7"><i data-lucide="car"></i> اليوم 07 <small>17 JUN</small></button>
+    <button class="tab" onclick="switchView('day8', this)" id="tab-day8"><i data-lucide="coffee"></i> اليوم 08 <small>18 JUN</small></button>
+    <button class="tab" onclick="switchView('day9', this)" id="tab-day9"><i data-lucide="train-front"></i> اليوم 09 <small>19 JUN</small></button>
+    <button class="tab" onclick="switchView('day10', this)" id="tab-day10"><i data-lucide="waves"></i> اليوم 10 <small>20 JUN</small></button>
+    <button class="tab" onclick="switchView('day11', this)" id="tab-day11"><i data-lucide="map"></i> اليوم 11 <small>21 JUN</small></button>
+    <button class="tab" onclick="switchView('day12', this)" id="tab-day12"><i data-lucide="route"></i> اليوم 12 <small>22 JUN</small></button>
+    <button class="tab" onclick="switchView('day13', this)" id="tab-day13"><i data-lucide="shopping-bag"></i> اليوم 13 <small>23 JUN</small></button>
+    <button class="tab" onclick="switchView('day14', this)" id="tab-day14"><i data-lucide="sparkles"></i> اليوم 14 <small>24 JUN</small></button>
+    <button class="tab" onclick="switchView('day15', this)" id="tab-day15"><i data-lucide="mountain"></i> اليوم 15 <small>25 JUN</small></button>
+    <button class="tab" onclick="switchView('day16', this)" id="tab-day16"><i data-lucide="plane-takeoff"></i> اليوم 16 <small>26 JUN</small></button>
+  </nav>
+</header>
+
+
+<main id="view-cover" class="view">
+  <div class="safra-hero">
+    <div class="safra-mark">SAFRA</div>
+    <h1 class="safra-title">MASTER ITALIA 2026</h1>
+    <p class="safra-sub">
+      يسعدنا في SAFRA أن نقدم لكم هذا الدليل المصمم بعناية ليكون رفيقكم الهادئ طوال الرحلة.
+      هذا الملف يساعد العائلة على معرفة مسار كل يوم، أهم الأماكن، الأجواء، المطاعم، التنقلات، والتنبيهات المهمة بطريقة مرنة وسهلة.
+      يمكنكم الالتزام بالخطة كما هي أو تعديلها بما يناسب رغبتكم وطاقتكم أثناء السفر.
+    </p>
+    <div class="safra-actions">
+      <button class="safra-primary" onclick="goSmartStart()"><i data-lucide="play"></i> ✈️ دخول الرحلة</button>
+      <button class="safra-secondary" onclick="switchView('readiness', document.getElementById('tab-readiness'))"><i data-lucide="check-square"></i> تجهيز ما قبل السفر</button>
+      <button class="safra-secondary" onclick="switchView('overview', document.getElementById('tab-overview'))"><i data-lucide="layout-dashboard"></i> ملخص الرحلة</button>
+    </div>
+    <div class="day-chip" style="margin-top:18px">
+      <i data-lucide="heart"></i>
+      صُمم هذا الدليل ليمنح العائلة رحلة أكثر هدوءاً وتنظيماً وراحة
+    </div>
+  </div>
+
+  <div class="section-note">
+    قبل بداية الرحلة يفتح الملف على هذا الغلاف وتجهيزات السفر.
+    وعند دخول أيام الرحلة فعلياً، ينقلك زر “دخول الرحلة” مباشرة إلى اليوم الموافق للتاريخ الحالي.
+  </div>
+</main>
+
+
+
+<main id="view-overview" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="layout-dashboard"></i></div>
+    <h2>ملخص الرحلة الكامل</h2>
+    <p>نظرة سريعة من أول يوم إلى يوم العودة</p>
+    <div class="date-line">11–26 June 2026</div>
+  </div>
+  <div class="overview-grid">
+    
+    <div class="overview-card" onclick="switchView(getSafraTarget(), document.getElementById('tab-' + getSafraTarget()))" style="cursor:pointer">
+      <h3>DAY 01 — الوصول إلى ميلانو</h3>
+      <p>Arrival • Duomo soft start</p>
+      <span class="day-chip">11 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day2', document.getElementById('tab-day2'))" style="cursor:pointer">
+      <h3>DAY 02 — كومو وبيلاجيو</h3>
+      <p>Lake Como • Bellagio</p>
+      <span class="day-chip">12 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day3', document.getElementById('tab-day3'))" style="cursor:pointer">
+      <h3>DAY 03 — الانتقال للشمال</h3>
+      <p>Dolomites bound</p>
+      <span class="day-chip">13 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day4', document.getElementById('tab-day4'))" style="cursor:pointer">
+      <h3>DAY 04 — برايس وسان كانديدو</h3>
+      <p>Alpine lakes</p>
+      <span class="day-chip">14 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day5', document.getElementById('tab-day5'))" style="cursor:pointer">
+      <h3>DAY 05 — أورتيسي وريفا</h3>
+      <p>Seceda • Lake Garda</p>
+      <span class="day-chip">15 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day6', document.getElementById('tab-day6'))" style="cursor:pointer">
+      <h3>DAY 06 — ليموني وسيرميوني</h3>
+      <p>Lake Garda villages</p>
+      <span class="day-chip">16 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day7', document.getElementById('tab-day7'))" style="cursor:pointer">
+      <h3>DAY 07 — العودة لميلانو الكبرى</h3>
+      <p>Villa check-in</p>
+      <span class="day-chip">17 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day8', document.getElementById('tab-day8'))" style="cursor:pointer">
+      <h3>DAY 08 — ميلانو وبريرا</h3>
+      <p>Airport logistics • Brera</p>
+      <span class="day-chip">18 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day9', document.getElementById('tab-day9'))" style="cursor:pointer">
+      <h3>DAY 09 — فينيسيا بالقطار</h3>
+      <p>Venice by high-speed train</p>
+      <span class="day-chip">19 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day10', document.getElementById('tab-day10'))" style="cursor:pointer">
+      <h3>DAY 10 — نافيلي راحة</h3>
+      <p>Slow Milan recovery</p>
+      <span class="day-chip">20 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day11', document.getElementById('tab-day11'))" style="cursor:pointer">
+      <h3>DAY 11 — فلورنسا وتوسكانا</h3>
+      <p>Decision day</p>
+      <span class="day-chip">21 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day12', document.getElementById('tab-day12'))" style="cursor:pointer">
+      <h3>DAY 12 — عودة توسكانا / ميلانو</h3>
+      <p>Dynamic recovery</p>
+      <span class="day-chip">22 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day13', document.getElementById('tab-day13'))" style="cursor:pointer">
+      <h3>DAY 13 — سيرافالي</h3>
+      <p>Shopping day</p>
+      <span class="day-chip">23 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day14', document.getElementById('tab-day14'))" style="cursor:pointer">
+      <h3>DAY 14 — ميلانو الراقية</h3>
+      <p>Freedom luxury day</p>
+      <span class="day-chip">24 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day15', document.getElementById('tab-day15'))" style="cursor:pointer">
+      <h3>DAY 15 — لوغانو أو فيرونا</h3>
+      <p>Final escape decision</p>
+      <span class="day-chip">25 Jun</span>
+    </div>
+
+    <div class="overview-card" onclick="switchView('day16', document.getElementById('tab-day16'))" style="cursor:pointer">
+      <h3>DAY 16 — المغادرة</h3>
+      <p>MXP → Jeddah</p>
+      <span class="day-chip">26 Jun</span>
+    </div>
+  </div>
+</main>
+
+
+<main id="view-readiness" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="check-square"></i></div>
+    <h2>تجهيز ما قبل السفر</h2>
+    <p>Checklist تفاعلية لتجهيزات ما قبل السفر</p>
+    <div class="date-line">Before You Fly</div>
+  </div>
+
+  <div class="section-note">
+    هذه القائمة ليست إلزامية بالكامل. هي مرجع يساعد العائلة على عدم نسيان الأساسيات.
+    اختاروا ما يناسبكم، وكل عنصر يمكن تعليمه كـ “تم”.
+  </div>
+
+  <div class="prep-actions">
+    <button onclick="markAllPrep(true)">تحديد الكل تم</button>
+    <button onclick="markAllPrep(false)">إعادة ضبط</button>
+  </div>
+
+  <div class="readiness-grid">
+    <div class="readiness-card"><h3>الوثائق الأساسية</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-1"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>الجوازات الأصلية لجميع المسافرين</span></div><div class="prep-item" data-prep-id="prep-2"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>صور الجوازات محفوظة في الجوال</span></div><div class="prep-item" data-prep-id="prep-3"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>التأشيرات أو متطلبات الدخول إن وجدت</span></div><div class="prep-item" data-prep-id="prep-4"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تذاكر الطيران PDF</span></div><div class="prep-item" data-prep-id="prep-5"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>حجوزات السكن PDF</span></div><div class="prep-item" data-prep-id="prep-6"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تذاكر القطار إن وجدت</span></div><div class="prep-item" data-prep-id="prep-7"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تأمين السفر</span></div><div class="prep-item" data-prep-id="prep-8"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>بطاقات بنكية احتياطية</span></div></div></div><div class="readiness-card"><h3>الجوال والطاقة</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-9"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>شاحن جوال لكل شخص</span></div><div class="prep-item" data-prep-id="prep-10"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>Power Bank مشحون</span></div><div class="prep-item" data-prep-id="prep-11"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>محول كهرباء أوروبي</span></div><div class="prep-item" data-prep-id="prep-12"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>كيابل احتياطية</span></div><div class="prep-item" data-prep-id="prep-13"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تحميل خرائط Google Offline</span></div><div class="prep-item" data-prep-id="prep-14"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تفعيل eSIM أو التجوال</span></div><div class="prep-item" data-prep-id="prep-15"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>حفظ أرقام السائق والسكن</span></div></div></div><div class="readiness-card"><h3>الحقائب والملابس</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-16"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>أحذية مشي مريحة</span></div><div class="prep-item" data-prep-id="prep-17"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>نظارات شمسية</span></div><div class="prep-item" data-prep-id="prep-18"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>قبعات</span></div><div class="prep-item" data-prep-id="prep-19"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>جاكيت خفيف</span></div><div class="prep-item" data-prep-id="prep-20"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>ملابس صيفية قطنية</span></div><div class="prep-item" data-prep-id="prep-21"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>ملابس أنيقة للعشاء</span></div><div class="prep-item" data-prep-id="prep-22"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>شنطة يومية صغيرة</span></div><div class="prep-item" data-prep-id="prep-23"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>أقفال وأسماء على الحقائب</span></div></div></div><div class="readiness-card"><h3>الصحة والعناية</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-24"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>الأدوية الشخصية</span></div><div class="prep-item" data-prep-id="prep-25"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مسكنات بسيطة</span></div><div class="prep-item" data-prep-id="prep-26"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>لاصق جروح</span></div><div class="prep-item" data-prep-id="prep-27"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>واقي شمس</span></div><div class="prep-item" data-prep-id="prep-28"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مرطب شفاه</span></div><div class="prep-item" data-prep-id="prep-29"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مناديل مبللة</span></div><div class="prep-item" data-prep-id="prep-30"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>معقم يدين</span></div><div class="prep-item" data-prep-id="prep-31"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>أدوية دوار الحركة لمن يحتاج</span></div></div></div><div class="readiness-card"><h3>المطار والـ Tax Free</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-32"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>وزن الحقائب قبل السفر</span></div><div class="prep-item" data-prep-id="prep-33"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>فصل السوائل أقل من 100ml</span></div><div class="prep-item" data-prep-id="prep-34"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>حقيبة يد للمشتريات الثمينة</span></div><div class="prep-item" data-prep-id="prep-35"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>ملف خاص لفواتير Tax-Free</span></div><div class="prep-item" data-prep-id="prep-36"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تصوير الفواتير المهمة</span></div><div class="prep-item" data-prep-id="prep-37"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>عدم شحن المشتريات قبل ختم التاكس فري</span></div></div></div><div class="readiness-card"><h3>راحة العائلة</h3><div class="checklist"><div class="prep-item" data-prep-id="prep-38"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>الاتفاق على نقطة تجمع يومية</span></div><div class="prep-item" data-prep-id="prep-39"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>شرب الماء باستمرار</span></div><div class="prep-item" data-prep-id="prep-40"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>عدم ضغط الجدول عند التعب</span></div><div class="prep-item" data-prep-id="prep-41"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>تخصيص فترات راحة</span></div><div class="prep-item" data-prep-id="prep-42"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>مراعاة كبار السن أو المتعبين</span></div><div class="prep-item" data-prep-id="prep-43"><button class="prep-check" onclick="togglePrep(this)">✓</button><span>إلغاء أي نشاط عند الإرهاق بدون تردد</span></div></div></div>
+  </div>
+</main>
+
+
+<main id="view-finance" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="lock-keyhole"></i></div>
+    <h2>الصفحة المالية الخاصة</h2>
+    <p>Private financial layer — يتم تعبئتها لاحقاً بالأرقام النهائية</p>
+    <div class="date-line">Confidential</div>
+  </div>
+  <div class="section-note">
+    هذه الصفحة مخصصة لاحقاً للتكاليف الإجمالية، تكلفة الفرد، المدفوع، المتبقي، السكن، السائق، التذاكر، والمستحقات.
+    يمكن جعلها برقم سري في النسخة النهائية عند توفر الأرقام المؤكدة.
+  </div>
+  <div class="finance-grid">
+    <div class="finance-card"><span class="private-badge"><i data-lucide="lock"></i> خاص</span><h3>إجمالي الرحلة</h3><p>يضاف لاحقاً بعد تثبيت جميع الحجوزات.</p></div>
+    <div class="finance-card"><span class="private-badge"><i data-lucide="user"></i> للفرد</span><h3>تكلفة الشخص الواحد</h3><p>تحسب بناءً على عدد المسافرين وإجمالي التكلفة.</p></div>
+    <div class="finance-card"><span class="private-badge"><i data-lucide="hotel"></i> السكن</span><h3>الفنادق والفلل</h3><p>مدفوع / متبقي / تواريخ الاستحقاق.</p></div>
+    <div class="finance-card"><span class="private-badge"><i data-lucide="car"></i> النقل</span><h3>السائق والتنقلات</h3><p>قيمة العقد، التغطية، والمدفوعات.</p></div>
+  </div>
+</main>
+
+<main id="view-day1" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="map-pin"></i></div>
+    <h2>ميلانو</h2>
+    <p>ليلتين • 11 June → 13 June</p>
+    <div class="date-line">الخميس — 11 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="cloud-sun"></i><b>24° / 16°</b><span>الطقس</span></div>
+    <div class="quick-item"><i data-lucide="train-front"></i><b>Metro M1</b><span>المساء</span></div>
+    <div class="quick-item"><i data-lucide="badge-euro"></i><b>72€</b><span>مطلوب</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>Driver</b><span>نشط</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:05 PM</div>
+      <div class="card-title"><h3>الوصول والمطار</h3><p>MXP Terminal 1 • Saudia SV211</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="plane-landing"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الجوازات والأمتعة</h4><p>ختم الجوازات واستلام الحقائب. المتوقع للخروج 45–90 دقيقة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الإنترنت ودورة المياه</h4><p>تفعيل التجوال قبل بوابة الخروج لضمان التواصل.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>اللقاء بالسائق</h4><p>السائق بانتظار العائلة، والفان هو الخيار المناسب للحقائب و8 أشخاص.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Malpensa+Airport+Terminal+1"><i data-lucide="navigation"></i> فتح مطار مالبينسا T1</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">04:00 PM</div>
+      <div class="card-title"><h3>السكن واللوجستيات</h3><p>RELSTAY Vercelli Suites</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="building-2"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="shopping-basket"></i></span><div class="step-content"><h4>توقف سوبرماركت سريع</h4><p>شراء ماء وسناكات وقهوة قبل دخول السكن.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="key-round"></i></span><div class="step-content"><h4>تسجيل الدخول</h4><p>الحجز مدفوع بالكامل، وتوزيع 4 غرف للعائلة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="badge-euro"></i><div class="box-text"><strong>مطلوب الدفع</strong>72€ كاش — ضريبة المدينة فقط.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>ممنوع النوم</strong>راحة 45–60 دقيقة فقط، ثم الخروج لتفادي Jet Lag.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=RELSTAY+Vercelli+Suites+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">06:00 PM</div>
+      <div class="card-title"><h3>جولة الدومو</h3><p>Duomo • Galleria • Rinascente</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="train-front"></i></span><div class="step-content"><h4>المترو M1</h4><p>Conciliazione إلى Duomo — 4 محطات مباشرة بدون تبديل.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>المسار</h4><p>الدومو، الغاليريا، ثم ريناتشينتي بشكل خفيف بدون إجهاد.</p></div></li>
+      </ul>
+      <div class="btn-grid">
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Conciliazione+Metro+Milano"><i data-lucide="train-front"></i> المترو</a>
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Duomo+di+Milano"><i data-lucide="navigation"></i> الدومو</a>
+      </div>
+      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Rinascente+Milano+Piazza+Duomo"><i data-lucide="shopping-bag"></i> Rinascente</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:00 PM</div>
+      <div class="card-title"><h3>القهوة والعشاء</h3><p>Marchesi / Starbucks Reserve • Spontini</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>القهوة</h4><p>Marchesi 1824 أو Starbucks Reserve حسب قربهم وازدحام المكان.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>العشاء المقترح</h4><p>Spontini Duomo — سريع ومناسب لأول يوم ولا يحتاج حجز.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="moon"></i></span><div class="step-content"><h4>العودة</h4><p>العودة بالمترو للسكن والنوم مبكرًا استعدادًا لكومو.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Spontini+Duomo+Milano"><i data-lucide="navigation"></i> فتح Spontini</a>
+    </div>
+  </div>
+</main>
+
+
+<main id="view-day2" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="waves"></i></div>
+    <h2>كومو وبيلاجيو</h2>
+    <p>رحلة يوم كامل • الليلة الثانية في ميلانو</p>
+    <div class="date-line">الجمعة — 12 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="cloud-sun"></i><b>26° / 16°</b><span>الطقس</span></div>
+    <div class="quick-item"><i data-lucide="ship"></i><b>Ferry</b><span>العبّارة</span></div>
+    <div class="quick-item"><i data-lucide="badge-euro"></i><b>120–150€</b><span>احتياط</span></div>
+    <div class="quick-item"><i data-lucide="footprints"></i><b>متوسط</b><span>الحركة</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 AM</div>
+      <div class="card-title"><h3>الانطلاق من ميلانو</h3><p>RELSTAY → Como • الطريق السريع A9</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>التحرك المبكر</h4><p>الخروج من السكن باتجاه مدينة كومو. المدة المتوقعة 50–60 دقيقة حسب الحركة الصباحية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="briefcase"></i></span><div class="step-content"><h4>تجهيزات اليوم</h4><p>ماء، نظارات شمسية، جاكيت خفيف للبحيرة، جوالات مشحونة، وكاش بسيط احتياطي.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="sparkles"></i></span><div class="step-content"><h4>هدف التوقيت</h4><p>الوصول قبل الذروة الصباحية لتسهيل تذاكر العبّارة والاستمتاع بكومو بهدوء.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=RELSTAY+Vercelli+Suites+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:30 AM</div>
+      <div class="card-title"><h3>مرفأ كومو والتذاكر</h3><p>Navigazione Lago di Como • قبل الازدحام</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ticket"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="ticket"></i></span><div class="step-content"><h4>تذاكر العبّارة السريعة</h4><p>اختيار Hydrofoil / Rapido باتجاه Bellagio، لأنها تختصر الوقت وتعطي تجربة أريح للعائلة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="timer"></i></span><div class="step-content"><h4>المدة المتوقعة</h4><p>20–30 دقيقة حسب الطابور. بعد 10 صباحاً يزيد الازدحام بشكل واضح.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="circle-alert"></i></span><div class="step-content"><h4>تجنب العبّارة البطيئة</h4><p>Battello تتوقف في قرى كثيرة وقد تستغرق وقتاً طويلاً. اليوم مبني على العبّارة السريعة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="badge-euro"></i><div class="box-text"><strong>مبلغ احتياطي</strong>يفضل تجهيز 120–150€ لتذاكر العبّارة في حال تعطل الدفع بالبطاقة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Navigazione+Lago+di+Como+Piazza+Cavour"><i data-lucide="navigation"></i> فتح مرفأ كومو</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:00 AM</div>
+      <div class="card-title"><h3>COMO EXPERIENCE</h3><p>سنتر كومو • ساحة الكاتدرائية • قهوة خفيفة</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="church"></i></span><div class="step-content"><h4>Piazza del Duomo</h4><p>ساحة جميلة قرب الكاتدرائية، مناسبة لجلسة هادئة أو قهوة وجيلاتو، وأحياناً تكون فيها أجواء موسيقى شارع خفيفة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>VIK&amp;A Waffles Drinks</h4><p>قهوة مختصة ووافل وسويت داخل سنتر كومو، مناسبة كاستراحة صباحية أو جلسة خفيفة أثناء التمشية قرب الساحة والكنيسة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>مطعم تايلندي قريب</h4><p>خيار آسيوي مناسب لمحبي الأكل التايلندي داخل كومو، ويمكن اعتماده كغداء أو عشاء بديل إذا فضلت العائلة البقاء في كومو.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Meat Crew Como</h4><p>مطعم برجر ولحم بقري، خيار عملي إذا قررت العائلة البقاء في كومو للغداء أو العشاء بدل بيلاجيو.</p></div></li>
+      </ul>
+      <div class="btn-grid">
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Piazza+del+Duomo+Como"><i data-lucide="map-pin"></i> ساحة الكاتدرائية</a>
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=VIK%26A+Waffles+Drinks+Como"><i data-lucide="coffee"></i> VIK&amp;A</a>
+      </div>
+      <div class="btn-grid">
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Thai+restaurant+near+VIK%26A+Waffles+Drinks+Como"><i data-lucide="utensils"></i> المطعم التايلندي</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Meat+Crew+Como"><i data-lucide="utensils"></i> Meat Crew</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">11:30 AM</div>
+      <div class="card-title"><h3>العبّارة إلى بيلاجيو</h3><p>Como → Bellagio • تجربة البحيرة</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ship"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="waves"></i></span><div class="step-content"><h4>الإبحار السريع</h4><p>المدة 45–50 دقيقة تقريباً، مع إطلالات جميلة على الفلل والجبال المحيطة بالبحيرة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>التصوير</h4><p>يمكن الصعود للسطح للتصوير عند توفر المساحة، مع الانتباه للهواء البارد أثناء الحركة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="jacket"></i></span><div class="step-content"><h4>الملابس</h4><p>الجاكيت الخفيف مناسب على سطح العبّارة فقط، خصوصاً لمن يتأثر بنسمات البحيرة.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Como+Traghetto+Pier"><i data-lucide="navigation"></i> فتح رصيف كومو</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">12:30 PM</div>
+      <div class="card-title"><h3>BELLAGIO EXPERIENCE</h3><p>القرية • الغداء • الممرات الحجرية</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="trees"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="map-pin"></i></span><div class="step-content"><h4>الواجهة السفلية</h4><p>الممشى المطل على البحيرة مريح وهادئ، ومناسب كبداية قبل الدخول للممرات الحجرية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="footprints"></i></span><div class="step-content"><h4>الممرات العلوية</h4><p>تحتاج مشياً أكثر وفيها درجات حجرية. المسار العلوي اختياري لمحبي التصوير والتمشية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Ristorante Bilacus</h4><p>مطعم إيطالي جميل داخل القرية، مناسب للغداء وجلسة أطول إذا توفر مكان مناسب للعائلة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="ice-cream"></i></span><div class="step-content"><h4>Gelateria del Borgo</h4><p>جيلاتو مشهور داخل الممرات الحجرية، مناسب بعد الغداء وأثناء التمشية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Café Classique</h4><p>خيار جلسة خفيفة قريب من البحيرة للقهوة أو سناك سريع.</p></div></li>
+      </ul>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Bellagio+Lake+Como+Italy"><i data-lucide="navigation"></i> Bellagio</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Ristorante+Bilacus+Bellagio"><i data-lucide="utensils"></i> Bilacus</a>
+      </div>
+      <div class="btn-grid">
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+del+Borgo+Bellagio"><i data-lucide="ice-cream"></i> Gelato</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Cafe+Classique+Bellagio"><i data-lucide="coffee"></i> Café Classique</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">OPTION</div>
+      <div class="card-title"><h3>خيار بديل: البقاء في كومو</h3><p>Como Relax Day • بدون بيلاجيو</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="sparkles"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="waves"></i></span><div class="step-content"><h4>جلسات البحيرة</h4><p>الاكتفاء بكومو خيار ممتاز إذا رغبت العائلة بيوم أهدأ وحركة أقل.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="sailboat"></i></span><div class="step-content"><h4>Como On Boat</h4><p>تجربة اختيارية لقارب خاص داخل البحيرة، مناسبة للتصوير والهدوء ورؤية الفلل من الماء.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="landmark"></i></span><div class="step-content"><h4>سنتر كومو</h4><p>ساحة الكاتدرائية، القهوة والوافل، المطعم التايلندي، البرجر، والتسوق الخفيف — كلها قريبة ومريحة داخل كومو.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Como+On+Boat"><i data-lucide="navigation"></i> Como On Boat</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">04:30 PM</div>
+      <div class="card-title"><h3>العودة إلى كومو</h3><p>Bellagio → Como • ثم ميلانو</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="rotate-ccw"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>الوصول المبكر للرصيف</h4><p>التواجد قبل موعد العبّارة بـ 20 دقيقة، لأن رحلات العودة تكون أكثر ازدحاماً.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="message-circle"></i></span><div class="step-content"><h4>تنسيق العودة</h4><p>إرسال وقت الوصول المتوقع للسائق ليكون قريباً من نقطة الإنزال في كومو.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="car"></i></span><div class="step-content"><h4>العودة إلى ميلانو</h4><p>بعد الوصول لكومو، ركوب الفان والعودة للسكن. المتوقع الوصول حوالي 06:30 PM.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Bellagio+Traghetto+Pier"><i data-lucide="navigation"></i> فتح مرفأ Bellagio</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:00 PM</div>
+      <div class="card-title"><h3>نهاية اليوم</h3><p>راحة وتجهيز لليوم التالي</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="bed"></i></span><div class="step-content"><h4>راحة في السكن</h4><p>العودة للفندق، تبديل الملابس، وراحة هادئة بعد يوم البحيرة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="luggage"></i></span><div class="step-content"><h4>تجهيز الشنط</h4><p>غداً تسجيل خروج نهائي من ميلانو، لذلك تُجهز الحقائب والملابس الليلة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="mountain"></i></span><div class="step-content"><h4>الاستعداد للشمال</h4><p>اليوم التالي انتقال أطول باتجاه الدولوميت وبرونيكو، والنوم المبكر مهم جداً.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه الغد</strong>تسجيل خروج من ميلانو والانطلاق شمالاً، لذلك الأفضل إغلاق الشنط قبل النوم.</div></div>
+    </div>
+  </div>
+</main>
+
+
+
+
+<main id="view-day3" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="mountain-snow"></i></div>
+    <h2>برونيكو • الدولوميت</h2>
+    <p>مغادرة ميلانو والدخول إلى شمال إيطاليا • الليلة الأولى في برونيكو</p>
+    <div class="date-line">السبت — 13 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="cloud-sun"></i><b>19° / 9°</b><span>طقس جبلي</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>3:45h</b><span>قيادة صافية</span></div>
+    <div class="quick-item"><i data-lucide="shopping-cart"></i><b>Interspar</b><span>ضروري اليوم</span></div>
+    <div class="quick-item"><i data-lucide="shirt"></i><b>طبقات</b><span>جاكيت دافئ</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 AM</div>
+      <div class="card-title"><h3>تسجيل الخروج من ميلانو</h3><p>RELSTAY Vercelli Suites • تحميل الأمتعة</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="hotel"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="key-round"></i></span><div class="step-content"><h4>إنهاء السكن</h4><p>تسليم مفاتيح الغرف وإنهاء الخروج من السكن قبل الانطلاق باتجاه الشمال الإيطالي.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="luggage"></i></span><div class="step-content"><h4>تحميل الشنط</h4><p>تحميل الحقائب الكبيرة داخل السيارة بشكل مرتب، مع إبقاء الجاكيتات والشواحن والجوازات في متناول اليد.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="search-check"></i></span><div class="step-content"><h4>مراجعة أخيرة</h4><p>التأكد من عدم نسيان الشواحن، الباور بانك، الأدوية، أو أي مقتنيات ثمينة داخل الغرف والخزنات.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="clock-3"></i><div class="box-text"><strong>مهم</strong>الانطلاق في الوقت المحدد يساعد على الوصول إلى برونيكو قبل برودة المساء وإغلاق المتاجر.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=RELSTAY+Vercelli+Suites+Milano"><i data-lucide="navigation"></i> فتح موقع السكن</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:15 AM</div>
+      <div class="card-title"><h3>الطريق السريع والتوقف الأول</h3><p>Milan → A4 / A22 • استراحة طريق</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="road"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="car-front"></i></span><div class="step-content"><h4>بداية الطريق الطويل</h4><p>الخروج من ميلانو باتجاه الشمال عبر الطرق السريعة الحديثة. اليوم انتقالي ومريح داخل السيارة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Autogrill Brianza Nord</h4><p>توقف قصير للقهوة الإيطالية، دورات المياه، وشراء ماء وسناكات خفيفة قبل استكمال الطريق.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="battery-charging"></i></span><div class="step-content"><h4>شحن الأجهزة</h4><p>استغلال وقت الطريق لشحن الجوالات والكاميرات استعداداً للمناطق الجبلية.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="route"></i><div class="box-text"><strong>المسار العام</strong>A4 ثم A22 باتجاه الشمال، وبعدها طريق SS49 باتجاه وادي بوستيريا وبرونيكو.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Autogrill+Brianza+Nord+A4"><i data-lucide="navigation"></i> فتح استراحة الطريق</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">12:00 PM</div>
+      <div class="card-title"><h3>ترينتو • الغداء والتوقف الجبلي</h3><p>Trento Centro • Piazza Duomo</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="map-pin"></i></span><div class="step-content"><h4>سنتر ترينتو</h4><p>توقف جميل في مدينة ترينتو التاريخية للغداء وتمشية خفيفة قبل دخول أجواء الدولوميت بالكامل.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="trees"></i></span><div class="step-content"><h4>بداية تغير الأجواء</h4><p>من هذه المرحلة تبدأ الجبال والمروج بالظهور، ويصبح الهواء ألطف وأبرد من ميلانو.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Forsterbräu Trento</h4><p>مطعم واسع ومناسب للتوقف العائلي، بأجواء شمالية دافئة وأطباق إيطالية وتيرولية متنوعة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Pasticceria San Vigilio</h4><p>خيار قهوة وحلويات قريب من الساحة، مناسب لتجربة Apple Strudel أو كابتشينو سريع أثناء التمشية.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="shirt"></i><div class="box-text"><strong>تغير الطقس</strong>يفضل إخراج الجاكيتات الخفيفة قبل النزول لأن الحرارة تبدأ بالانخفاض تدريجياً.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+Duomo+Trento"><i data-lucide="navigation"></i> سنتر ترينتو</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Forsterbr%C3%A4u+Trento"><i data-lucide="utensils"></i> Forsterbräu</a>
+      </div>
+      <div class="btn-grid">
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Pasticceria+San+Vigilio+Trento"><i data-lucide="coffee"></i> San Vigilio</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Parcheggio+Piazza+Fiera+Trento"><i data-lucide="parking-circle"></i> موقف قريب</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:30 PM</div>
+      <div class="card-title"><h3>الدخول إلى الدولوميت</h3><p>Trento → Brunico / Bruneck</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="mountain"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="route"></i></span><div class="step-content"><h4>المسار البانورامي</h4><p>استكمال الطريق شمالاً عبر A22 ثم باتجاه وادي بوستيريا وصولاً إلى برونيكو.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>المشاهد الطبيعية</h4><p>الطريق مليء بالمروج والقرى التيرولية والجبال، لذلك يفضل إبقاء الكاميرات جاهزة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="tunnel"></i></span><div class="step-content"><h4>الطريق</h4><p>الطريق ممهد وحديث، مع أنفاق جبلية ومقاطع طويلة بين الجبال.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="gauge"></i><div class="box-text"><strong>ملاحظة قيادة</strong>طريق A22 يحتوي أنظمة رصد سرعة، لذلك الالتزام بالسرعة يعطي رحلة أهدأ وأكثر سلاسة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Brunico+Bruneck+Italy"><i data-lucide="navigation"></i> فتح برونيكو</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">04:30 PM</div>
+      <div class="card-title"><h3>الوصول والسوبرماركت</h3><p>Brunico • Interspar</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="shopping-cart"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="package"></i></span><div class="step-content"><h4>تأمين الاحتياجات</h4><p>التوقف في السوبرماركت لتأمين احتياجات الأيام الجبلية قبل إغلاق المتاجر مساءً.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="shopping-basket"></i></span><div class="step-content"><h4>مشتريات مقترحة</h4><p>ماء، فواكه، خبز، حليب، قهوة، أجبان، مناديل، وسناكات للجولات الصباحية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="calendar-alert"></i></span><div class="step-content"><h4>مهم جداً</h4><p>الكثير من متاجر الشمال تغلق يوم الأحد، لذلك لا يفضل تأجيل التسوق إلى الغد.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="clock"></i><div class="box-text"><strong>إغلاق مبكر</strong>يفضل إنهاء التسوق فور الوصول، لأن محلات المدن الجبلية تغلق مبكراً مقارنة بميلانو.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Interspar+Brunico+Bruneck"><i data-lucide="navigation"></i> فتح Interspar Brunico</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">06:30 PM</div>
+      <div class="card-title"><h3>جولة برونيكو المسائية</h3><p>Via Centrale / Stadtgasse • عشاء دافئ</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="lamp"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="footprints"></i></span><div class="step-content"><h4>تمشية هادئة</h4><p>جولة قصيرة في الشارع التاريخي وسط البيوت التيرولية الملونة والأجواء الجبلية الباردة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Weisses Lamm</h4><p>مطعم دافئ داخل السنتر، مناسب لعشاء مريح بعد يوم الطريق.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="ice-cream"></i></span><div class="step-content"><h4>Gelateria Amatis</h4><p>خيار لطيف للجيلاتو أو قهوة خفيفة أثناء التمشية إن كان الوقت مناسباً.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="shirt"></i><div class="box-text"><strong>المساء بارد</strong>بعد غياب الشمس تنخفض الحرارة سريعاً، لذلك الجاكيت الدافئ مهم أثناء التمشية.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Via+Centrale+Brunico"><i data-lucide="navigation"></i> سنتر برونيكو</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Weisses+Lamm+Brunico"><i data-lucide="utensils"></i> Weisses Lamm</a>
+      </div>
+      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+Amatis+Brunico"><i data-lucide="ice-cream"></i> Gelateria Amatis</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:00 PM</div>
+      <div class="card-title"><h3>نهاية اليوم</h3><p>استقرار في برونيكو • تجهيز ليوم برايس</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="bed"></i></span><div class="step-content"><h4>الاستقرار</h4><p>العودة للسكن وترتيب الغرف بعد يوم الانتقال الطويل.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="battery-charging"></i></span><div class="step-content"><h4>تجهيز التصوير</h4><p>شحن الجوالات والكاميرات وتجهيز بطاقات الذاكرة ليوم الطبيعة التالي.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="mountain-snow"></i></span><div class="step-content"><h4>الغد</h4><p>زيارة Lago di Braies والمناطق الجبلية القريبة، لذلك النوم المبكر مهم.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="shirt"></i><div class="box-text"><strong>تجهيز الملابس</strong>يفضل تجهيز أحذية مريحة وجاكيتات دافئة لليوم التالي.</div></div>
+    </div>
+  </div>
+</main>
+
+
+<main id="view-day4" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="mountain-snow"></i></div>
+    <h2>بحيرة برايس • سان كانديدو</h2>
+    <p>الليلة الثانية في برونيكو • Lago di Braies + San Candido + Loacker</p>
+    <div class="date-line">الأحد — 14 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>20° / 8°</b><span>طقس جبلي</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>30 min</b><span>إلى برايس</span></div>
+    <div class="quick-item"><i data-lucide="ship-wheel"></i><b>Boats</b><span>اختياري</span></div>
+    <div class="quick-item"><i data-lucide="shirt"></i><b>Windbreaker</b><span>مهم</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 AM</div>
+      <div class="card-title"><h3>الانطلاق إلى بحيرة برايس</h3><p>Brunico → Lago di Braies</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>التحرك المبكر</h4><p>الانطلاق من برونيكو باتجاه Lago di Braies. الوصول المبكر مهم لتجنب ازدحام مواقف البحيرة والحافلات السياحية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="route"></i></span><div class="step-content"><h4>مدة الطريق</h4><p>حوالي 30 دقيقة عبر طريق جبلي ممهد ومناظر طبيعية هادئة داخل وادي برايس.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="backpack"></i></span><div class="step-content"><h4>تجهيزات قبل النزول</h4><p>جاكيت مقاوم للهواء، أحذية مشي ثابتة، ماء، نظارات شمسية، وشحن الجوالات للتصوير.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="triangle-alert"></i><div class="box-text"><strong>تنبيه المواقف</strong>في موسم الصيف قد يتم تقييد دخول السيارات بعد امتلاء المواقف، لذلك الالتزام بالانطلاق المبكر مهم جداً.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Lago+di+Braies"><i data-lucide="navigation"></i> بحيرة برايس</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Lago+di+Braies+Parking+P2"><i data-lucide="parking-circle"></i> موقف P2</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:00 AM</div>
+      <div class="card-title"><h3>تجربة البحيرة والقوارب</h3><p>Pragser Wildsee • The Boathouse</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ship-wheel"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>أفضل نقطة تصوير</h4><p>الكوخ الخشبي والرصيف أمام البحيرة يعطيان أجمل زاوية للصور مع انعكاس الجبال والمياه الفيروزية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="ship-wheel"></i></span><div class="step-content"><h4>القوارب الخشبية</h4><p>يمكن استئجار القوارب الكلاسيكية حسب توفرها. القارب عادة يناسب مجموعة صغيرة، ويمكن تقسيم العائلة على أكثر من قارب.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="footprints"></i></span><div class="step-content"><h4>المشي حول البحيرة</h4><p>المشي حول البحيرة اختياري بالكامل، ويمكن الاكتفاء بالمناطق القريبة من الرصيف والمقهى لمن يفضل جهداً أخف.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="wind"></i></span><div class="step-content"><h4>الهواء حول البحيرة</h4><p>الهواء يكون بارداً قرب المياه وفي القارب، والجاكيت الخفيف يجعل التجربة أكثر راحة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>السلامة في القارب</strong>يفضل البقاء جالساً أثناء حركة القارب والانتباه عند النزول والصعود من الرصيف.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=The+Boathouse+Lago+di+Braies"><i data-lucide="navigation"></i> موقع القوارب الخشبية</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">12:00 PM</div>
+      <div class="card-title"><h3>الانتقال إلى سان كانديدو</h3><p>Lago di Braies → San Candido / Innichen</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="map-pinned"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="car-front"></i></span><div class="step-content"><h4>طريق قصير</h4><p>التحرك شرقاً باتجاه سان كانديدو. الطريق حوالي 25 دقيقة وسط أجواء تيرولية هادئة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="landmark"></i></span><div class="step-content"><h4>السنتر التاريخي</h4><p>البلدة ذات طابع إيطالي نمساوي جميل، مناسبة للغداء والتمشية بين الشارع الرئيسي ومحلات الهدايا والقهوة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="parking-circle"></i></span><div class="step-content"><h4>المواقف</h4><p>الأفضل الوقوف في المواقف العامة القريبة من منطقة المشاة، ثم الدخول للسنتر مشياً.</p></div></li>
+      </ul>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=San+Candido+Bolzano+Italy"><i data-lucide="navigation"></i> San Candido</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Parking+San+Candido+Zentrum"><i data-lucide="parking-circle"></i> موقف السنتر</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">12:30 PM</div>
+      <div class="card-title"><h3>الغداء في سان كانديدو</h3><p>Ristorante Central • جلسة عائلية</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="utensils"></i></span><div class="step-content"><h4>Ristorante Central</h4><p>مطعم عائلي في قلب السنتر، مناسب للباستا والبيتزا والأطباق الدافئة بعد جولة البحيرة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="clock"></i></span><div class="step-content"><h4>المدة المقترحة</h4><p>ساعة إلى ساعة ونصف للغداء والراحة قبل زيارة Loacker أو إكمال التمشية في البلدة.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Central+San+Candido"><i data-lucide="navigation"></i> فتح Ristorante Central</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:30 PM</div>
+      <div class="card-title"><h3>Loacker Moccaria</h3><p>قهوة • ويفر • هدايا شوكولاتة</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cookie"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="cookie"></i></span><div class="step-content"><h4>تجربة Loacker</h4><p>زيارة بوتيك ومقهى Loacker، تجربة الحلويات الطازجة وشراء علب الشوكولاتة والويفر كهدايا.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>القهوة والحلويات</h4><p>جلسة مريحة للقهوة أو الكابتشينو مع حلويات Loacker داخل المقهى الرسمي.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="gift"></i></span><div class="step-content"><h4>المشتريات</h4><p>يفضل شراء الهدايا الخفيفة هنا لأن الخيارات أكبر من المتاجر العامة.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Loacker+Moccaria+San+Candido"><i data-lucide="navigation"></i> فتح Loacker Moccaria</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">04:30 PM</div>
+      <div class="card-title"><h3>العودة إلى برونيكو</h3><p>San Candido → Brunico • Castello di Brunico اختياري</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="castle"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="car"></i></span><div class="step-content"><h4>طريق العودة</h4><p>العودة من سان كانديدو إلى برونيكو. الطريق حوالي 35 دقيقة ويكون مريحاً في نهاية اليوم.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="castle"></i></span><div class="step-content"><h4>قلعة برونيكو</h4><p>إذا كان الوقت والطاقة مناسبين، يمكن عمل جولة تصوير خفيفة حول Castello di Brunico وقت العصر.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="camera"></i></span><div class="step-content"><h4>إطلالة العصر</h4><p>المنطقة المحيطة بالقلعة تعطي إطلالة جميلة على الوادي والبيوت الجبلية.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="footprints"></i><div class="box-text"><strong>ملاحظة مشي</strong>الوصول للقلعة يتضمن صعوداً خفيفاً، ويمكن الاكتفاء بالسنتر إذا فضلت العائلة الراحة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Brunico+Castle"><i data-lucide="navigation"></i> فتح قلعة برونيكو</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:30 PM</div>
+      <div class="card-title"><h3>عشاء خفيف في برونيكو</h3><p>Pasticceria Gatterer أو وجبة من السكن</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="coffee"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="coffee"></i></span><div class="step-content"><h4>Pasticceria Gatterer</h4><p>خيار هادئ في سنتر برونيكو للقهوة والحلويات أو وجبة خفيفة بعد يوم الطبيعة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="cover"></i></span><div class="step-content"><h4>خيار السكن</h4><p>يمكن الاكتفاء بوجبة خفيفة ومشروبات دافئة داخل السكن من مشتريات اليوم السابق.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Pasticceria+Gatterer+Brunico"><i data-lucide="navigation"></i> فتح Pasticceria Gatterer</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 PM</div>
+      <div class="card-title"><h3>نهاية اليوم</h3><p>راحة وتجهيز لمغادرة برونيكو</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon"><i data-lucide="bed"></i></span><div class="step-content"><h4>راحة مبكرة</h4><p>العودة للسكن والاسترخاء بعد يوم طويل بين البحيرة والقرى الجبلية.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="luggage"></i></span><div class="step-content"><h4>تجهيز الحقائب</h4><p>غداً مغادرة برونيكو، لذلك يفضل ترتيب الشنط وتجهيز ملابس الطريق من الليلة.</p></div></li>
+        <li class="step"><span class="step-icon"><i data-lucide="battery-charging"></i></span><div class="step-content"><h4>شحن الأجهزة</h4><p>شحن الجوالات والكاميرات والباور بانك استعداداً ليوم أورتيسي وريفا ديل غاردا.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="route"></i><div class="box-text"><strong>الغد</strong>مغادرة برونيكو والتوجه إلى Ortisei ثم النزول نحو Riva del Garda، لذلك النوم المبكر مهم.</div></div>
+    </div>
+  </div>
+</main>
+
+
+
+
+<main id="view-day5" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="cable-car"></i></div>
+    <h2>أورتيسي • ريفا ديل غاردا</h2>
+    <p>مغادرة برونيكو، صعود سيسيدا، ثم الانتقال إلى بحيرة غاردا</p>
+    <div class="date-line">الاثنين — 15 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="cloud-sun"></i><b>18° / 25°</b><span>جبل / بحيرة</span></div>
+    <div class="quick-item"><i data-lucide="shirt"></i><b>Layering</b><span>جاكيت للقمة</span></div>
+    <div class="quick-item"><i data-lucide="footprints"></i><b>متوسط</b><span>المشي</span></div>
+    <div class="quick-item"><i data-lucide="cover"></i><b>Casa Amrita</b><span>ليلة أولى</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 AM</div>
+      <div class="card-title"><h3>تسجيل الخروج والانطلاق إلى أورتيسي</h3><p>Brunico → Ortisei / Val Gardena</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تجهيز الخروج</h4><p>إنهاء Check-out من برونيكو وتحميل شنط 8 أشخاص داخل الفان بشكل مرتب.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>إبقاء الجاكيتات</h4><p>الجاكيتات الثقيلة تبقى داخل كابينة السيارة وليست مع الشنط لأن القمة باردة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الطريق الجبلي</h4><p>رحلة جبلية مريحة باتجاه وادي غاردينا ومناظر الدولوميت.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة التقريبية ساعة واحدة قيادة.</div></div>
+
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ortisei+Bolzano+Italy"><i data-lucide="navigation"></i> فتح أورتيسي</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:45 AM</div>
+      <div class="card-title"><h3>صعود تلفريك سيسيدا</h3><p>Funivie Seceda Ortisei • قمة 2,500m</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cable-car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>شراء التذاكر والصعود</h4><p>الصعود على مرحلتين بتلفريك مغلق ومريح للعائلة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>المشي فوق الهضبة</h4><p>تصوير بانورامي أمام الأخاديد الصخرية والجلوس في المقهى الجبلي.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>النزول بهدوء</h4><p>المشي يكون ببطء بسبب الارتفاع والهواء البارد.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>التلفريك آمن ومغلق، والسيارة والشنط تنتظر في المواقف السفلية.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>ارتداء الجاكيت والنظارة الشمسية فور النزول من التلفريك بالأعلى.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Seceda+Cableway+Ortisei"><i data-lucide="navigation"></i> فتح تلفريك سيسيدا</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:00 PM</div>
+      <div class="card-title"><h3>جولة سنتر أورتيسي والغداء</h3><p>Zona Pedonale Ortisei</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>النزول للسنتر</h4><p>مشي خفيف 5 دقائق تقريباً من محطة التلفريك إلى منطقة المشاة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تمشية البلدة</h4><p>تصوير البيوت الخشبية الملونة والممرات المزينة بالزهور.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الغداء</h4><p>الخيار الفاخر Ristorante Tubladel، والبديل العملي Restaurant Mauriz Keller.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>السنتر منبسط ومريح للمشي العائلي.</div></div>
+
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Tubladel+Ortisei"><i data-lucide="navigation"></i> فتح مطعم Tubladel</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">03:00 PM</div>
+      <div class="card-title"><h3>التحرك إلى ريفا ديل غاردا</h3><p>Ortisei → Riva del Garda</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="route"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>النزول من الجبال</h4><p>التحرك جنوباً عبر A22 مع تغير الأجواء تدريجياً من جبلي إلى متوسطي.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تحديث المضيف</h4><p>إبلاغ إدارة Casa Amrita بوقت الوصول المتوقع قبل ساعة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الوصول للفيلا</h4><p>استلام المفاتيح وتوزيع الغرف والاستقرار.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة التقريبية ساعتان قيادة.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التنسيق مع المضيف مهم لأن الفيلا ليست فندقاً بمكتب استقبال 24 ساعة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Riva+del+Garda+Trento+Italy"><i data-lucide="navigation"></i> فتح ريفا ديل غاردا</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">05:30 PM</div>
+      <div class="card-title"><h3>كورنيش ريفا ديل غاردا</h3><p>Lungolago Riva del Garda</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="waves"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تغيير الملابس</h4><p>تخفيف الملابس بعد الوصول للبحيرة ولبس صيفي مريح.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>جولة الكورنيش</h4><p>تمشية منبسطة على البحيرة بين الورود والبط والمرفأ.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>جيلاتو وقهوة</h4><p>Gelateria Flora خيار جميل للجلسة والتصوير.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>شراء المياه واحتياجات الفيلا قبل إغلاق المحلات بين 7:30 و8:00 مساءً.</div></div>
+
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Gelateria+Flora+Riva+del+Garda"><i data-lucide="navigation"></i> فتح Gelateria Flora</a>
+    </div>
+  </div>
+
+</main>
+
+
+<main id="view-day6" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="waves"></i></div>
+    <h2>ليموني • سيرميوني</h2>
+    <p>قرى الليمون واللسان التاريخي داخل بحيرة غاردا</p>
+    <div class="date-line">الثلاثاء — 16 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>27° / 15°</b><span>مشمس</span></div>
+    <div class="quick-item"><i data-lucide="ship"></i><b>Boat</b><span>خاص</span></div>
+    <div class="quick-item"><i data-lucide="footprints"></i><b>متوسط</b><span>مشي قرى</span></div>
+    <div class="quick-item"><i data-lucide="cover"></i><b>نفس الفيلا</b><span>ليلة ثانية</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:00 AM</div>
+      <div class="card-title"><h3>الانطلاق إلى ليموني سول غاردا</h3><p>Limone sul Garda</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="lemon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الطريق الساحلي</h4><p>ركوب الفان والتحرك بمحاذاة الشاطئ الغربي للبحيرة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>منطقة المشاة</h4><p>إنزال العائلة عند المرفأ والبدء بالممرات الملونة والزهور.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>بستان الليمون</h4><p>زيارة Limonaia del Castèl وشراء منتجات وصابون الليمون.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة 15 دقيقة طريق تقريباً + ساعتان ونصف تمشية.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>ممرات البلدة فيها مرتفعات خفيفة؛ المشي بهدوء مناسب لكبار السن.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Limone+sul+Garda+Brescia+Italy"><i data-lucide="navigation"></i> فتح ليموني</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">11:30 AM</div>
+      <div class="card-title"><h3>الانتقال إلى سيرميوني</h3><p>Sirmione Centro Storico</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="castle"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>التحرك جنوب البحيرة</h4><p>القيادة باتجاه اللسان المائي الممتد في جنوب بحيرة غاردا.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الدخول مشياً</h4><p>إنزال العائلة عند مدخل القلعة والجسر الخشبي فقط.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الغداء والتمشية</h4><p>الغداء داخل المنطقة التاريخية ثم تمشية بين الساحات والمقاهي.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>Ristorante Risorgimento خيار فاخر، وPizzeria Scaligeri خيار عملي بجانب القلعة.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>يمنع دخول السيارة خلف أسوار القلعة بسبب ZTL والكاميرات.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Sirmione+Brescia+Italy"><i data-lucide="navigation"></i> فتح سيرميوني</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:00 PM</div>
+      <div class="card-title"><h3>جولة القارب الخاص والجيلاتو</h3><p>Sirmione Boats</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ship"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>قارب خاص للعائلة</h4><p>جولة قصيرة 30 دقيقة حول شبه الجزيرة تتسع للقروب.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>المعالم البحرية</h4><p>مشاهدة القلعة، فيلا ماريا كالاس، والينابيع الكبريتية داخل البحيرة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>جيلاتو سيرميوني</h4><p>Gelateria Mirice خيار مشهور للمخاريط العملاقة والتصوير.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>رسوم القارب التقريبية 100–130€ للقروب كامل.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>القارب آمن ومزود بسترات نجاة، والجلوس أفضل أثناء الحركة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Sirmione+Boats+Consorzio+Motoscafisti"><i data-lucide="navigation"></i> فتح قوارب سيرميوني</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">04:30 PM</div>
+      <div class="card-title"><h3>العودة إلى ريفا ديل غاردا</h3><p>Sirmione → Riva del Garda</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="rotate-ccw"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>التحرك شمالاً</h4><p>العودة إلى الفيلا عبر الطريق الأنسب حسب الزحام.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>استراحة في الفيلا</h4><p>تبديل الملابس والاسترخاء بعد جولة البحيرة الطويلة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>عشاء خفيف</h4><p>الأفضل عشاء في الفيلا لتقليل الجهد بعد يوم المشي.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الخروج 4:30 مساءً يساعد على تفادي ذروة ازدحام سيرميوني.</div></div>
+
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Riva+del+Garda+Trento+Italy"><i data-lucide="navigation"></i> فتح ريفا ديل غاردا</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:00 PM</div>
+      <div class="card-title"><h3>نهاية اليوم والتجهيز للخروج</h3><p>Casa Amrita</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الاستقرار</h4><p>قضاء مساء عائلي هادئ داخل الفيلا وحديقتها.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>إغلاق الشنط</h4><p>حزم الشنط الكبيرة الليلة دون تأخير.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تجهيز الغد</h4><p>غداً Check-out من بحيرة غاردا والعودة باتجاه ميلانو الكبرى.</p></div></li>
+      </ul>
+
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التجهيز صارم الليلة لأن اليوم التالي يوم انتقال وحقائب.</div></div>
+
+    </div>
+  </div>
+
+</main>
+
+
+<main id="view-day7" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="car"></i></div>
+    <h2>العودة إلى ميلانو الكبرى</h2>
+    <p>خروج متأخر، انتقال مريح، واستلام الفيلا الختامية</p>
+    <div class="date-line">الأربعاء — 17 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>26° / 16°</b><span>معتدل</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>3:30h</b><span>مع التوقف</span></div>
+    <div class="quick-item"><i data-lucide="activity"></i><b>منخفض</b><span>الجهد</span></div>
+    <div class="quick-item"><i data-lucide="cover"></i><b>Villa</b><span>ميلانو الكبرى</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">11:00 AM</div>
+      <div class="card-title"><h3>الخروج المتأخر ووداع ريفا</h3><p>Casa Amrita → Riva Center</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cover"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>صباح هادئ</h4><p>الاستمتاع بالفيلا دون ضغط واستكمال جمع الأغراض.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تحميل الشنط</h4><p>تحميل شنط 8 أشخاص داخل الفان والتأكد من الشواحن والأجهزة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>غداء وداعي</h4><p>التوجه للسنتر لغداء فاخر قبل مغادرة بحيرة غاردا.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>Ristorante Leon d'Oro خيار مناسب للغداء الوداعي في ريفا.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>تفتيش الأدراج والفيش قبل إغلاق الفيلا نهائياً.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Leon+d%27Oro+Riva+del+Garda"><i data-lucide="navigation"></i> فتح Leon d'Oro</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:30 PM</div>
+      <div class="card-title"><h3>الانطلاق والتوقف في الطريق</h3><p>Riva del Garda → A4 Highway</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="road"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>بداية العودة</h4><p>التحرك براً باتجاه ميلانو الكبرى عبر الطرق السريعة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>توقف Autogrill</h4><p>استراحة للقهوة ودورات المياه وشراء المياه للسيارة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>استكمال الطريق</h4><p>الطريق منبسط وسريع ومريح بعد الخروج من منطقة البحيرة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المدة الصافية ساعتان و15 دقيقة، وتصل 3 ساعات ونصف مع التوقف.</div></div>
+
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Autogrill+Sebino+A4+Highway"><i data-lucide="navigation"></i> فتح Autogrill Sebino</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">04:30 PM</div>
+      <div class="card-title"><h3>الوصول واستلام فيلا ميلانو الكبرى</h3><p>Greater Milan Villa</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="building-2"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الوصول للفيلا</h4><p>إنزال العائلة أمام البوابة واستلام المفاتيح.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>توزيع الغرف</h4><p>تفريغ الحقائب والاستقرار داخل الفيلا بخصوصية كاملة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>أي مستحقات</h4><p>دفع أي ضريبة مدينة متبقية إن وجدت حسب شروط الفيلا.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>إرسال رسالة للمضيف قبل ساعة من الوصول الفعلي.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التنسيق المسبق مهم لأن السكن فيلا خاصة وليس فندقاً تقليدياً.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milan+Metropolitan+City+Italy"><i data-lucide="navigation"></i> فتح ميلانو الكبرى</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">06:30 PM</div>
+      <div class="card-title"><h3>السوبرماركت والجولة الخفيفة</h3><p>محيط السكن الجديد</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="shopping-cart"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تأمين الفيلا</h4><p>شراء مياه، عصائر، فواكه، فطور صباحي ومناديل.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>جولة حي قصيرة</h4><p>استكشاف محيط الفيلا بشكل خفيف ومنبسط.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>عشاء بسيط</h4><p>مطعم بيتزا محلي أو عشاء خفيف قريب دون إجهاد.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>المحلات في النطاق السكني قد تغلق 9 مساءً؛ الشراء أولاً.</div></div>
+
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=supermarket+Milan+Metropolitan+City+Italy"><i data-lucide="navigation"></i> فتح سوبرماركت قريب</a>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:30 PM</div>
+      <div class="card-title"><h3>نهاية اليوم</h3><p>استقرار وتجهيز فلورنسا</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>جلسة عائلية</h4><p>ترتيب مشتريات السوبرماركت في الفيلا.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>شحن الأجهزة</h4><p>شحن الهواتف والكاميرات والباور بانك.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تجهيز الغد</h4><p>ملابس صيفية أنيقة وأحذية مريحة ليوم فلورنسا.</p></div></li>
+      </ul>
+
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>النوم المبكر ضروري لأن الخميس 18 يونيو هو يوم Florence Day Tour.</div></div>
+
+    </div>
+  </div>
+
+</main>
+
+
+
+<main id="view-day8" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="coffee"></i></div>
+    <h2>ميلانو • بريرا • تشغيل المطار</h2>
+    <p>Starbucks Reserve • MXP • Duomo Meeting • Brera District</p>
+    <div class="date-line">الخميس — 18 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>28° / 17°</b><span>مشمس</span></div>
+    <div class="quick-item"><i data-lucide="plane"></i><b>MXP</b><span>نورة + شخصين</span></div>
+    <div class="quick-item"><i data-lucide="map-pin"></i><b>Duomo</b><span>نقطة تجمع</span></div>
+    <div class="quick-item"><i data-lucide="palette"></i><b>Brera</b><span>راحة فاخرة</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 AM</div>
+      <div class="card-title"><h3>فطور ستاربكس ريزيرف وتقسيم القروب</h3><p>Starbucks Reserve Roastery Milano • Piazza Cordusio</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="coffee"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الخروج من الفيلا</h4><p>تحميل شنط نورة فقط في السيارة، والتأكد من الجواز وبطاقة الصعود وفواتير التاكس فري.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>فطور صباحي فاخر</h4><p>القروب كامل يبدأ اليوم في Starbucks Reserve مع مخبوزات Princi والقهوة المختصة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>التقسيم بعد الفطور</h4><p>نورة + شخصين يتوجهون للمطار، وبقية العائلة يتوجهون للدومو كنقطة انتظار واضحة وسهلة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه ZTL</strong>منطقة كوردوسيو قريبة من نطاقات القيادة المحظورة؛ الإنزال والتحميل يكون سريعاً حسب توجيه السائق.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Starbucks+Reserve+Roastery+Milano"><i data-lucide="navigation"></i> فتح Starbucks Reserve</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:45 AM</div>
+      <div class="card-title"><h3>توصيل نورة إلى مطار مالبينسا</h3><p>Milan Malpensa Airport • MXP Terminal 1</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="plane"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>المجموعة A</h4><p>نورة + شخصين فقط يتجهون إلى مطار مالبينسا عبر الطريق السريع A8.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>إجراءات المطار</h4><p>إنزال الشنط، تخليص التاكس فري، التأكد من البوابة وبطاقات الصعود، ثم التوديع قبل الدخول.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>العودة لنقطة التجمع</h4><p>بعد إنهاء التوديع يعود الشخصان إلى الدومو للالتقاء ببقية العائلة عند النقطة المتفق عليها.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>هدف التقسيم</strong>عدم سحب كامل العائلة للمطار يحافظ على وقت وراحة بقية القروب داخل ميلانو.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milan+Malpensa+Airport+Terminal+1"><i data-lucide="navigation"></i> فتح مطار مالبينسا T1</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:00 AM</div>
+      <div class="card-title"><h3>الدومو كنقطة تجمع واضحة</h3><p>Piazza del Duomo • Rinascente / Galleria Entrance</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>المجموعة B</h4><p>بقية العائلة لا يمشون إلى بريرا مباشرة؛ يتوجهون إلى الدومو لأنه أوضح وأسهل كنقطة انتظار.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>نقطة الالتقاء</h4><p>الاتفاق يكون أمام Rinascente Duomo أو مدخل Galleria Vittorio Emanuele II وليس وسط الساحة المفتوحة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>انتظار مريح</h4><p>استراحة قهوة أو تمشية خفيفة جداً حتى عودة الشخصين من المطار.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="shield-alert"></i><div class="box-text"><strong>تنبيه النشالين</strong>الدومو والغاليريا مزدحمة؛ الجوالات والحقائب تكون أمام الجسم وليست في الجيوب الخلفية.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+del+Duomo+Milano"><i data-lucide="navigation"></i> فتح الدومو</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Rinascente+Milano+Piazza+Duomo"><i data-lucide="shopping-bag"></i> Rinascente</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:00 PM</div>
+      <div class="card-title"><h3>الانتقال الجماعي إلى بريرا والغداء</h3><p>Brera District • Via Brera / Via Fiori Chiari</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="palette"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>اكتمال القروب</h4><p>بعد عودة الشخصين من المطار، يركب الجميع مع السائق ويتجهون إلى بريرا معاً.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>عدم المشي الطويل</h4><p>السائق يوصل العائلة إلى حدود حي بريرا لتجنب المشي الطويل من ستاربكس أو الدومو.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الغداء العائلي</h4><p>Ristorante Nabucco هو الخيار الفاخر المعتمد لجلسة هادئة وراقية في قلب بريرا.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>طابع اليوم</strong>هذا اليوم مخصص للراحة والرفاهية بعد الأيام الجبلية، وليس للضغط أو المشي المكثف.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Brera+District+Milano"><i data-lucide="navigation"></i> فتح Brera</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Ristorante+Nabucco+Milano"><i data-lucide="utensils"></i> Nabucco</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">03:30 PM</div>
+      <div class="card-title"><h3>بوتيكات بريرا والمقاهي الخارجية</h3><p>Brera Boutique Walk • Caffè Fioraio Bianchi</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="shopping-bag"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تمشية راقية</h4><p>جولة هادئة بين بوتيكات العطور المتخصصة، المعارض الفنية، ومحلات الملابس المستقلة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>قهوة وتحلية</h4><p>Caffè Fioraio Bianchi خيار جميل لجلسة تصوير وقهوة بين الزهور الطبيعية.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>مشي منخفض الجهد</h4><p>المنطقة منبسطة، لكن أرضيتها مرصوفة بالحصى؛ الأحذية المريحة مهمة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="clock"></i><div class="box-text"><strong>أفضل توقيت</strong>العصر إلى المساء هو الوقت الأجمل في بريرا، حيث الجلسات الخارجية والهدوء والموسيقى الخفيفة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Caff%C3%A8+Fioraio+Bianchi+Caff%C3%A8+Milano"><i data-lucide="navigation"></i> فتح Fioraio Bianchi</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:00 PM</div>
+      <div class="card-title"><h3>العودة للفيلا وتجهيز Serravalle</h3><p>Greater Milan Villa • End of Day</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>العودة المبكرة</h4><p>ركوب الفان من بريرا والعودة مباشرة إلى الفيلا للراحة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>عشاء خفيف</h4><p>وجبة بسيطة ومشروبات دافئة داخل الفيلا لتخفيف الجهد.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تجهيز يوم التسوق</h4><p>غداً Serravalle Designer Outlet؛ تجهيز أحذية رياضية مريحة وملابس كاجوال خفيفة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>النوم المبكر</strong>يوم Serravalle طويل ويحتاج راحة للأقدام قبل التسوق.</div></div>
+    </div>
+  </div>
+</main>
+
+
+
+<main id="view-day9" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="train-front"></i></div>
+    <h2>فينيسيا بالقطار السريع</h2>
+    <p>Milano Centrale → Venezia Santa Lucia • Venice Day Tour</p>
+    <div class="date-line">الجمعة — 19 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>29° / 18°</b><span>مشمس ورطب</span></div>
+    <div class="quick-item"><i data-lucide="train-front"></i><b>2:30h</b><span>قطار لكل اتجاه</span></div>
+    <div class="quick-item"><i data-lucide="ship"></i><b>Vaporetto</b><span>القناة الكبرى</span></div>
+    <div class="quick-item"><i data-lucide="footprints"></i><b>مرتفع</b><span>المشي والجسور</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">06:45 AM</div>
+      <div class="card-title"><h3>الانطلاق إلى Milano Centrale</h3><p>الفيلا → محطة ميلانو المركزية</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الخروج المبكر</h4><p>ركوب العائلة 7 أشخاص في الفان والانطلاق للمحطة مع تذاكر القطار محفوظة بالجوال.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الدخول للمحطة</h4><p>الصعود للمستوى العلوي للقطارات، ثم قراءة شاشة Partenze لمطابقة رقم القطار والوجهة Venezia S. Lucia.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الرصيف Platform</h4><p>رقم الرصيف يظهر غالباً قبل 15–20 دقيقة فقط من الإقلاع؛ بعد ظهوره يتم الدخول عبر بوابات QR Code.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه محطة</strong>Milano Centrale كبيرة ومزدحمة؛ لا تتوزع العائلة داخل المحطة، والانتظار يكون قرب شاشات المغادرة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milano+Centrale"><i data-lucide="navigation"></i> فتح Milano Centrale</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:45 AM</div>
+      <div class="card-title"><h3>القطار السريع إلى فينيسيا</h3><p>Frecciarossa / Italo • Venezia Santa Lucia</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="train-front"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>المقاعد المحددة</h4><p>الجلوس حسب رقم العربة والمقعد في التذكرة، والشنط الخفيفة فوق المقاعد أو عند طرف العربة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>راحة القطار</h4><p>الرحلة مريحة ومناسبة لتعويض الخروج المبكر، ويفضل استغلالها للنوم أو شحن الجوالات.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الوصول الساحر</h4><p>عند الخروج من محطة Venezia Santa Lucia تظهر القناة الكبرى مباشرة أمام العائلة.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Venezia+Santa+Lucia"><i data-lucide="navigation"></i> فتح Venezia Santa Lucia</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:30 AM</div>
+      <div class="card-title"><h3>القناة الكبرى وجسر ريالتو</h3><p>Vaporetto Line 1/2 • Rialto Bridge</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="ship"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تذاكر Vaporetto</h4><p>شراء تذاكر باص الماء من الأكشاك أمام المحطة لتجربة القناة الكبرى بدون إجهاد المشي.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>النزول في Rialto</h4><p>النزول عند محطة Rialto، ثم صعود الجسر الحجري الشهير والتصوير فوق القناة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تمشية خفيفة</h4><p>استكشاف الممرات القريبة والأسواق الصغيرة دون الدخول العميق في الأزقة لتجنب الضياع.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>تخفيف الجهد</strong>الذهاب بحراً عبر القناة الكبرى أفضل بكثير للعائلة من المشي الطويل من المحطة إلى سان ماركو.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Ponte+di+Rialto"><i data-lucide="navigation"></i> فتح Ponte di Rialto</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:00 PM</div>
+      <div class="card-title"><h3>سان ماركو والجندول</h3><p>Piazza San Marco • Gondola Experience</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الوصول للساحة</h4><p>اتباع اللوحات الصفراء Per San Marco من ريالتو إلى ساحة سان ماركو عبر مسار قصير وواضح.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الغداء</h4><p>Trattoria Do Forni خيار مريح وواسع قرب الساحة، مناسب للقروب والسي فود والباستا.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الجندول</h4><p>استئجار جندولين لأن الجندول الواحد يتسع عادة حتى 5 أشخاص، والجولة 30 دقيقة داخل القنوات الهادئة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تكلفة الجندول</strong>السعر النهاري الرسمي غالباً 80€ للقارب لمدة 30 دقيقة؛ لا تجعلوا المكاسرة تضيع الوقت.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+San+Marco+Venice"><i data-lucide="navigation"></i> San Marco</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Trattoria+Do+Forni+Venice"><i data-lucide="utensils"></i> Do Forni</a>
+      </div>
+      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Suso+Gelatoteca+Venice"><i data-lucide="ice-cream"></i> Suso Gelatoteca</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">05:30 PM</div>
+      <div class="card-title"><h3>العودة إلى ميلانو</h3><p>San Marco → Venezia S. Lucia → Milano Centrale</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="rotate-ccw"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>العودة للمحطة</h4><p>الأفضل العودة بالـ Vaporetto من San Marco إلى Ferrovia / Santa Lucia لتخفيف المشي في نهاية اليوم.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>قطار العودة</h4><p>الموعد المثالي حول 06:00 PM، مع الوصول إلى ميلانو تقريباً 08:30 PM.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>استقبال السائق</h4><p>السائق ينتظر عند Milano Centrale لإعادة العائلة للفيلا مباشرة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="map"></i><div class="box-text"><strong>تجنب الضياع</strong>للعودة اتبعوا اللوحات الصفراء Alla Ferrovia أو استخدموا Vaporetto مباشرة إلى محطة القطار.</div></div>
+    </div>
+  </div>
+</main>
+
+
+<main id="view-day10" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="waves"></i></div>
+    <h2>ميلانو الهادئة • نافيلي</h2>
+    <p>Slow Milan Recovery Day • Navigli District</p>
+    <div class="date-line">السبت — 20 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>28° / 17°</b><span>صافي</span></div>
+    <div class="quick-item"><i data-lucide="bed"></i><b>Late Start</b><span>راحة صباحية</span></div>
+    <div class="quick-item"><i data-lucide="waves"></i><b>Navigli</b><span>قنوات ميلانو</span></div>
+    <div class="quick-item"><i data-lucide="activity"></i><b>منخفض</b><span>الجهد</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:00 AM</div>
+      <div class="card-title"><h3>صباح بطيء داخل الفيلا</h3><p>Villa Recovery • Brunch • Recharge</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cover"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>استيقاظ حر</h4><p>لا يوجد منبهات أو خروج مبكر بعد يوم فينيسيا الطويل والقطارات والجسور.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>Brunch داخل الفيلا</h4><p>فطور متأخر من مشتريات السوبرماركت: قهوة، مخبوزات، فواكه، أجبان، ومياه كثيرة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تصفير الجهد</h4><p>شحن الجوالات، ترتيب الصور، وغسيل الملابس الخفيفة إن لزم، بدون أي ضغط تشغيلي.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="battery-charging"></i><div class="box-text"><strong>هدف اليوم</strong>إعادة شحن طاقة العائلة قبل توسكانا وفلورنسا، وليس إضافة معالم جديدة.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">03:00 PM</div>
+      <div class="card-title"><h3>الانطلاق إلى Navigli</h3><p>Naviglio Grande • Milan Canals</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>خروج عصري</h4><p>ركوب الفان من الفيلا باتجاه حي نافيلي بعد اكتمال الراحة الصباحية.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>نقطة الإنزال</h4><p>الأفضل الإنزال قرب Naviglio Grande أو Ponte Alda Merini لتبدأ التمشية مباشرة دون مشي طويل.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>استكشاف خفيف</h4><p>محلات الأنتيك، اللوحات، المقاهي الصغيرة، والتمشية البطيئة على الرصيف المائي.</p></div></li>
+      </ul>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Naviglio+Grande+Milan"><i data-lucide="navigation"></i> فتح Naviglio Grande</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">05:00 PM</div>
+      <div class="card-title"><h3>الغروب والعشاء على القناة</h3><p>Golden Hour • Navigli Dinner</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>جلسة قهوة أو جيلاتو</h4><p>Gelato Libre خيار جميل قبل الغروب، مع تمشية خفيفة على القناة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>صورة الغروب</h4><p>الجسور الصغيرة فوق القناة تعطي لقطة ممتازة لانعكاس المباني والإضاءة على الماء.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>عشاء عائلي</h4><p>Osteria del Gnocco Fritto خيار مطل ومناسب للمجموعات، والأفضل الحضور قبل زحمة 8:30 مساءً.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="users"></i><div class="box-text"><strong>زحمة السبت</strong>نافيلي يصبح أكثر حيوية بعد 8:30 مساءً؛ العشاء المبكر يحافظ على راحة العائلة.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Osteria+del+Gnocco+Fritto+Milan"><i data-lucide="utensils"></i> Gnocco Fritto</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelato+Libre+Milan"><i data-lucide="ice-cream"></i> Gelato Libre</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:30 PM</div>
+      <div class="card-title"><h3>العودة والاستعداد لقرار فلورنسا</h3><p>Option A / Option B Decision</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>العودة للفيلا</h4><p>الالتقاء بالسائق والعودة مباشرة للراحة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>قرار الغد</h4><p>حسم اختيار Florence: عودة بنفس اليوم أو مبيت ليلة في فلورنسا.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>حقيبة صغيرة</h4><p>إذا تم اختيار المبيت، تجهيز حقيبة يد صغيرة فقط وعدم فتح الشنط الكبيرة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>مهم</strong>خيار المبيت في فلورنسا هو الأريح والأفخم للعائلة، لكن يحتاج تجهيز حقيبة صغيرة مسبقاً.</div></div>
+    </div>
+  </div>
+</main>
+
+
+<main id="view-day11" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="map"></i></div>
+    <h2>فلورنسا وتوسكانا</h2>
+    <p>Florence & Tuscany Decision Day • Option A / Option B</p>
+    <div class="date-line">الأحد — 21 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>30° / 17°</b><span>توسكانا</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>3h</b><span>لكل اتجاه</span></div>
+    <div class="quick-item"><i data-lucide="shopping-bag"></i><b>The Mall</b><span>Outlet</span></div>
+    <div class="quick-item"><i data-lucide="hotel"></i><b>Option B</b><span>موصى به</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">DECISION</div>
+      <div class="card-title"><h3>اختيار المسار التشغيلي</h3><p>Same Day vs Overnight Florence</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="scale"></i></div>
+    </div>
+    <div class="card-body">
+      <div class="finance-row">
+        <div class="mini"><span>Option A</span><b>عودة بنفس اليوم</b></div>
+        <div class="mini"><span>الجهد</span><b>مرتفع جداً</b></div>
+        <div class="mini"><span>Option B</span><b>مبيت فلورنسا</b></div>
+        <div class="mini"><span>الترشيح</span><b>الأفضل للعائلة</b></div>
+      </div>
+      <div class="info-box"><i data-lucide="sparkles"></i><div class="box-text"><strong>ترشيح الكونسيرج</strong>Option B هو الأرقى والأريح: يقسم الجهد، يمنح فلورنسا ليلة جميلة، ويفتح DAY 12 لعودة توسكانية هادئة.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>Option A</strong>مناسب فقط إذا العائلة مستعدة ليوم طويل جداً: حوالي 6 ساعات قيادة + تسوق + مشي فلورنسا.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:30 AM</div>
+      <div class="card-title"><h3>الانطلاق إلى The Mall Tuscany</h3><p>Milan → The Mall Luxury Outlets</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="shopping-bag"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>طريق A1 جنوباً</h4><p>التحرك المبكر من ميلانو باتجاه توسكانا عبر طريق سريع طويل لكنه مريح.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>وصول الأوت لت</h4><p>The Mall مناسب لتسوق Gucci وPrada وBalenciaga وغيرها، لكن الوقت يجب أن يكون مضبوطاً.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>Tax Free</h4><p>إحضار صور الجوازات بالجوال وتجميع الفواتير لكل شخص بشكل مستقل.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="clock"></i><div class="box-text"><strong>لا تطيلون الأوت لت</strong>إذا زاد التسوق عن ساعة ونصف سيضغط فلورنسا بالكامل، خصوصاً في Option A.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=The+Mall+Luxury+Outlets"><i data-lucide="navigation"></i> فتح The Mall</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">11:45 AM</div>
+      <div class="card-title"><h3>دخول فلورنسا وغداء الستيك</h3><p>Firenze Centro • Bistecca alla Fiorentina</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الإنزال الخارجي</h4><p>السائق ينزل العائلة عند حدود منطقة المشاة لتجنب ZTL وغرامات فلورنسا.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>Buca Mario</h4><p>غداء فاخر في مطعم تاريخي مناسب للستيك التوسكاني والباستا المنزلية.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>استراحة طويلة</h4><p>الغداء هنا ليس سريعاً؛ هو محطة راحة حقيقية قبل المشي في السنتر.</p></div></li>
+      </ul>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Buca+Mario+Florence"><i data-lucide="utensils"></i> Buca Mario</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Piazza+della+Signoria+Florence"><i data-lucide="map-pin"></i> Piazza Signoria</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:30 PM</div>
+      <div class="card-title"><h3>الدومو وبونتي فيكيو</h3><p>Piazza del Duomo • Ponte Vecchio • Gelato</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>ساحة الدومو</h4><p>تصوير الكاتدرائية من الخارج فقط، بدون صعود القبة أو برج جيوتو لتجنب إجهاد 400+ درجة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>جسر بونتي فيكيو</h4><p>تمشية قصيرة إلى جسر الذهب فوق نهر أرنو والتقاط صور عائلية.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>Gelateria Santa Trinita</h4><p>جيلاتو ممتاز قرب النهر؛ نكهة الفستق والشوكولاتة السوداء مناسبة جداً.</p></div></li>
+      </ul>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+del+Duomo+Florence"><i data-lucide="navigation"></i> Duomo Florence</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Ponte+Vecchio+Florence"><i data-lucide="camera"></i> Ponte Vecchio</a>
+      </div>
+      <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+Santa+Trinita+Florence"><i data-lucide="ice-cream"></i> Gelateria Santa Trinita</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">OPTION A</div>
+      <div class="card-title"><h3>العودة إلى ميلانو بنفس اليوم</h3><p>Piazzale Michelangelo ثم طريق A1 شمالاً</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="rotate-ccw"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>مطل مايكل أنجلو</h4><p>إذا بقيت طاقة، يصعد السائق بالعائلة للمطل لأجمل صورة بانورامية بدون صعود مشياً.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>عودة طويلة</h4><p>التحرك إلى ميلانو قبل 06:00 PM لتجنب الوصول المتأخر جداً.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>وصول الفيلا</h4><p>الوصول المتوقع حوالي 09:30 PM، والليلة تكون راحة كاملة فقط.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>قرار مرهق</strong>لا تضيفون Pisa على Option A؛ سيصبح اليوم مضغوطاً جداً وغير مناسب للعائلة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazzale+Michelangelo+Florence"><i data-lucide="navigation"></i> Piazzale Michelangelo</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">OPTION B</div>
+      <div class="card-title"><h3>المبيت في فلورنسا — الموصى به</h3><p>Check-in • Florence Night • DAY 12 Tuscany Return</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="hotel"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تسجيل الدخول</h4><p>التوجه للفندق في فلورنسا، استلام الغرف، والاستراحة بدون استعجال.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>مساء فلورنسا</h4><p>عشاء هادئ وتمشية ليلية حول النهر والجسر؛ هذه هي القيمة الحقيقية للمبيت.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تأثير DAY 12</h4><p>اليوم التالي يصبح عودة توسكانية هادئة: Pisa Quick Photo Stop أو San Gimignano ثم غداء ريفي وعودة لميلانو.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="sparkles"></i><div class="box-text"><strong>الأفضل للعائلة</strong>Option B يحوّل فلورنسا من يوم سباق إلى تجربة فاخرة موزونة على يومين.</div></div>
+      <div class="alert-box"><i data-lucide="map-pin"></i><div class="box-text"><strong>Pisa</strong>بيزا تكون اختيارية في DAY 12 كمرور تصوير سريع فقط، وليست جلسة طويلة حتى لا تضغط العودة.</div></div>
+    </div>
+  </div>
+</main>
+
+
+
+<main id="view-day12" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="route"></i></div>
+    <h2>توسكانا الهادئة أو ميلانو المرنة</h2>
+    <p>Tuscany Slow Return OR Milan Flexible Freedom</p>
+    <div class="date-line">الاثنين — 22 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>28° / 17°</b><span>صافي</span></div>
+    <div class="quick-item"><i data-lucide="route"></i><b>Dynamic</b><span>حسب خيار 21</span></div>
+    <div class="quick-item"><i data-lucide="battery-charging"></i><b>Recovery</b><span>راحة وطاقة</span></div>
+    <div class="quick-item"><i data-lucide="map-pin"></i><b>San Gimignano</b><span>موصى به</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">DECISION</div>
+      <div class="card-title"><h3>اليوم يتبع قرار فلورنسا</h3><p>Option A Milan Recovery / Option B Tuscany Return</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="split"></i></div>
+    </div>
+    <div class="card-body">
+      <div class="finance-row">
+        <div class="mini"><span>إذا اختاروا A</span><b>راحة في ميلانو</b></div>
+        <div class="mini"><span>إذا اختاروا B</span><b>عودة توسكانية</b></div>
+        <div class="mini"><span>Pisa</span><b>تصوير سريع فقط</b></div>
+        <div class="mini"><span>San Gimignano</span><b>الأفضل للعائلة</b></div>
+      </div>
+      <div class="info-box"><i data-lucide="sparkles"></i><div class="box-text"><strong>توصية الكونسيرج</strong>إذا باتوا في فلورنسا، الأفضل San Gimignano بدل Pisa لأنها أهدأ وأجمل كتجربة ريفية وتناسب عائلة 7 أشخاص أكثر.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>Pisa ليست إلزامية</strong>برج بيزا يصلح مرور تصوير سريع فقط، أما تحويله إلى محطة طويلة سيضغط اليوم ويرفع التعب.</div></div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:30 AM</div>
+      <div class="card-title"><h3>Option A — صباح راحة في ميلانو</h3><p>لمن عادوا من فلورنسا بنفس اليوم السابق</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cover"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>استيقاظ متأخر</h4><p>هذا المسار مخصص لتعويض تعب يوم فلورنسا الطويل والعودة الليلية إلى ميلانو.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>Brunch هادئ</h4><p>فطور متأخر داخل الفيلا أو خروج خفيف إلى CityLife حسب طاقة العائلة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>لا التزام قوي</h4><p>اليوم حر ومرن: قهوة، تمشية خفيفة، أو البقاء في الفيلا بدون أي شعور بفوات شيء.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>هذا المسار يحافظ على راحة العائلة ويمنع تراكم الإجهاد قبل Serravalle.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تضيفوا بحيرة أو مدينة جديدة في هذا اليوم إذا تم اختيار Option A.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=CityLife+Milano"><i data-lucide="navigation"></i> فتح CityLife</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:00 AM</div>
+      <div class="card-title"><h3>Option B — صباح فلورنسا والعودة التوسكانية</h3><p>Florence Hotel → San Gimignano → Milan</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>فطور الفندق و Check-out</h4><p>تحميل الحقائب الصغيرة فقط في الفان بعد ليلة فلورنسا الهادئة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الانطلاق إلى San Gimignano</h4><p>الطريق ريفي جميل بين تلال توسكانا، والمدينة تعطي إحساس القرون الوسطى بأقل ضغط.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تمشية خفيفة</h4><p>دخول البلدة من الموقف الخارجي، تمشية في الساحة، تصوير الأبراج الحجرية، وجيلاتو سريع.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>هذا هو المسار الموصى به لأنه يجعل DAY 12 امتداداً فاخراً وهادئاً لفلورنسا.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تدخلوا بالسيارة داخل البلدة التاريخية؛ السائق يستخدم مواقف خارج الأسوار.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=San+Gimignano+Tuscany"><i data-lucide="navigation"></i> فتح San Gimignano</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">11:30 AM</div>
+      <div class="card-title"><h3>غداء ريفي والعودة لميلانو</h3><p>Tuscany Lunch → A1 North → Greater Milan Villa</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>غداء توسكانا</h4><p>Ristorante Dorandò أو خيار ريفي قريب للباستا واللحوم وزيت الزيتون المحلي.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>Gelateria Dondoli</h4><p>تجربة جيلاتو قصيرة في الساحة الرئيسية بدون إطالة الطابور إذا كان مزدحماً.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>العودة شمالاً</h4><p>التحرك بعد الغداء نحو ميلانو لتصل العائلة قبل المساء وتستعيد طاقتها.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الوصول للفيلا قبل 06:00 PM هو الهدف لضمان راحة كاملة قبل يوم التسوق.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>إذا أصروا على Pisa، اجعلها Quick Photo Stop فقط ويفضل إلغاء San Gimignano حتى لا يتراكم الجهد.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Ristorante+Dorand%C3%B2+San+Gimignano"><i data-lucide="utensils"></i> Dorandò</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Gelateria+Dondoli+San+Gimignano"><i data-lucide="ice-cream"></i> Dondoli</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">06:00 PM</div>
+      <div class="card-title"><h3>الاستقرار في فيلا ميلانو</h3><p>Recovery Evening • No Bags Movement</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="moon"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تفريغ بسيط</h4><p>إعادة ترتيب الحقائب الصغيرة فقط إذا تم اختيار المبيت.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>عشاء خفيف</h4><p>وجبة منزلية بسيطة وماء كثير، لأن الغد يوم تسوق طويل.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نوم مبكر</h4><p>تجهيز أحذية التسوق والملابس الخفيفة ليوم Serravalle.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا توجد أي تنقلات شنط كبيرة الليلة؛ الاستقرار مهم جداً قبل الأوت لت.</div></div>
+    </div>
+  </div>
+
+</main>
+
+
+<main id="view-day13" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="shopping-bag"></i></div>
+    <h2>Serravalle Designer Outlet</h2>
+    <p>Full Shopping Day • Tax Free Strategy</p>
+    <div class="date-line">الثلاثاء — 23 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>28° / 17°</b><span>مكشوف</span></div>
+    <div class="quick-item"><i data-lucide="car"></i><b>55 min</b><span>لكل اتجاه</span></div>
+    <div class="quick-item"><i data-lucide="shopping-bag"></i><b>300+</b><span>متجر</span></div>
+    <div class="quick-item"><i data-lucide="receipt"></i><b>Tax Free</b><span>ملف خاص</span></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:00 AM</div>
+      <div class="card-title"><h3>الانطلاق نحو سيرافالي</h3><p>Milan → Serravalle Scrivia • A7</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>التحرك بعد الفطور</h4><p>الخروج الساعة 09:00 للوصول مع افتتاح المتاجر وتجنب ذروة المواقف.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تجهيز الجوازات</h4><p>صور الجوازات واضحة في الجوال أو الجوازات الأصلية للتسوق والـ Tax-Free.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نقطة الإنزال</h4><p>السائق ينزل العائلة عند المدخل الأقرب، ثم ينتظر في المواقف الخارجية.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>يوم الثلاثاء ممتاز لأنه أخف من الويكند وتتوفر المقاسات بهدوء أكبر.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Serravalle</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:00 AM</div>
+      <div class="card-title"><h3>Guest Services وبدء الجولة الأولى</h3><p>Fashion Passport • Luxury Boutiques</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="badge-percent"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>مكتب الاستعلامات</h4><p>المرور على Guest Services للسؤال عن Fashion Passport أو أي خصومات إضافية متاحة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تقسيم الماركات</h4><p>ابدأوا بالماركات الأعلى أولوية أولاً: Gucci / Prada / Moncler / Balenciaga ثم الباقي.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نقطة تجمع ثابتة</h4><p>تحديد نقطة تجمع كل 90 دقيقة لتجنب تشتت العائلة داخل المجمع.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تجعلوا كل شخص يختفي لوحده مدة طويلة؛ المجمع كبير وقد يضيع الوقت بسهولة.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Guest+Services+Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Guest Services</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:30 PM</div>
+      <div class="card-title"><h3>غداء واستراحة منتصف اليوم</h3><p>Food Court / Le Fornaci / Venchi</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>غداء فعلي</h4><p>التوقف ساعة كاملة للغداء وليس سناك فقط حتى لا تنهار الطاقة في الجولة الثانية.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>Le Fornaci da Lino</h4><p>خيار إيطالي مريح داخل المجمع للعائلة، بيتزا وباستا ولحوم.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>Venchi</h4><p>قهوة وجيلاتو وشوكولاتة لاستعادة الطاقة بعد الغداء.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الغداء هو محطة استعادة طاقة، وليس تفصيل جانبي في يوم التسوق.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Le+Fornaci+da+Lino+Serravalle"><i data-lucide="utensils"></i> Le Fornaci</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Venchi+Serravalle+Designer+Outlet"><i data-lucide="ice-cream"></i> Venchi</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:30 PM</div>
+      <div class="card-title"><h3>الجولة الثانية والتاكس فري</h3><p>Shopping Round 2 • Tax Refund Office</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="receipt"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الجولة الأخيرة</h4><p>استكمال الماركات المتبقية والهدايا مع تقليل الدخول العشوائي للمتاجر.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>ملف الفواتير</h4><p>كل فاتورة Tax-Free توضع فوراً في ملف واحد مع اسم صاحب الجواز.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>مكتب التاكس فري</h4><p>قبل الخروج بـ 45 دقيقة يتم فحص وترتيب الفواتير لتسهيل إجراءات المطار.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تضع الفواتير مع أكياس التسوق؛ تضيع بسهولة وتسبب خسارة الاسترداد.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Tax+Free+Office+Serravalle+Designer+Outlet"><i data-lucide="navigation"></i> فتح Tax Free Office</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">05:30 PM</div>
+      <div class="card-title"><h3>العودة إلى الفيلا</h3><p>Serravalle → Greater Milan Villa</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="rotate-ccw"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تحميل الأكياس</h4><p>تحميل المشتريات داخل الفان مع إخفاء الأكياس الثمينة وعدم تركها ظاهرة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>عودة مباشرة</h4><p>العودة للفيلا بدون محطة إضافية لأن العائلة ستكون متعبة من المشي والتسوق.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>فرز المشتريات</h4><p>تقسيم المشتريات والفواتير داخل الفيلا وتجهيز ملف Tax-Free.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>يوم التسوق يستهلك طاقة ذهنية وبدنية؛ النهاية المبكرة أفضل من عشاء خارجي إضافي.</div></div>
+    </div>
+  </div>
+
+</main>
+
+
+<main id="view-day14" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="sparkles"></i></div>
+    <h2>ميلانو الراقية الحرة</h2>
+    <p>Freedom Milan Luxury Day • Slow Brunch • Brera • CityLife</p>
+    <div class="date-line">الأربعاء — 24 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>28° / 16°</b><span>معتدل</span></div>
+    <div class="quick-item"><i data-lucide="coffee"></i><b>Brunch</b><span>فاخر</span></div>
+    <div class="quick-item"><i data-lucide="palette"></i><b>Brera</b><span>بوتيكات</span></div>
+    <div class="quick-item"><i data-lucide="activity"></i><b>منخفض</b><span>جهد</span></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:00 AM</div>
+      <div class="card-title"><h3>Luxury Brunch في ميلانو</h3><p>Portrait Milano / Corso Venezia</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="coffee"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>استيقاظ مريح</h4><p>لا يوجد خروج مبكر بعد يوم التسوق؛ اليوم مصمم لصيانة طاقة العائلة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>فطور فاخر</h4><p>اختيار Portrait Milano أو 10 Corso Como حسب الرغبة والقرب والتوفر.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>جلسة طويلة</h4><p>الهدف جلسة راقية وهادئة وليس إنجاز أماكن كثيرة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>لا نرجع للدومو اليوم إلا إذا طلبت العائلة، لأن الازدحام صار مستهلكاً للطاقة.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Portrait+Milano+Corso+Venezia+11"><i data-lucide="navigation"></i> Portrait Milano</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=10+Corso+Como+Milano"><i data-lucide="coffee"></i> 10 Corso Como</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:30 PM</div>
+      <div class="card-title"><h3>بريرا بوتيكات ومقاهي</h3><p>Via Brera • Niche Perfumes • Outdoor Cafes</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="palette"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تمشية فنية</h4><p>حي بريرا مناسب للعطور الخاصة والبوتيكات الصغيرة والمعارض الخفيفة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>قهوة وتحلية</h4><p>جلسة مقهى خارجية في Fioraio Bianchi أو خيار مشابه وسط الحي.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>مشي منخفض</h4><p>المنطقة منبسطة لكن مرصوفة بالحجر، لذلك الأحذية المريحة مهمة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تحولوا بريرا إلى تسوق طويل جديد؛ هي استراحة أنيقة بعد Serravalle.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Brera+District+Milano"><i data-lucide="navigation"></i> Brera</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Caff%C3%A8+Fioraio+Bianchi+Caff%C3%A8+Milano"><i data-lucide="coffee"></i> Fioraio Bianchi</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">05:30 PM</div>
+      <div class="card-title"><h3>CityLife وعشاء هادئ</h3><p>Modern Milan • CityLife District</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="building-2"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>انتقال عصري</h4><p>الذهاب إلى CityLife يعطي تغييراً بصرياً حديثاً بعيداً عن السنتر التاريخي.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تمشية حدائق</h4><p>التقاط صور خفيفة حول الأبراج والحدائق والمسارات الممهدة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>عشاء مريح</h4><p>Attimi di Heinz Beck أو أي خيار عائلي داخل المجمع بدون مشي إضافي.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>CityLife مناسب جداً كخروج مرتب وسهل لآخر مرحلة قبل يوم القرار النهائي.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=CityLife+Milano"><i data-lucide="navigation"></i> CityLife</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Attimi+by+Heinz+Beck+CityLife"><i data-lucide="utensils"></i> Attimi</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:30 PM</div>
+      <div class="card-title"><h3>تصويت اليوم الأخير</h3><p>Verona OR Lugano Decision</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="scale"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>فتح التصويت العائلي</h4><p>تحديد هل يكون الغد Verona بطابع إيطالي، أو Lugano بختام سويسري هادئ.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>تجهيز الجوازات</h4><p>إذا اختاروا Lugano، تُجهز الجوازات الأصلية في حقيبة واحدة لعبور الحدود.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تجهيز الشنط ذهنياً</h4><p>الغد آخر يوم كامل، لذلك لا تؤجلوا كل ترتيب الحقائب إلى ليلة السفر.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>إذا اختير Lugano، لا تنسوا أن الأسعار أعلى وأن اليوم يعتمد على الهدوء لا المعالم الكثيرة.</div></div>
+    </div>
+  </div>
+
+</main>
+
+
+<main id="view-day15" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="mountain"></i></div>
+    <h2>لوغانو أو فيرونا</h2>
+    <p>Final Escape Decision Day • Swiss Luxury vs Italian Soft Ending</p>
+    <div class="date-line">الخميس — 25 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="sun"></i><b>26–29°</b><span>حسب الوجهة</span></div>
+    <div class="quick-item"><i data-lucide="landmark"></i><b>Verona</b><span>إيطالي ناعم</span></div>
+    <div class="quick-item"><i data-lucide="mountain"></i><b>Lugano</b><span>سويسري فاخر</span></div>
+    <div class="quick-item"><i data-lucide="luggage"></i><b>Final Night</b><span>تقفيل الشنط</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">DECISION</div>
+      <div class="card-title"><h3>اختيار ختام الرحلة</h3><p>Verona Soft Italian Day OR Lugano Swiss Luxury Escape</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="scale"></i></div>
+    </div>
+    <div class="card-body">
+      <div class="finance-row">
+        <div class="mini"><span>Verona</span><b>أخف تكلفة</b></div>
+        <div class="mini"><span>الإحساس</span><b>إيطالي تاريخي</b></div>
+        <div class="mini"><span>Lugano</span><b>أغلى وأهدأ</b></div>
+        <div class="mini"><span>الترشيح</span><b>لوغانو</b></div>
+      </div>
+      <div class="info-box"><i data-lucide="sparkles"></i><div class="box-text"><strong>الترشيح النهائي</strong>لوغانو أفضل كختام نفسي للرحلة لأنها تضيف إحساساً جديداً: بحيرة، سويسرا، شوكولاتة، وهدوء مختلف عن المدن الإيطالية السابقة.</div></div>
+      <div class="alert-box"><i data-lucide="wallet"></i><div class="box-text"><strong>ملاحظة تكلفة</strong>لوغانو أجمل وأفخم لكنها أغلى بوضوح في المطاعم والقهوة والمواقف. فيرونا أوفر وأسهل.</div></div>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:15 AM</div>
+      <div class="card-title"><h3>Option B — لوغانو السويسرية</h3><p>Milan → Chiasso Border → Lugano Lake</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="mountain"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>حمل الجوازات</h4><p>إحضار الجوازات الأصلية لجميع أفراد العائلة في حقيبة واحدة احتياطاً عند الحدود.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الطريق إلى سويسرا</h4><p>التحرك شمالاً عبر A8 ثم A2 باتجاه لوغانو، والرحلة قصيرة نسبياً ومريحة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الدخول للواجهة</h4><p>إنزال العائلة قرب Lungolago Lugano أو Parco Ciani لتبدأ التمشية من أجمل نقطة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>لوغانو ليست يوم معالم كثيرة، بل يوم هدوء وبحيرة وقهوة وشوكولاتة.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>التأكد من جاهزية الجوازات والتجوال/الإنترنت لأنكم ستدخلون سويسرا.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Lungolago+Lugano+Switzerland"><i data-lucide="navigation"></i> Lungolago Lugano</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Parco+Ciani+Lugano"><i data-lucide="trees"></i> Parco Ciani</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:45 AM</div>
+      <div class="card-title"><h3>كورنيش لوغانو والسنتر</h3><p>Lake Walk • Piazza della Riforma • Via Nassa</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="waves"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>تمشية البحيرة</h4><p>مشي منبسط على الكورنيش بين الورد والجبال والبحيرة، مناسب لكبار السن وللعائلة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>Piazza della Riforma</h4><p>ساحة سنتر جميلة للجلوس والقهوة والغداء دون ضغط.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>Via Nassa</h4><p>شارع بوتيكات وشوكولاتة راقٍ ومناسب للهدايا الأخيرة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>أفضل هدايا اليوم: شوكولاتة سويسرية فاخرة وخفيفة الحمل.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+della+Riforma+Lugano"><i data-lucide="map-pin"></i> Piazza Riforma</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Via+Nassa+Lugano"><i data-lucide="shopping-bag"></i> Via Nassa</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:30 PM</div>
+      <div class="card-title"><h3>غداء وشوكولاتة لوغانو</h3><p>Grand Café Al Porto • Läderach</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="utensils"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>غداء راقٍ</h4><p>Grand Café Al Porto خيار تاريخي وفاخر ومناسب للجلسة العائلية.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>شوكولاتة</h4><p>Läderach Lugano خيار ممتاز للهدايا الفاخرة والمغلفة بعناية.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>رجوع مبكر</h4><p>عدم التأخر في لوغانو لأن الليلة مخصصة لتقفيل الشنط.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>الدفع بالفيزا كافٍ ولا حاجة لتحويل فرنك سويسري، لكن الأسعار أعلى من إيطاليا.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Grand+Caf%C3%A9+Al+Porto+Lugano"><i data-lucide="utensils"></i> Al Porto</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=L%C3%A4derach+Lugano"><i data-lucide="gift"></i> Läderach</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">OPTION A</div>
+      <div class="card-title"><h3>بديل فيرونا الإيطالية</h3><p>Verona Soft Italian Ending</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="landmark"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>طابع اليوم</h4><p>ساحات إيطالية رومانسية، Piazza Bra، Arena di Verona، ومشي خفيف داخل السنتر.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الإيجابيات</h4><p>أوفر، إيطالي كلاسيكي، وأسهل في المطاعم والتكاليف.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>السلبيات</h4><p>يشبه أجواء المدن الإيطالية السابقة، ولا يضيف اختلافاً نفسياً بقوة لوغانو.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>فيرونا مناسبة إذا فضلت العائلة عدم عبور الحدود أو أرادت تكلفة أخف.</div></div>
+      <div class="btn-grid">
+        <a class="btn" target="_blank" href="https://maps.google.com/?q=Piazza+Bra+Verona"><i data-lucide="navigation"></i> Piazza Bra</a>
+        <a class="btn-secondary" target="_blank" href="https://maps.google.com/?q=Arena+di+Verona"><i data-lucide="landmark"></i> Arena Verona</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">06:15 PM</div>
+      <div class="card-title"><h3>العودة وتقفيل حقائب السفر</h3><p>Final Packing Protocol</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="luggage"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>العودة المبكرة</h4><p>الوصول للفيلا قبل المساء مهم جداً لأن هذه آخر ليلة.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>توزيع الأوزان</h4><p>توزيع وزن الحقائب بحيث لا تتجاوز 23 كجم للحقيبة الواحدة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>ملف Tax-Free</h4><p>فصل الفواتير والمشتريات الثمينة في حقيبة يد مع محمد وعدم شحنها في الحقائب الكبيرة.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تضعوا الفواتير أو القطع الثمينة داخل الشنط المشحونة قبل ختم التاكس فري في المطار.</div></div>
+    </div>
+  </div>
+
+</main>
+
+
+<main id="view-day16" class="view">
+  <div class="page-head">
+    <div class="icon"><i data-lucide="plane-takeoff"></i></div>
+    <h2>مغادرة ميلانو والعودة إلى جدة</h2>
+    <p>Departure Day • Milan Malpensa T1 • SV212</p>
+    <div class="date-line">الجمعة — 26 June 2026</div>
+  </div>
+
+  <div class="quick-strip">
+    <div class="quick-item"><i data-lucide="plane"></i><b>SV212</b><span>02:05 PM</span></div>
+    <div class="quick-item"><i data-lucide="clock"></i><b>09:30 AM</b><span>وصول المطار</span></div>
+    <div class="quick-item"><i data-lucide="receipt"></i><b>Tax Free</b><span>قبل الشحن</span></div>
+    <div class="quick-item"><i data-lucide="luggage"></i><b>23 kg</b><span>لكل شنطة</span></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">07:30 AM</div>
+      <div class="card-title"><h3>الاستيقاظ وتقفيل السكن</h3><p>Final Villa Check-out</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="cover"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>فطور خفيف</h4><p>قهوة وماء ووجبة خفيفة فقط لتجنب التأخير.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>مراجعة نهائية</h4><p>الجوازات، الجوالات، الشواحن، الأدوية، ملف التاكس فري، والمشتريات الثمينة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>تحميل الشنط</h4><p>تجهيز الحقائب عند الباب قبل وصول السائق لتسريع الخروج.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>لا تتركوا وزن الشنط للمطار؛ ضبط الوزن في الفيلا يمنع فتح الشنط أمام الناس.</div></div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">08:30 AM</div>
+      <div class="card-title"><h3>الانطلاق إلى مطار مالبينسا</h3><p>Greater Milan Villa → MXP Terminal 1</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="car"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الخروج النهائي</h4><p>تحميل جميع الحقائب في الفان والتوجه مباشرة إلى مالبينسا T1.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>الوصول المبكر</h4><p>الوصول 09:30 AM يمنح العائلة وقتاً كافياً للتاكس فري والجوازات بدون توتر.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>نقطة الإنزال</h4><p>الإنزال أمام صالة المغادرة الدولية T1 مع عربات الحقائب.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>الوصول قبل الرحلة بـ 4 ساعات ونصف قرار صحيح لعائلة 7 أشخاص مع Tax-Free.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Milan+Malpensa+Airport+Terminal+1+Departures"><i data-lucide="navigation"></i> فتح MXP Terminal 1</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">09:30 AM</div>
+      <div class="card-title"><h3>Tax-Free قبل شحن الحقائب</h3><p>Customs / Global Blue / Planet • MXP T1</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="receipt"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>المسار الصحيح</h4><p>التاكس فري أولاً، ثم شحن الحقائب ثانياً، وليس العكس.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>المشتريات في اليد</h4><p>إبقاء القطع الثمينة والفواتير في حقيبة يد لأن موظف الجمارك قد يطلب رؤيتها.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الاسترداد</h4><p>الأفضل تحويل المبلغ للفيزا؛ أسرع وأنظف من حمل الكاش.</p></div></li>
+      </ul>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>شحن المشتريات قبل ختم التاكس فري قد يعني خسارة الاسترداد بالكامل.</div></div>
+      <a class="btn" target="_blank" href="https://maps.google.com/?q=Global+Blue+Malpensa+Terminal+1"><i data-lucide="navigation"></i> فتح Global Blue MXP</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">10:45 AM</div>
+      <div class="card-title"><h3>كاونترات السعودية والجوازات</h3><p>Saudi Airlines Check-in • Passport Control</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="badge-check"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>شحن الحقائب</h4><p>التوجه لكاونترات الخطوط السعودية بعد الانتهاء من التاكس فري.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>بطاقات الصعود</h4><p>استلام Boarding Passes والتأكد من البوابة والوجهة جدة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>عبور الجوازات</h4><p>الدخول لصالة المغادرة الدولية والاستراحة في المقاهي أو السوق الحرة.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>كاونترات الشحن تغلق قبل الإقلاع بوقت محدد؛ عدم التأخير بعد التاكس فري مهم جداً.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>أي سوائل تُشترى بعد التفتيش تبقى داخل كيس Duty-Free المختوم.</div></div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">01:15 PM</div>
+      <div class="card-title"><h3>الصعود للطائرة</h3><p>Gate Boarding • SV212</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="plane"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>التوجه للبوابة</h4><p>عدم انتظار آخر نداء، خصوصاً مع عائلة وحقائب يد.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>المقاعد والحقائب</h4><p>ترتيب حقائب اليد فوق المقاعد والاستقرار بهدوء.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>ختام الرحلة</h4><p>الاسترخاء على متن الطائرة والعودة إلى جدة بحفظ الله.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>تم إنهاء الرحلة بإيقاع هادئ ومنظم: جبال، بحيرات، مدن، تسوق، سويسرا، ثم عودة.</div></div>
+      <div class="alert-box"><i data-lucide="circle-alert"></i><div class="box-text"><strong>تنبيه مهم</strong>آخر مراجعة: الجوازات والجوالات والحقائب اليدوية قبل الصعود.</div></div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-head">
+      <div class="time">02:05 PM</div>
+      <div class="card-title"><h3>الإقلاع إلى جدة</h3><p>Milan → Jeddah</p></div>
+      <button class="complete-btn" onclick="toggleCardDone(this)" aria-label="تم"><i data-lucide="circle"></i></button><div class="card-icon"><i data-lucide="plane-takeoff"></i></div>
+    </div>
+    <div class="card-body">
+      <ul class="steps">
+        <li class="step"><span class="step-icon">1</span><div class="step-content"><h4>الإقلاع</h4><p>المغادرة من ميلانو إلى جدة على رحلة الخطوط السعودية SV212.</p></div></li>
+        <li class="step"><span class="step-icon">2</span><div class="step-content"><h4>على متن الطائرة</h4><p>راحة، نوم، وجبات الطائرة، وتجميع ذكريات الرحلة.</p></div></li>
+        <li class="step"><span class="step-icon">3</span><div class="step-content"><h4>الوصول للوطن</h4><p>استلام الشنط في مطار الملك عبدالعزيز والعودة للمنازل بسلام.</p></div></li>
+      </ul>
+      <div class="info-box"><i data-lucide="info"></i><div class="box-text"><strong>ملاحظة تشغيلية</strong>رافقتكم السلامة في حلّكم وترحالكم، وانتهت رحلة Master Italia 2026 بنجاح تشغيلي كامل.</div></div>
+    </div>
+  </div>
+
+</main>
+
+
+<script>
+function initIcons(){ if(window.lucide) lucide.createIcons(); }
+
+function switchView(viewId, btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const view=document.getElementById('view-'+viewId);
+  if(view) view.classList.add('active');
+  if(btn){
+    btn.classList.add('active');
+    btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+  initIcons();
+}
+
+function toggleCheck(el){
+  el.classList.toggle('done');
+  const i=el.querySelector('i');
+  i.setAttribute('data-lucide', el.classList.contains('done') ? 'check-circle-2' : 'circle');
+  initIcons();
+}
+
+
+function toggleCardDone(btn){
+  const card = btn.closest('.card');
+  if(!card) return;
+  card.classList.toggle('completed');
+  const icon = btn.querySelector('i');
+  icon.setAttribute('data-lucide', card.classList.contains('completed') ? 'check-circle-2' : 'circle');
+  initIcons();
+}
+
+window.onload=()=>{
+  initIcons();
+  const today=new Date();
+  const key=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,'0')+"-"+String(today.getDate()).padStart(2,'0');
+  const schedule={
+    "2026-06-11":"day1",
+    "2026-06-12":"day2",
+    "2026-06-13":"day3",
+    "2026-06-14":"day4",
+    "2026-06-15":"day5",
+    "2026-06-16":"day6",
+    "2026-06-17":"day7",
+    "2026-06-18":"day8",
+    "2026-06-19":"day9",
+    "2026-06-20":"day10",
+    "2026-06-21":"day11",
+    "2026-06-22":"day12",
+    "2026-06-23":"day13",
+    "2026-06-24":"day14",
+    "2026-06-25":"day15",
+    "2026-06-26":"day16"
+  };
+  const target=schedule[key] || "day1";
+  const btn=document.getElementById("tab-"+target);
+  switchView(target,btn);
+};
+</script>
+
+
+
+
+
+
+<script id="safra-smart-start">
+function safraDateKey(d){
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  const dd = String(d.getDate()).padStart(2,'0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+function getSafraTarget(){
+  const tripStart = new Date('2026-06-11T00:00:00');
+  const tripEnd = new Date('2026-06-26T23:59:59');
+  const now = new Date();
+  const dateMap = {
+    '2026-06-11':'day1','2026-06-12':'day2','2026-06-13':'day3','2026-06-14':'day4',
+    '2026-06-15':'day5','2026-06-16':'day6','2026-06-17':'day7','2026-06-18':'day8',
+    '2026-06-19':'day9','2026-06-20':'day10','2026-06-21':'day11','2026-06-22':'day12',
+    '2026-06-23':'day13','2026-06-24':'day14','2026-06-25':'day15','2026-06-26':'day16'
+  };
+  const key = safraDateKey(now);
+  if(dateMap[key]) return dateMap[key];
+  if(now < tripStart) return 'cover';
+  if(now > tripEnd) return 'overview';
+  return 'overview';
+}
+function goSmartStart(){
+  const target = getSafraTarget();
+  const tab = document.getElementById('tab-' + target);
+  if(typeof switchView === 'function') switchView(target, tab);
+}
+function togglePrep(btn){
+  const item = btn.closest('.prep-item');
+  if(!item) return;
+  item.classList.toggle('done');
+  try{
+    const id = item.getAttribute('data-prep-id');
+    localStorage.setItem('safra-' + id, item.classList.contains('done') ? '1' : '0');
+  }catch(e){}
+}
+function markAllPrep(done){
+  document.querySelectorAll('.prep-item').forEach(item=>{
+    item.classList.toggle('done', done);
+    try{
+      localStorage.setItem('safra-' + item.getAttribute('data-prep-id'), done ? '1' : '0');
+    }catch(e){}
+  });
+}
+function restorePrep(){
+  document.querySelectorAll('.prep-item').forEach(item=>{
+    try{
+      if(localStorage.getItem('safra-' + item.getAttribute('data-prep-id')) === '1') item.classList.add('done');
+    }catch(e){}
+  });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  const hash = window.location.hash ? window.location.hash.replace('#','') : '';
+  if(hash && document.getElementById('view-' + hash)){
+    const tab = document.getElementById('tab-' + hash);
+    if(typeof switchView === 'function') switchView(hash, tab);
+  } else {
+    const target = getSafraTarget();
+    const tab = document.getElementById('tab-' + target);
+    if(typeof switchView === 'function') switchView(target, tab);
+  }
+  restorePrep();
+});
+</script>
+
+
+<script id="safra-final-open-guard">
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    if (typeof getSafraTarget === 'function' && typeof switchView === 'function') {
+      const hash = window.location.hash ? window.location.hash.replace('#','') : '';
+      if(!hash){
+        const target = getSafraTarget();
+        const tab = document.getElementById('tab-' + target);
+        switchView(target, tab);
+      }
+    }
+  }, 50);
+});
+</script>
+
+</body>
+</html>
